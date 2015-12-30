@@ -5,12 +5,14 @@ var Exercise = (function () {
     
     var my = {};
     
-    my.Multiplication = function (left, operator, right, solution, feedback) {
+    my.Multiplication = function (left, operator, right, solution, correctCallBack, wrongCallBack, resetCallBack) {
         this.left = left;
         this.operator = operator;
         this.right = right;
         this.solution = solution;
-        this.feedback = feedback;
+        this.correctCallBack = correctCallBack;
+        this.wrongCallBack = wrongCallBack;
+        this.resetCallBack = resetCallBack;
         
         this.input = document.createElement("input");
         this.input.id = "exercise-input";
@@ -57,13 +59,16 @@ var Exercise = (function () {
             } while (this.numbers[0] === previousEnd);
         }
         
+        /* reset */
+        
         my.clearElement(this.left);
         my.clearElement(this.right);
         my.clearElement(this.operator);
         my.clearElement(this.solution);
         my.clearElement(this.input);
-        my.clearElement(this.feedback);
         this.input.value = "";
+        this.resetCallBack();
+        
         
         if (this.unknown === "solution") {
             rightOperand = this.numbers[this.index];
@@ -98,17 +103,11 @@ var Exercise = (function () {
     };
     
     my.Multiplication.prototype.check = function () {
-        console.log(this.input.value);
-        
         if (parseInt(this.input.value, 10) === this.input.solution) {
-            this.feedback.className = "correct";
-            this.feedback.innerHTML = "correct";
+            this.correctCallBack();
         } else {
-            this.feedback.className = "wrong";
-            this.feedback.innerHTML = "fout " + this.input.solution;
+            this.wrongCallBack();
         }
-        
-        setTimeout(this.generate.bind(this), 2000);
     };
     
     my.getPermutation = function (from, to) {
@@ -136,10 +135,6 @@ var Exercise = (function () {
         return array;
     };
     
-    my.refresh = function () {
-        window.location.reload(true);
-    };
-    
     my.clearElement = function (element) {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
@@ -156,8 +151,40 @@ var rightOperator = document.getElementById("exercise-operator-right");
 var operator = document.getElementById("exercise-operand");
 var solution = document.getElementById("exercise-solution");
 var feedback = document.getElementById("exercise-feedback");
+var monkey = document.getElementById("monkey");
 
-var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, feedback);
+var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, function () {
+    "use strict";
+    
+    var image = new Image();
+        
+    image.onload = function () {
+        monkey.style.backgroundImage = 'url("images/monkey-happy.svg")';
+        setTimeout(this.generate.bind(this), 2000);
+    }.bind(multipliation);
+    
+    image.src = "images/monkey-happy.svg";
+}, function () {
+    "use strict";
+    
+    var image = new Image();
+        
+    image.onload = function () {
+        monkey.style.backgroundImage = 'url("images/monkey-sad.svg")';
+        setTimeout(this.generate.bind(this), 2000);
+    }.bind(multipliation);
+    
+    image.src = "images/monkey-sad.svg";
+}, function () {
+    "use strict";
+    var image = new Image();
+        
+    image.onload = function () {
+        monkey.style.backgroundImage = 'url("images/monkey-thinking.svg")';
+    }.bind(multipliation);
+    
+    image.src = "images/monkey-thinking.svg";
+});
 
 multipliation.setUnknown("solution");
 multipliation.setTable(4);

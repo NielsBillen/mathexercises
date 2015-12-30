@@ -29,11 +29,12 @@ body {
     
     font-family: "raleway-bold";
     font-size: 14vmin;
-    
-    background-color: greenyellow;
+        background-color: rgb(228,232,229);
+
     background-image: url("images/tree.svg");
     background-size: contain;
     background-repeat: repeat-x;
+    background-position: bottom;
 }
 
 /* header */
@@ -57,12 +58,12 @@ header {
     justify-content: center;
 }
 
-.monkey {
+#monkey {
     position: relative;
     top: 1vmax;
     
-    width: 16vmax;
-    height: 16vmax;
+    width: 25vmin;
+    height: 25vmin;
     z-index: -100;
     
     background-image: url("images/monkey-thinking.svg");
@@ -70,6 +71,7 @@ header {
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .jungle-grass {
     position: fixed;
     bottom: 0;
@@ -81,6 +83,7 @@ header {
     background-repeat: repeat-x;
     z-index: -1000;
 }
+
 .jungle-border {
     position: fixed;
     top: 0;
