@@ -15,10 +15,26 @@ var Keyboard = (function () {
     
     var my = {}, listeners = [];
     
-    my.buttonClicked = function (button, value) {
+    document.onkeypress = function (e) {
+        e = e || window.event;
+    
+        var string, charCode;
+        
+        charCode = (typeof e.which === "number") ? e.which : e.keyCode;
+        
+        if (charCode >= 48 && charCode <= 57) {
+            my.buttonClicked(charCode - 48);
+        } else if (charCode === 13) {
+            my.buttonClicked("enter");
+        } else if (charCode === 8) {
+            my.buttonClicked("backspace");
+        }
+    };
+    
+    my.buttonClicked = function (value) {
         var j;
         for (j = 0; j < listeners.length; j += 1) {
-            listeners[j](button, value);
+            listeners[j](value);
         }
     };
     
@@ -31,14 +47,14 @@ var Keyboard = (function () {
         
         for (i = 0; i <= 9; i += 1) {
             button = document.getElementById("button" + i);
-            addTouchListener(button, my.buttonClicked.bind(this, button, i));
+            addTouchListener(button, my.buttonClicked.bind(this, i));
         }
     
         button = document.getElementById("button_enter");
-        addTouchListener(button, my.buttonClicked.bind(this, button, "enter"));
+        addTouchListener(button, my.buttonClicked.bind(this, "enter"));
         
         button = document.getElementById("button_back");
-        addTouchListener(button, my.buttonClicked.bind(this, button, "backspace"));
+        addTouchListener(button, my.buttonClicked.bind(this, "backspace"));
     };
     
     my.init();
@@ -65,7 +81,7 @@ var Exercise = (function () {
         this.input.id = "exercise-input";
         this.input.className = "center";
         
-        Keyboard.apppendListener(function (button, value) {
+        Keyboard.apppendListener(function (value) {
             var length = this.input.innerHTML.length;
 
             if (this.enabled) {
