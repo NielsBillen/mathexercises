@@ -67,21 +67,48 @@ header {
     justify-content: center;
 }
 
-@keyframes monkey-animation{
-    from {
-        top: 21vmin;
-        visibility: visible;
+@keyframes monkey-animation-start {
+    0% {
+        top: 24vmin;
     }
-    to {
+    100% {
         top: 1vmax;
-        visibility: visible;
     }
 }
 
+@keyframes monkey-animation-correct {
+    0% {
+        top: 1vmax;
+    }
+    25% {
+        top: 2vmax;
+    }
+    50% {
+        top: 1vmax;
+    }
+    75% {
+        top: 2vmax;
+    }
+    100% {
+        top: 1vmax;
+    }
+}
+
+@keyframes monkey-animation-wrong {
+    0% {
+        top: 1vmax;
+    }
+    95% {
+        top: 3vmax;
+    }
+    100% {
+        top: 1vmax;
+    }
+}
 #monkey {
     position: relative;
-    visibility: hidden;
     overflow: hidden;
+    top: 24vmin;
     
     width: 24vmin;
     height: 24vmin;
@@ -93,11 +120,11 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     
-    animation-name: monkey-animation;
+    animation-name: monkey-animation-start;
     animation-duration: 1s;
     animation-delay: 1s;
     animation-timing-function: linear;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
 }
 
 .jungle-grass {
@@ -162,6 +189,7 @@ header {
     background-color: white;
     color: black;
     text-align: center;
+    overflow: auto;
 }
 
 .correct {
@@ -196,4 +224,13 @@ header {
     padding: 1vmin;
     
     cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

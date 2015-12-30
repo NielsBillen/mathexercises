@@ -59,6 +59,7 @@ var Exercise = (function () {
         this.correctCallBack = correctCallBack;
         this.wrongCallBack = wrongCallBack;
         this.resetCallBack = resetCallBack;
+        this.enabled = true;
         
         this.input = document.createElement("div");
         this.input.id = "exercise-input";
@@ -67,16 +68,18 @@ var Exercise = (function () {
         Keyboard.apppendListener(function (button, value) {
             var length = this.input.innerHTML.length;
 
-            if (length > 0) {
+            if (this.enabled) {
                 if (value === "enter") {
-                    this.check();
+                    if (length > 0) {
+                        this.check();
+                    }
                 } else if (value === "backspace") {
-                    this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
+                    if (length > 0) {
+                        this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
+                    }
                 } else {
                     this.input.innerHTML = parseInt(this.input.innerHTML + value, 10);
                 }
-            } else {
-                this.input.innerHTML = parseInt(this.input.innerHTML + value, 10);
             }
         }.bind(this));
         
@@ -117,9 +120,9 @@ var Exercise = (function () {
         my.clearElement(this.operator);
         my.clearElement(this.solution);
         my.clearElement(this.input);
-
+                
+        this.enabled = true;
         this.resetCallBack();
-        
         
         if (this.unknown === "solution") {
             rightOperand = this.numbers[this.index];
@@ -154,11 +157,15 @@ var Exercise = (function () {
     };
     
     my.Multiplication.prototype.check = function () {
+        this.enabled = false;
+        
         if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
             this.correctCallBack();
         } else {
             this.wrongCallBack();
         }
+        
+        setTimeout(this.generate.bind(this), 2000);
     };
     
     my.getPermutation = function (from, to) {
@@ -204,37 +211,31 @@ var solution = document.getElementById("exercise-solution");
 var feedback = document.getElementById("exercise-feedback");
 var monkey = document.getElementById("monkey");
 
+var monkeyHappy = new Image();
+monkeyHappy.src = "images/monkey-happy.svg";
+
+var monkeySad = new Image();
+monkeySad.src = "images/monkey-sad.svg";
+
+var monkeyThinking = new Image();
+monkeyThinking.src = "images/monkey-thinking.svg";
+
 var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, function () {
     "use strict";
-    
-    var image = new Image();
-        
-    image.onload = function () {
-        monkey.style.backgroundImage = 'url("images/monkey-happy.svg")';
-        setTimeout(this.generate.bind(this), 2000);
-    }.bind(multipliation);
-    
-    image.src = "images/monkey-happy.svg";
+    monkey.style.backgroundImage = 'url(' + monkeyHappy.src + ')';
+    monkey.style.animationDelay = "0s";
+    monkey.style.animationName = "";
+    monkey.style.animationName = "monkey-animation-correct";
 }, function () {
     "use strict";
-    
-    var image = new Image();
-        
-    image.onload = function () {
-        monkey.style.backgroundImage = 'url("images/monkey-sad.svg")';
-        setTimeout(this.generate.bind(this), 2000);
-    }.bind(multipliation);
-    
-    image.src = "images/monkey-sad.svg";
+    monkey.style.backgroundImage = 'url(' + monkeySad.src + ')';
+    monkey.style.animationDelay = "0s";
+    monkey.style.animationDuration = "2s";
+    monkey.style.animationName = "";
+    monkey.style.animationName = "monkey-animation-wrong";
 }, function () {
     "use strict";
-    var image = new Image();
-        
-    image.onload = function () {
-        monkey.style.backgroundImage = 'url("images/monkey-thinking.svg")';
-    }.bind(multipliation);
-    
-    image.src = "images/monkey-thinking.svg";
+    monkey.style.backgroundImage = 'url(' + monkeyThinking.src + ')';
 });
 
 multipliation.setUnknown("solution");
