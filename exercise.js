@@ -16,6 +16,7 @@ var Exercise = (function () {
         
         this.input = document.createElement("input");
         this.input.id = "exercise-input";
+        this.input.type = "number";
         this.input.onkeyup = function (e) {
             if (!e) {
                 e = window.event;
