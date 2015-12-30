@@ -36,6 +36,9 @@ var Keyboard = (function () {
     
         button = document.getElementById("button_enter");
         addTouchListener(button, my.buttonClicked.bind(this, button, "enter"));
+        
+        button = document.getElementById("button_back");
+        addTouchListener(button, my.buttonClicked.bind(this, button, "backspace"));
     };
     
     my.init();
@@ -65,7 +68,11 @@ var Exercise = (function () {
             if (value === "enter") {
                 this.check();
             } else if (value === "backspace") {
-                console.log("backspace");
+                var length = this.input.innerHTML.length;
+                
+                if (length > 0) {
+                    this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
+                }
             } else {
                 this.input.innerHTML += value;
             }

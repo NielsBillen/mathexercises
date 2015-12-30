@@ -194,4 +194,6 @@ header {
     min-height: 8vmin;
     margin: 1vmin;
     padding: 1vmin;
+    
+    cursor: pointer;
 }
