@@ -115,8 +115,8 @@ header {
 .jungle-border {
     position: fixed;
     top: 0;
-    width: 40vmax;
-    height: 40vmax;
+    width: 50vmin;
+    height: 50vmin;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

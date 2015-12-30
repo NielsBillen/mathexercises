@@ -65,16 +65,18 @@ var Exercise = (function () {
         this.input.className = "center";
         
         Keyboard.apppendListener(function (button, value) {
-            if (value === "enter") {
-                this.check();
-            } else if (value === "backspace") {
-                var length = this.input.innerHTML.length;
-                
-                if (length > 0) {
+            var length = this.input.innerHTML.length;
+
+            if (length > 0) {
+                if (value === "enter") {
+                    this.check();
+                } else if (value === "backspace") {
                     this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
+                } else {
+                    this.input.innerHTML = parseInt(this.input.innerHTML + value, 10);
                 }
             } else {
-                this.input.innerHTML += value;
+                this.input.innerHTML = parseInt(this.input.innerHTML + value, 10);
             }
         }.bind(this));
         
