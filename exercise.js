@@ -1,5 +1,33 @@
 /*global console*/
 
+var Keyboard = (function () {
+    "use strict";
+    
+    var my = {}, i, button, listeners = [];
+    
+    my.buttonClicked = function (button, value) {
+        var j;
+        for (j = 0; j < listeners.length; j += 1) {
+            listeners[j](button, value);
+        }
+    };
+    
+    my.apppendListener = function (listener) {
+        listeners.push(listener);
+    };
+    
+    for (i = 0; i <= 9; i += 1) {
+        button = document.getElementById("button" + i);
+        button.onclick = my.buttonClicked.bind(this, button, i);
+    }
+    
+    button = document.getElementById("button_enter");
+    button.onclick = my.buttonClicked.bind(this, button, "enter");
+    
+    return my;
+    
+}());
+
 var Exercise = (function () {
     "use strict";
     
@@ -14,19 +42,19 @@ var Exercise = (function () {
         this.wrongCallBack = wrongCallBack;
         this.resetCallBack = resetCallBack;
         
-        this.input = document.createElement("input");
+        this.input = document.createElement("div");
         this.input.id = "exercise-input";
-        this.input.type = "number";
-        this.input.onkeyup = function (e) {
-            if (!e) {
-                e = window.event;
-            }
-            var keyCode = e.keyCode || e.which;
-            if (keyCode === 13) {
+        this.input.className = "center";
+        
+        Keyboard.apppendListener(function (button, value) {
+            if (value === "enter") {
                 this.check();
-                return false;
+            } else if (value === "backspace") {
+                console.log("backspace");
+            } else {
+                this.input.innerHTML += value;
             }
-        }.bind(this);
+        }.bind(this));
         
         this.table = 1;
         this.unknown = "solution";
@@ -59,15 +87,13 @@ var Exercise = (function () {
                 my.shuffle(this.numbers);
             } while (this.numbers[0] === previousEnd);
         }
-        
-        /* reset */
-        
+                
         my.clearElement(this.left);
         my.clearElement(this.right);
         my.clearElement(this.operator);
         my.clearElement(this.solution);
         my.clearElement(this.input);
-        this.input.value = "";
+
         this.resetCallBack();
         
         
@@ -79,7 +105,7 @@ var Exercise = (function () {
             this.operator.innerHTML = "&times;";
             this.solution.appendChild(this.input);
 
-            this.input.solution = rightOperand * this.table;
+            this.exerciseSolution = rightOperand * this.table;
         } else if (this.unknown === "left") {
             solution = this.numbers[this.index];
             
@@ -88,7 +114,7 @@ var Exercise = (function () {
             this.operator.innerHTML = "&times;";
             this.left.appendChild(this.input);
 
-            this.input.solution = solution;
+            this.exerciseSolution = solution;
         } else if (this.unknown === "right") {
             solution = this.numbers[this.index];
             
@@ -96,15 +122,15 @@ var Exercise = (function () {
             this.solution.innerHTML = (solution * this.table);
             this.operator.innerHTML = "&times;";
             this.right.appendChild(this.input);
-
-            this.input.solution = solution;
+            
+            this.exerciseSolution = solution;
         }
         
         this.index = (this.index + 1) % (this.numbers.length);
     };
     
     my.Multiplication.prototype.check = function () {
-        if (parseInt(this.input.value, 10) === this.input.solution) {
+        if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
             this.correctCallBack();
         } else {
             this.wrongCallBack();

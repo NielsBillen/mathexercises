@@ -22,8 +22,6 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    align-items: center;
     
     width: 100%;
     height: 100%;
@@ -33,7 +31,7 @@ body {
     
     font-family: "raleway-bold";
     font-size: 14vmin;
-        background-color: rgb(228,232,229);
+    background-color: rgb(228,232,229);
 
     background-image: url("images/tree.svg");
     background-size: contain;
@@ -43,16 +41,23 @@ body {
 
 /* header */
 header {
+    position: fixed;
+    left: 1vmin;
+    top: 1vmin;
+    padding: 1vmin 3vmin;
+    
     text-align: center;
-    font-size: 12vmin;
+    font-size: 8vmin;
     font-family: "raleway-bold";
     background-image: url("images/woodenframe.svg");
     background-repeat: repeat-x;
     background-size: contain;
     color: white;
     
+    /*
     margin: 1vmin;
-    padding: 1vmin 8vmin;
+    margin-right: auto;
+    padding: 1vmin 8vmin;*/
 }
 
 .center {
@@ -64,7 +69,7 @@ header {
 
 @keyframes monkey-animation{
     from {
-        top: 26vmin;
+        top: 21vmin;
         visibility: visible;
     }
     to {
@@ -75,11 +80,12 @@ header {
 
 #monkey {
     position: relative;
-    top: 1vmax;
     visibility: hidden;
+    overflow: hidden;
     
-    width: 25vmin;
-    height: 25vmin;
+    width: 24vmin;
+    height: 24vmin;
+    transform: translateX(0);
     z-index: -100;
     
     background-image: url("images/monkey-thinking.svg");
@@ -103,7 +109,7 @@ header {
     background-image: url("images/grass.svg");
     background-size: contain;
     background-repeat: repeat-x;
-    z-index: -1000;
+    z-index: -10;
 }
 
 .jungle-border {
@@ -133,42 +139,11 @@ header {
 }
 
 #exercise {
-    padding: 8vmin 2vmin;
+    padding: 2vmin 2vmin;
+    min-height: 24vmin;
     background-image: url("images/woodenframe.svg");
     background-repeat: repeat-x;
     background-size: contain;
-}
-
-#exercise-input {
-    text-align: center;
-    
-    font-family: "raleway-bold";
-    font-size: 14vmin;
-    
-    border-radius: 4vmin;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    
-    border: none;
-    outline: none;
-    /*
-    text-align: center;
-    
-    font-family: "raleway-bold";
-    font-size: 12vmin;
-    
-    width: 80%;
-    height: 80%;
-    border-radius: 20%;
-    border:none;
-    outline: 0;
-    */
-}
-
-#exercise-feedback {
-    height: 18vmin;
-    text-align: center;
 }
 
 .exercise-operand {
@@ -176,17 +151,17 @@ header {
     align-content: center;
     align-items: center;
     justify-content: center;
+    min-width: 16vmin;
+    color: white;
+}
 
+#exercise-input {
     width: 18vmin;
     height: 18vmin;
-    
-    color: white;
-    /*
-    border-radius: 5vmin;
-    background-color: greenyellow;
-    border: 1vmin solid black;
-    box-shadow: 1vmin 1vmin 2vmin gray;
-    */
+    border-radius: 4vmin;
+    background-color: white;
+    color: black;
+    text-align: center;
 }
 
 .correct {
@@ -195,4 +170,28 @@ header {
 
 .wrong {
     color: red;
+}
+
+#keyboard {
+    background-image: url("images/woodenframe.svg");
+    background-size: contain;
+    background-repeat: repeat-x;
+        
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1vmin;
+}
+
+.keyboard-button {
+    font-size: 7vmin;
+    color: white;
+    background-color: burlywood;
+    border-radius: 2.5vmin;
+    
+    min-width: 8vmin;
+    min-height: 8vmin;
+    margin: 1vmin;
+    padding: 1vmin;
 }
