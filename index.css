@@ -62,9 +62,21 @@ header {
     justify-content: center;
 }
 
+@keyframes monkey-animation{
+    from {
+        top: 26vmin;
+        visibility: visible;
+    }
+    to {
+        top: 1vmax;
+        visibility: visible;
+    }
+}
+
 #monkey {
     position: relative;
     top: 1vmax;
+    visibility: hidden;
     
     width: 25vmin;
     height: 25vmin;
@@ -74,6 +86,12 @@ header {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    
+    animation-name: monkey-animation;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
 
 .jungle-grass {
