@@ -1,9 +1,19 @@
 /*global console*/
 
+var addTouchListener = function (element, callback) {
+    "use strict";
+    
+    if (document.body.ontouchstart === undefined) {
+        element.addEventListener("click", callback);
+    } else {
+        element.addEventListener("touchstart", callback);
+    }
+};
+
 var Keyboard = (function () {
     "use strict";
     
-    var my = {}, i, button, listeners = [];
+    var my = {}, listeners = [];
     
     my.buttonClicked = function (button, value) {
         var j;
@@ -16,16 +26,21 @@ var Keyboard = (function () {
         listeners.push(listener);
     };
     
-    for (i = 0; i <= 9; i += 1) {
-        button = document.getElementById("button" + i);
-        button.onclick = my.buttonClicked.bind(this, button, i);
-    }
+    my.init = function () {
+        var i, button;
+        
+        for (i = 0; i <= 9; i += 1) {
+            button = document.getElementById("button" + i);
+            addTouchListener(button, my.buttonClicked.bind(this, button, i));
+        }
     
-    button = document.getElementById("button_enter");
-    button.onclick = my.buttonClicked.bind(this, button, "enter");
+        button = document.getElementById("button_enter");
+        addTouchListener(button, my.buttonClicked.bind(this, button, "enter"));
+    };
+    
+    my.init();
     
     return my;
-    
 }());
 
 var Exercise = (function () {
