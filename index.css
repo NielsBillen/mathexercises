@@ -72,39 +72,57 @@ header {
         top: 24vmin;
     }
     100% {
-        top: 1vmax;
+        top: 1vmin;
     }
 }
 
 @keyframes monkey-animation-correct {
     0% {
-        top: 1vmax;
+        top: 1vmin;
+    }
+    12.5% {
+        top: 4vmin;
     }
     25% {
-        top: 2vmax;
+        top: 1vmin;
+    }
+    37.5% {
+        top: 4vmin;
     }
     50% {
-        top: 1vmax;
+        top: 1vmin;
+    }
+    62.5% {
+        top: 4vmin;
     }
     75% {
-        top: 2vmax;
+        top: 1vmin;
+    }
+    87.5% {
+        top: 4vmin;
     }
     100% {
-        top: 1vmax;
+        top: 1vmin;
     }
 }
 
 @keyframes monkey-animation-wrong {
     0% {
-        top: 1vmax;
+        top: 1vmin;
     }
-    95% {
-        top: 3vmax;
+    30% {
+        top: 3vmin;
+        transform: rotate(5deg);
+    }
+    90% {
+        top: 4vmin;
+        transform: rotate(5deg);
     }
     100% {
-        top: 1vmax;
+        top: 1vmin;
     }
 }
+
 #monkey {
     position: relative;
     overflow: hidden;
@@ -183,7 +201,7 @@ header {
 }
 
 #exercise-input {
-    width: 18vmin;
+    min-width: 18vmin;
     height: 18vmin;
     border-radius: 4vmin;
     background-color: white;

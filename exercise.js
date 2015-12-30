@@ -120,7 +120,8 @@ var Exercise = (function () {
         my.clearElement(this.operator);
         my.clearElement(this.solution);
         my.clearElement(this.input);
-                
+        
+        this.input.style.color = "";
         this.enabled = true;
         this.resetCallBack();
         
@@ -161,11 +162,19 @@ var Exercise = (function () {
         
         if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
             this.correctCallBack();
+                
+            setTimeout(this.generate.bind(this), 2000);
         } else {
+            setTimeout(function () {
+                this.input.innerHTML = this.exerciseSolution;
+                this.input.style.color = "red";
+            }.bind(this), 1000);
+            
+            setTimeout(this.generate.bind(this), 3000);
+
+            
             this.wrongCallBack();
         }
-        
-        setTimeout(this.generate.bind(this), 2000);
     };
     
     my.getPermutation = function (from, to) {
@@ -220,24 +229,36 @@ monkeySad.src = "images/monkey-sad.svg";
 var monkeyThinking = new Image();
 monkeyThinking.src = "images/monkey-thinking.svg";
 
+monkey.addEventListener("animationend", function () {
+    "use strict";
+    if (monkey.style.animationName === "monkey-animation-start") {
+        monkey.style.top = "1vmin";
+    }
+});
+
 var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, function () {
     "use strict";
     monkey.style.backgroundImage = 'url(' + monkeyHappy.src + ')';
     monkey.style.animationDelay = "0s";
-    monkey.style.animationName = "";
-    monkey.style.animationName = "monkey-animation-correct";
+    monkey.style.animationDuration = "2s";
+    monkey.style.animationName = "none";
+    setTimeout(function () {
+        monkey.style.animationName = "monkey-animation-correct";
+    }, 1);
 }, function () {
     "use strict";
     monkey.style.backgroundImage = 'url(' + monkeySad.src + ')';
     monkey.style.animationDelay = "0s";
     monkey.style.animationDuration = "2s";
-    monkey.style.animationName = "";
-    monkey.style.animationName = "monkey-animation-wrong";
+    monkey.style.animationName = "none";
+    setTimeout(function () {
+        monkey.style.animationName = "monkey-animation-wrong";
+    }, 1);
 }, function () {
     "use strict";
     monkey.style.backgroundImage = 'url(' + monkeyThinking.src + ')';
 });
 
 multipliation.setUnknown("solution");
-multipliation.setTable(4);
+multipliation.setTable(3);
 multipliation.generate();
