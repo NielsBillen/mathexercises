@@ -1,85 +1,31 @@
-/*global console*/
+/*global Keyboard, console*/
 
-var addTouchListener = function (element, callback) {
-    "use strict";
-    
-    if (document.body.ontouchstart === undefined) {
-        element.addEventListener("click", callback);
-    } else {
-        element.addEventListener("touchstart", callback);
-    }
-};
-
-var Keyboard = (function () {
-    "use strict";
-    
-    var my = {}, listeners = [];
-    
-    document.onkeypress = function (e) {
-        e = e || window.event;
-    
-        var string, charCode;
-        
-        charCode = (typeof e.which === "number") ? e.which : e.keyCode;
-        
-        if (charCode >= 48 && charCode <= 57) {
-            my.buttonClicked(charCode - 48);
-        } else if (charCode === 13) {
-            my.buttonClicked("enter");
-        } else if (charCode === 8) {
-            my.buttonClicked("backspace");
-        }
-    };
-    
-    my.buttonClicked = function (value) {
-        var j;
-        for (j = 0; j < listeners.length; j += 1) {
-            listeners[j](value);
-        }
-    };
-    
-    my.apppendListener = function (listener) {
-        listeners.push(listener);
-    };
-    
-    my.init = function () {
-        var i, button;
-        
-        for (i = 0; i <= 9; i += 1) {
-            button = document.getElementById("button" + i);
-            addTouchListener(button, my.buttonClicked.bind(this, i));
-        }
-    
-        button = document.getElementById("button_enter");
-        addTouchListener(button, my.buttonClicked.bind(this, "enter"));
-        
-        button = document.getElementById("button_back");
-        addTouchListener(button, my.buttonClicked.bind(this, "backspace"));
-    };
-    
-    my.init();
-    
-    return my;
-}());
+/*-----------------------------------------------------------------------------
+ * Javascript file which controls the exercise
+ *---------------------------------------------------------------------------*/
 
 var Exercise = (function () {
     "use strict";
     
     var my = {};
     
-    my.Multiplication = function (left, operator, right, solution, correctCallBack, wrongCallBack, resetCallBack) {
-        this.left = left;
-        this.operator = operator;
-        this.right = right;
-        this.solution = solution;
-        this.correctCallBack = correctCallBack;
-        this.wrongCallBack = wrongCallBack;
-        this.resetCallBack = resetCallBack;
-        this.enabled = true;
+    my.Multiplication = function (left, operator, right, solution, score, correctCallBack, wrongCallBack, resetCallBack) {
+        this.left = left;                           /* left operand container */
+        this.operator = operator;                   /* operator container */
+        this.right = right;                         /* right operand container */
+        this.solution = solution;                   /* solution container */
+        this.score = score;                         /* container showing the score */
+        this.correctCallBack = correctCallBack;     /* callback to function which is called when the correct answer is given */
+        this.wrongCallBack = wrongCallBack;         /* callback to function which is called when the wrong answer is given */
+        this.resetCallBack = resetCallBack;         /* callback to fuction which is called when the question is reset */
+        this.enabled = true;                        /* whether any input is accepted */
         
-        this.input = document.createElement("div");
+        this.correct = 0;                           /* the statistics */
+        this.questions = 0;                         /* the question */
+        
+        this.input = document.createElement("div"); /* the element in which the input is shown */
         this.input.id = "exercise-input";
-        this.input.className = "center";
+        this.input.className = "center noselect";
         
         Keyboard.apppendListener(function (value) {
             var length = this.input.innerHTML.length;
@@ -115,7 +61,7 @@ var Exercise = (function () {
     
     my.Multiplication.prototype.setTable = function (table) {
         if (table < 2) {
-            throw "the table should be larger than 1.";
+            throw "the table should be larger than 1!";
         }
         this.table = table;
     };
@@ -174,22 +120,29 @@ var Exercise = (function () {
     };
     
     my.Multiplication.prototype.check = function () {
-        this.enabled = false;
-        
-        if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
-            this.correctCallBack();
-                
-            setTimeout(this.generate.bind(this), 2000);
-        } else {
-            setTimeout(function () {
-                this.input.innerHTML = this.exerciseSolution;
-                this.input.style.color = "red";
-            }.bind(this), 1000);
-            
-            setTimeout(this.generate.bind(this), 3000);
+        if (this.enabled) {
+            this.enabled = false;
 
+            this.questions += 1;
             
-            this.wrongCallBack();
+            if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
+                this.correct += 1;
+                this.input.style.color = "lime";
+                this.correctCallBack();
+
+                setTimeout(this.generate.bind(this), 2000);
+            } else {
+                setTimeout(function () {
+                    this.input.innerHTML = this.exerciseSolution;
+                    this.input.style.color = "red";
+                }.bind(this), 1000);
+
+                setTimeout(this.generate.bind(this), 3000);
+
+                this.wrongCallBack();
+            }
+            
+            this.score.innerHTML = "Score: " + this.correct + "/" + this.questions;
         }
     };
     
@@ -233,17 +186,23 @@ var leftOperator = document.getElementById("exercise-operator-left");
 var rightOperator = document.getElementById("exercise-operator-right");
 var operator = document.getElementById("exercise-operand");
 var solution = document.getElementById("exercise-solution");
-var feedback = document.getElementById("exercise-feedback");
+var score = document.getElementById("score");
 var monkey = document.getElementById("monkey");
 
-var monkeyHappy = new Image();
-monkeyHappy.src = "images/monkey-happy.svg";
-
-var monkeySad = new Image();
-monkeySad.src = "images/monkey-sad.svg";
-
-var monkeyThinking = new Image();
-monkeyThinking.src = "images/monkey-thinking.svg";
+var setBackgroundImage = function (element, imageFilename, callBack) {
+    "use strict";
+    var image = new Image();
+    
+    image.onload = function () {
+        element.style.backgroundImage = "url(" + image.src + ")";
+        
+        if (callBack) {
+            callBack();
+        }
+    };
+    
+    image.src = imageFilename;
+};
 
 monkey.addEventListener("animationend", function () {
     "use strict";
@@ -252,29 +211,37 @@ monkey.addEventListener("animationend", function () {
     }
 });
 
-var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, function () {
+var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, score, function () {
     "use strict";
-    monkey.style.backgroundImage = 'url(' + monkeyHappy.src + ')';
-    monkey.style.animationDelay = "0s";
-    monkey.style.animationDuration = "2s";
-    monkey.style.animationName = "none";
-    setTimeout(function () {
-        monkey.style.animationName = "monkey-animation-correct";
-    }, 1);
+    setBackgroundImage(monkey, "images/monkey-happy.svg", function () {
+        monkey.style.animationDelay = "0s";
+        monkey.style.animationDuration = "2s";
+        monkey.style.animationName = "none";
+        setTimeout(function () {
+            monkey.style.animationName = "monkey-animation-correct";
+        }, 10);
+    });
 }, function () {
     "use strict";
-    monkey.style.backgroundImage = 'url(' + monkeySad.src + ')';
-    monkey.style.animationDelay = "0s";
-    monkey.style.animationDuration = "2s";
-    monkey.style.animationName = "none";
-    setTimeout(function () {
-        monkey.style.animationName = "monkey-animation-wrong";
-    }, 1);
+    setBackgroundImage(monkey, "images/monkey-sad.svg", function () {
+        monkey.style.animationDelay = "0s";
+        monkey.style.animationDuration = "3s";
+        monkey.style.animationName = "none";
+        setTimeout(function () {
+            monkey.style.animationName = "monkey-animation-wrong";
+        }, 10);
+    });
 }, function () {
     "use strict";
-    monkey.style.backgroundImage = 'url(' + monkeyThinking.src + ')';
+    setBackgroundImage(monkey, "images/monkey-thinking.svg");
 });
 
+var exerciseTable = localStorage.getItem("exercise-multiplication-table");
+if (exerciseTable) {
+    multipliation.setTable(parseInt(exerciseTable, 10));
+} else {
+    multipliation.setTable(3);
+}
+
 multipliation.setUnknown("solution");
-multipliation.setTable(3);
 multipliation.generate();

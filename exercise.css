@@ -15,7 +15,6 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 /* body styling */
@@ -30,9 +29,8 @@ body {
     overflow: hidden;
     
     font-family: "raleway-bold";
-    font-size: 14vmin;
+    
     background-color: rgb(228,232,229);
-
     background-image: url("images/tree.svg");
     background-size: contain;
     background-repeat: repeat-x;
@@ -49,17 +47,22 @@ header {
     text-align: center;
     font-size: 8vmin;
     font-family: "raleway-bold";
-    background-image: url("images/woodenframe.svg");
-    background-repeat: repeat-x;
-    background-size: contain;
     color: white;
-    
-    /*
-    margin: 1vmin;
-    margin-right: auto;
-    padding: 1vmin 8vmin;*/
 }
 
+#score {
+    position: fixed;
+    right: 1vmin;
+    top: 1vmin;
+    padding: 1vmin 3vmin;
+    
+    text-align: center;
+    font-size: 8vmin;
+    font-family: "raleway-bold";
+    color: white;
+}
+
+/* class which centers its content */
 .center {
     display: flex;
     align-items: center;
@@ -116,7 +119,7 @@ header {
     }
     90% {
         top: 4vmin;
-        transform: rotate(5deg);
+        transform: rotate(8deg);
     }
     100% {
         top: 1vmin;
@@ -145,39 +148,6 @@ header {
     animation-fill-mode: both;
 }
 
-.jungle-grass {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 16vmax;
-    background-image: url("images/grass.svg");
-    background-size: contain;
-    background-repeat: repeat-x;
-    z-index: -10;
-}
-
-.jungle-border {
-    position: fixed;
-    top: 0;
-    width: 50vmin;
-    height: 50vmin;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: -1000;
-}
-
-.jungle-border.left {
-    left: 0;
-    background-image: url("images/jungleborder-left.svg");
-}
-
-.jungle-border.right {
-    right: 0;
-    background-image: url("images/jungleborder-right.svg");
-}
-
 #exercise-wrapper {
     flex: 1;
     flex-direction: column;
@@ -186,62 +156,21 @@ header {
 #exercise {
     padding: 2vmin 2vmin;
     min-height: 24vmin;
-    background-image: url("images/woodenframe.svg");
-    background-repeat: repeat-x;
-    background-size: contain;
 }
 
 .exercise-operand {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
     min-width: 16vmin;
+    font-size: 14vmin;
     color: white;
 }
 
 #exercise-input {
     min-width: 18vmin;
     height: 18vmin;
+
     border-radius: 4vmin;
     background-color: white;
     color: black;
-    text-align: center;
-    overflow: auto;
-}
-
-.correct {
-    color: lime;
-}
-
-.wrong {
-    color: red;
-}
-
-#keyboard {
-    background-image: url("images/woodenframe.svg");
-    background-size: contain;
-    background-repeat: repeat-x;
-        
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 1vmin;
-}
-
-.keyboard-button {
-    font-size: 7vmin;
-    color: white;
-    background-color: burlywood;
-    border-radius: 2.5vmin;
-    
-    min-width: 8vmin;
-    min-height: 8vmin;
-    margin: 1vmin;
-    padding: 1vmin;
-    
-    cursor: pointer;
 }
 
 .noselect {

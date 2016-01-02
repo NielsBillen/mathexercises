@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        
+        <link type="text/css" rel="stylesheet" href="jungle.css"></link>
+        <link type="text/css" rel="stylesheet" href="exercise.css"></link>
+        <link type="text/css" rel="stylesheet" href="keyboard.css"></link>
+    </head>
+    <body>
+        <header class = "wood">Maal</header>
+        <div id = "score" class = "wood">Score: 0/0</div>
+        <div class = "jungle-border left">Left border</div>
+        <div class = "jungle-border right"></div>
+        <!--<div class = "jungle-grass"></div>-->
+        <div id = "exercise-wrapper" class = "center">
+            <div id = "monkey"></div>
+            <div id = "exercise" class = "wood center">
+                <span class = "exercise-operand center" id = "exercise-operator-left">?</span>
+                <span class = "exercise-operand center" id = "exercise-operand">x</span>
+                <span class = "exercise-operand center" id = "exercise-operator-right">?</span>
+                <span class = "exercise-operand center">=</span>
+                <span class = "exercise-operand center" id = "exercise-solution">?</span>
+            </div>
+        </div>
+        <div id = "keyboard" class = "keyboard wood">
+            <div id = "button0" class = "keyboard-button center noselect">0</div>
+            <div id = "button1" class = "keyboard-button center noselect">1</div>
+            <div id = "button2" class = "keyboard-button center noselect">2</div>
+            <div id = "button3" class = "keyboard-button center noselect">3</div>
+            <div id = "button4" class = "keyboard-button center noselect">4</div>
+            <div id = "button5" class = "keyboard-button center noselect">5</div>
+            <div id = "button6" class = "keyboard-button center noselect">6</div>
+            <div id = "button7" class = "keyboard-button center noselect">7</div>
+            <div id = "button8" class = "keyboard-button center noselect">8</div>
+            <div id = "button9" class = "keyboard-button center noselect">9</div>
+            <div id = "button_enter" class = "keyboard-button center noselect">Ok</div>
+            <div id = "button_back" class = "keyboard-button center noselect">Wis</div>
+        </div>
+        
+        <script src = "keyboard.js"></script>
+        <script src = "exercise.js"></script>
+    </body>
+</html>

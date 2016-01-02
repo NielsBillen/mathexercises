@@ -1,0 +1,89 @@
+/* font definition for bold fonts */
+@font-face {
+    font-family: raleway-bold;
+    src: url("fonts/Roboto-Black.ttf");
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* body styling */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    font-family: "raleway-bold";
+    
+    background-color: rgb(228,232,229);
+    background-image: url("images/tree.svg");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+header {
+    font-size: 8vmin;
+    color: white;
+    
+    padding: 1vmin 6vmin;
+    margin: 5vmin;
+    margin-bottom: 8vmin;
+}
+
+#settings-container {
+    min-width: 50vmin;
+    padding: 2vmin;
+}
+
+.setting {
+    margin: 2vmin;
+    display: flex;
+}
+
+label {
+    color: white;
+    flex: 1;
+    font-size: 8vmin;
+    margin-right: 4vmin;
+}
+
+input {
+    width: 25vmin;
+    padding: 1vmin;
+    color: black;
+    font-size: 8vmin;
+    font-family: "raleway-bold";
+    text-align: right;
+}
+
+#back-button {
+    font-size: 7vmin;
+    color: white;
+    background-color: burlywood;
+    border-radius: 2.5vmin;
+    
+    min-height: 8vmin;
+    margin: 4vmin 2vmin;
+    padding: 1vmin;
+    
+    cursor: pointer;
+}
+
+/* class which centers its content */
+.center {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}

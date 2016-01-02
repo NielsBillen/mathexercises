@@ -1,0 +1,98 @@
+/*-----------------------------------------------------------------------------
+ * Cascading Style Sheet for the Jungle Theme
+ *
+ * @author  Niels Billen
+ * @version 0.1
+ *---------------------------------------------------------------------------*/
+
+/* wooden frame background decorations */
+.wood {
+    background-image: url("images/woodenframe.svg");
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+.jungle-grass {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 16vmax;
+    background-image: url("images/grass.svg");
+    background-size: contain;
+    background-repeat: repeat-x;
+    z-index: -10;
+}
+
+.jungle-border {
+    position: fixed;
+    top: 0;
+    width: 50vmin;
+    height: 50vmin;
+    
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    
+    z-index: -1000;
+}
+
+.jungle-border.left {
+    left: 0;
+    background-image: url("images/jungleborder-left.svg");
+    
+    animation-name: jungle-border-left-animation;
+}
+
+.jungle-border.right {
+    right: 0;
+    background-image: url("images/jungleborder-right.svg");
+    
+    animation-name: jungle-border-right-animation;
+}
+
+/*
+ * Animation for the key which is pressed.
+ */
+@keyframes jungle-border-left-animation {
+    0% {
+        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
+    }
+    25% {
+        transform: translate(-50%,-50%) rotate(2deg) translate(45%, 45%);
+    }
+    50% {
+        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
+    }
+    75% {
+        transform: translate(-50%,-50%) rotate(-2deg) translate(45%, 45%);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
+    }
+}
+
+/*
+ * Animation for the key which is pressed.
+ */
+@keyframes jungle-border-right-animation {
+    0% {
+        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
+    }
+    25% {
+        transform: translate(50%,-50%) rotate(-2deg) translate(-45%, 45%);
+    }
+    50% {
+        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
+    }
+    75% {
+        transform: translate(50%,-50%) rotate(2deg) translate(-45%, 45%);
+    }
+    100% {
+        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
+    }
+}

@@ -1,0 +1,76 @@
+/*-----------------------------------------------------------------------------
+ * CSS styling for the custom on screen keyboard
+ *---------------------------------------------------------------------------*/
+
+/*
+ * Styling for the keyboard.
+ */
+.keyboard {
+    /* horizontal flow layout */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    /* center the content */
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    /* add margins to sides */
+    padding: 1vmin
+}
+
+/*
+ * Styling for the individual buttons of the keyboard.
+ */
+.keyboard-button {
+    color: white;
+    font-size: 7vmin;
+    
+    background-color: burlywood;
+    border-radius: 2.5vmin;
+    
+    min-width: 8vmin;
+    min-height: 8vmin;
+    margin: 1vmin;
+    padding: 1vmin;
+    
+    cursor: pointer;
+    
+    animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+}
+
+/*
+ * Styling for the keyboard button when the mouse is hovered.
+ */
+.keyboard-button:hover {
+    background-color: sandybrown;
+}
+
+/*
+ * Animation for the key which is pressed.
+ */
+@keyframes keyboard-keypress {
+    0% {
+        transform: translateY(0%);
+    }
+    20% {
+        transform: translateY(-50%)
+    }
+    40% {
+        transform: translateY(0%);
+    }
+    60% {
+        transform: translateY(-25%);
+    }
+    80% {
+        transform: translateY(0%);
+    }
+    90% {
+        transform: translateY(-10%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
