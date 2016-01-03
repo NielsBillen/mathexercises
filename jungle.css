@@ -45,14 +45,14 @@
     left: 0;
     background-image: url("images/jungleborder-left.svg");
     
-    animation-name: jungle-border-left-animation;
+    /*animation-name: jungle-border-left-animation;*/
 }
 
 .jungle-border.right {
     right: 0;
     background-image: url("images/jungleborder-right.svg");
     
-    animation-name: jungle-border-right-animation;
+    /*animation-name: jungle-border-right-animation;*/
 }
 
 /*
