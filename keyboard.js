@@ -11,7 +11,7 @@
 var Keyboard = (function () {
     "use strict";
     
-    var my = {}, listeners = [], addTouchListener, buttonClicked, keyPressed;
+    var my = {}, listeners = [], addTouchListener, buttonClicked, keyPressed, audio = document.getElementById("keyboard-button-click");
     
     /**
      * Adds the given callback function as a touch listener to the given element.
@@ -81,6 +81,7 @@ var Keyboard = (function () {
         setTimeout(function () {
             button.style.animationName = "keyboard-keypress";
         }, 5);
+        audio.play();
     };
     
     /*
