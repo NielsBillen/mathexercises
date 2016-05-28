@@ -46,6 +46,17 @@ header {
     padding: 2vmin;
 }
 
+#settings-version {
+    position: fixed;
+    right: 1vmin;
+    bottom: 1vmin;
+    
+    color: white;
+    padding: 0.5vmin;
+    font-size: 4vmin;
+    
+}
+
 .setting {
     margin: 2vmin;
     display: flex;
