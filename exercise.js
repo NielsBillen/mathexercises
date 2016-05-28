@@ -242,7 +242,9 @@ if (exerciseTable) {
     var table = parseInt(exerciseTable, 10);
     
     if (!isNaN(table)) {
-        table = 1;
+        if (table < 1) {
+            table = 1;
+        }
     }
     multipliation.setTable(table);
 } else {
