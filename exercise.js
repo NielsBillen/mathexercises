@@ -60,7 +60,7 @@ var Exercise = (function () {
     };
     
     my.Multiplication.prototype.setTable = function (table) {
-        if (table < 2) {
+        if (table < 1) {
             throw "the table should be larger than 1!";
         }
         this.table = table;
@@ -237,8 +237,14 @@ var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOpe
 });
 
 var exerciseTable = localStorage.getItem("exercise-multiplication-table");
+
 if (exerciseTable) {
-    multipliation.setTable(parseInt(exerciseTable, 10));
+    var table = parseInt(exerciseTable, 10);
+    
+    if (!isNaN(table)) {
+        table = 1;
+    }
+    multipliation.setTable(table);
 } else {
     multipliation.setTable(3);
 }

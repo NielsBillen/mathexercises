@@ -15,6 +15,9 @@ var Settings = (function () {
         count = localStorage.getItem("exercise-multiplication-exercisecount");
         
         if (table) {
+            if (table < 1) {
+                table = 1;
+            }
             inputTable.value = table;
         } else {
             inputTable.value = 3;
@@ -22,6 +25,9 @@ var Settings = (function () {
         }
         
         if (count) {
+            if (count < 1) {
+                count = 1;
+            }
             inputExerciseCount.value = count;
         } else {
             inputExerciseCount.value = 20;
@@ -29,10 +35,14 @@ var Settings = (function () {
         }
     }());
     
-    inputTable.oninput = function (e) {
+    inputTable.oninput = inputTable.onchange = function (e) {
         var number = parseInt(inputTable.value, 10);
         
-        if (number) {
+        if (!isNaN(number)) {
+            if (number < 1) {
+                number = 1;
+                inputTable.value = 1;
+            }
             localStorage.setItem("exercise-multiplication-table", number);
         }
     };
@@ -40,7 +50,11 @@ var Settings = (function () {
     inputExerciseCount.oninput = function (e) {
         var number = parseInt(inputExerciseCount.value, 10);
         
-        if (number) {
+        if (!isNaN(number)) {
+            if (number < 1) {
+                number = 1;
+                inputExerciseCount.value = 1;
+            }
             localStorage.setItem("exercise-multiplication-exercisecount", number);
         }
     };
