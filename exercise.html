@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html manifest = "cache.manifest">
     <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
         <title>Oefening</title>
+        
+        <!-- metadata settings -->
+        <meta charset="utf-8"/>        
+        <meta name="mobileoptimized" content="true"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="mobile-web-app-capable" content="yes"></meta>
+        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"></meta>
+
+        <!-- manifest inclusion -->
+        <link rel="manifest" href="manifest.json"></link>
+
+        <!-- icons inclusion -->
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="favicon.ico"></link>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"></link>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"></link>
+
+        <!-- style sheets inclusions -->
         <link type="text/css" rel="stylesheet" href="jungle.css"></link>
         <link type="text/css" rel="stylesheet" href="exercise.css"></link>
         <link type="text/css" rel="stylesheet" href="keyboard.css"></link>
