@@ -9,7 +9,7 @@ var Exercise = (function () {
     
     var my = {};
     
-    my.Multiplication = function (left, operator, right, solution, score, correctCallBack, wrongCallBack, resetCallBack) {
+    my.Multiplication = function (left, operator, right, solution, score, nbOfExercises, correctCallBack, wrongCallBack, resetCallBack) {
         this.left = left;                           /* left operand container */
         this.operator = operator;                   /* operator container */
         this.right = right;                         /* right operand container */
@@ -19,6 +19,7 @@ var Exercise = (function () {
         this.wrongCallBack = wrongCallBack;         /* callback to function which is called when the wrong answer is given */
         this.resetCallBack = resetCallBack;         /* callback to fuction which is called when the question is reset */
         this.enabled = true;                        /* whether any input is accepted */
+        this.nbOfExercises = nbOfExercises;         /* number of exercises before starting over */
         
         this.correct = 0;                           /* the statistics */
         this.questions = 0;                         /* the question */
@@ -49,6 +50,8 @@ var Exercise = (function () {
         this.unknown = "solution";
         this.index = 0;
         this.numbers = my.getPermutation(2, 10);
+        
+        this.score.innerHTML = "Oefening: " + (this.questions + 1) + "/" + this.nbOfExercises;
     };
     
     my.Multiplication.prototype.setUnknown = function (unknown) {
@@ -142,7 +145,7 @@ var Exercise = (function () {
                 this.wrongCallBack();
             }
             
-            this.score.innerHTML = "Score: " + this.correct + "/" + this.questions;
+            this.score.innerHTML = "Oefening: " + Math.min(this.questions + 1, this.nbOfExercises) + "/" + this.nbOfExercises;
         }
     };
     
@@ -211,7 +214,19 @@ monkey.addEventListener("animationend", function () {
     }
 });
 
-var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, score, function () {
+var exerciseCountItem = localStorage.getItem("exercise-multiplication-exercisecount");
+var exerciseCount = 10;
+if (exerciseCountItem) {
+    exerciseCount = parseInt(exerciseCountItem, 10);
+    
+    if (!isNaN(exerciseCount)) {
+        if (exerciseCount < 1) {
+            exerciseCount = 1;
+        }
+    }
+}
+
+var multiplication = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, score, exerciseCount, function () {
     "use strict";
     setBackgroundImage(monkey, "images/monkey-happy.svg", function () {
         monkey.style.animationDelay = "0s";
@@ -234,22 +249,25 @@ var multipliation = new Exercise.Multiplication(leftOperator, operator, rightOpe
 }, function () {
     "use strict";
     setBackgroundImage(monkey, "images/monkey-thinking.svg");
+    
+    if (this.questions === this.nbOfExercises) {
+        window.location = "index.html";
+    }
 });
 
-var exerciseTable = localStorage.getItem("exercise-multiplication-table");
+var exerciseTableItem = localStorage.getItem("exercise-multiplication-table");
+var exerciseTable = 3;
 
-if (exerciseTable) {
-    var table = parseInt(exerciseTable, 10);
+if (exerciseTableItem) {
+    exerciseTable = parseInt(exerciseTableItem, 10);
     
-    if (!isNaN(table)) {
-        if (table < 1) {
-            table = 1;
+    if (!isNaN(exerciseTable)) {
+        if (exerciseTable < 1) {
+            exerciseTable = 1;
         }
     }
-    multipliation.setTable(table);
-} else {
-    multipliation.setTable(3);
 }
 
-multipliation.setUnknown("solution");
-multipliation.generate();
+multiplication.setTable(exerciseTable);
+multiplication.setUnknown("solution");
+multiplication.generate();
