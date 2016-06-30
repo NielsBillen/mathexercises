@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     align-items: center;
     align-content: center;
+    justify-content: center;
     
     width: 100%;
     height: 100%;
@@ -38,28 +39,31 @@ header {
     
     padding: 1vmin 6vmin;
     margin: 1vmin;
+    margin-bottom: 4vmin;
 }
 
 #settings-container {
     min-width: 50vmin;
-    max-width: 90vw;
+    max-width: 80vw;
     padding: 2vmin;
+    background-color: saddlebrown;
+    border-radius: 2vmin;
 }
 
 #settings-version {
-    position: fixed;
+    position: absolute;
     right: 1vmin;
     bottom: 1vmin;
     
     color: white;
     padding: 0.5vmin;
+    margin-top: 2vmin;
     font-size: 4vmin;
     
 }
 
 .setting {
     margin: 2vmin;
-    /*display: flex;*/
 }
 
 #input-table-button-container {
@@ -102,7 +106,7 @@ header {
 
 label {
     color: white;
-    font-size: 8vmin;
+    font-size: 6vmin;
 }
 
 #back-button {
