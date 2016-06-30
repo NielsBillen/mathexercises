@@ -1,64 +1,154 @@
 /*global console*/
 
+
+
 var Settings = (function () {
     "use strict";
     
-    var my = {}, inputTable, inputExerciseCount;
+    var my = {}, addTouchListener, inputTableButtonContainer, inputExerciseContainer;
     
-    inputTable = document.getElementById("input-table");
-    inputExerciseCount = document.getElementById("input-exercise-count");
-
-    (function () {
-        var table, count;
-        
-        table = localStorage.getItem("exercise-multiplication-table");
-        count = localStorage.getItem("exercise-multiplication-exercisecount");
-        
-        if (table) {
-            if (table < 1) {
-                table = 1;
-            }
-            inputTable.value = table;
+    /**
+     * Adds the given callback function as a touch listener to the given element.
+     *
+     * When touch events are supported, it will be added as a touchstart event, 
+     * otherwhise it will be added on a click.
+     */
+    addTouchListener = function (element, callback) {
+        if (document.body.ontouchstart === undefined) {
+            element.addEventListener("click", callback);
         } else {
-            inputTable.value = 3;
-            localStorage.setItem("exercise-multiplication-table", 3);
+            element.addEventListener("touchstart", callback);
+        }
+    };
+    
+    inputTableButtonContainer = document.getElementById("input-table-button-container");
+    inputExerciseContainer = document.getElementById("input-exercise-button-container");
+    
+    /**
+     * Control the value of the table.
+     */
+    (function () {
+        var i, button, tableStorage, table, addTableClickHandler;
+        
+        /* read the table as a string from storage */
+        tableStorage = localStorage.getItem("exercise-multiplication-table");
+        
+        /* convert the string to a valid integer */
+        if (tableStorage) {
+            table = parseInt(tableStorage, 10);
+            
+            if (table < 1 || table > 10) {
+                table = 5;
+            }
+        } else {
+            table = 5;
         }
         
-        if (count) {
-            if (count < 1) {
-                count = 1;
+        addTableClickHandler = function (button, i) {
+            addTouchListener(button, function () {
+                var previousButton;
+                
+                /* remove the selection */
+                previousButton = document.getElementById("table-button" + table);
+                previousButton.classList.remove("selected");
+
+                /* set the table */
+                table = i;
+
+                /* add the selection */
+                button.classList.add("selected");
+                
+                /* store the table */
+                localStorage.setItem("exercise-multiplication-table", i);
+            });
+        };
+
+        /* create the buttons */
+        for (i = 1; i <= 10; i += 1) {
+            button = document.createElement("div");
+            button.innerHTML = i;
+            button.id = "table-button" + i;
+            
+            inputTableButtonContainer.appendChild(button);
+            
+            if (i === table) {
+                button.className = "settings-button center selected";
+            } else {
+                button.className = "settings-button center";
             }
-            inputExerciseCount.value = count;
-        } else {
-            inputExerciseCount.value = 20;
-            localStorage.setItem("exercise-multiplication-exercisecount", 20);
+            
+            addTableClickHandler(button, i);
         }
     }());
     
-    inputTable.oninput = inputTable.onchange = function (e) {
-        var number = parseInt(inputTable.value, 10);
+    /**
+     * Control the number of exercises of the table.
+     */
+    (function () {
+        var i, j, array, button, exerciseStorage, exercise, addTableClickHandler;
         
-        if (!isNaN(number)) {
-            if (number < 1) {
-                number = 1;
-                inputTable.value = 1;
-            }
-            localStorage.setItem("exercise-multiplication-table", number);
-        }
-    };
-    
-    inputExerciseCount.oninput = function (e) {
-        var number = parseInt(inputExerciseCount.value, 10);
+        /* create the buttons */
+        array = [1, 5, 10, 15, 20];
         
-        if (!isNaN(number)) {
-            if (number < 1) {
-                number = 1;
-                inputExerciseCount.value = 1;
-            }
-            localStorage.setItem("exercise-multiplication-exercisecount", number);
+        /* read the table as a string from storage */
+        exerciseStorage = localStorage.getItem("exercise-multiplication-exercisecount");
+        
+        /* convert the string to a valid integer */
+        if (exerciseStorage) {
+            exercise = parseInt(exerciseStorage, 10);
+            
+            (function () {
+                var i, found = false;
+                for (i = 0; i < array.length; i += 1) {
+                    if (array[i] === exercise) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    exercise = array[1];
+                }
+            }());
+        } else {
+            exercise = array[1];
         }
-    };
-    
+        
+        addTableClickHandler = function (button, i) {
+            addTouchListener(button, function () {
+                var previousButton;
+                
+                /* remove the selection */
+                previousButton = document.getElementById("exercise-button" + exercise);
+                previousButton.classList.remove("selected");
+
+                /* set the table */
+                exercise = i;
+
+                /* add the selection */
+                button.classList.add("selected");
+                
+                /* store the table */
+                localStorage.setItem("exercise-multiplication-exercisecount", i);
+            });
+        };
+        
+        for (j = 0; j < array.length; j += 1) {
+            i = array[j];
+            button = document.createElement("div");
+            button.innerHTML = i;
+            button.id = "exercise-button" + i;
+            
+            inputExerciseContainer.appendChild(button);
+            
+            if (i === exercise) {
+                button.className = "settings-button center selected";
+            } else {
+                button.className = "settings-button center";
+            }
+            
+            addTableClickHandler(button, i);
+        }
+    }());
     
     return my;
 }());

@@ -45,7 +45,7 @@ header {
     padding: 1vmin 3vmin;
     
     text-align: center;
-    font-size: 8vmin;
+    font-size: 6vmin;
     font-family: "raleway-bold";
     color: white;
 }
@@ -57,7 +57,7 @@ header {
     padding: 1vmin 3vmin;
     
     text-align: center;
-    font-size: 8vmin;
+    font-size: 6vmin;
     font-family: "raleway-bold";
     color: white;
 }
@@ -68,62 +68,6 @@ header {
     align-items: center;
     align-content: center;
     justify-content: center;
-}
-
-@keyframes monkey-animation-start {
-    0% {
-        top: 24vmin;
-    }
-    100% {
-        top: 1vmin;
-    }
-}
-
-@keyframes monkey-animation-correct {
-    0% {
-        top: 1vmin;
-    }
-    12.5% {
-        top: 4vmin;
-    }
-    25% {
-        top: 1vmin;
-    }
-    37.5% {
-        top: 4vmin;
-    }
-    50% {
-        top: 1vmin;
-    }
-    62.5% {
-        top: 4vmin;
-    }
-    75% {
-        top: 1vmin;
-    }
-    87.5% {
-        top: 4vmin;
-    }
-    100% {
-        top: 1vmin;
-    }
-}
-
-@keyframes monkey-animation-wrong {
-    0% {
-        top: 1vmin;
-    }
-    30% {
-        top: 3vmin;
-        transform: rotate(5deg);
-    }
-    90% {
-        top: 4vmin;
-        transform: rotate(8deg);
-    }
-    100% {
-        top: 1vmin;
-    }
 }
 
 #monkey {
@@ -180,4 +124,60 @@ header {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+@keyframes monkey-animation-start {
+    0% {
+        top: 24vmin;
+    }
+    100% {
+        top: 1vmin;
+    }
+}
+
+@keyframes monkey-animation-correct {
+    0% {
+        top: 1vmin;
+    }
+    12.5% {
+        top: 4vmin;
+    }
+    25% {
+        top: 1vmin;
+    }
+    37.5% {
+        top: 4vmin;
+    }
+    50% {
+        top: 1vmin;
+    }
+    62.5% {
+        top: 4vmin;
+    }
+    75% {
+        top: 1vmin;
+    }
+    87.5% {
+        top: 4vmin;
+    }
+    100% {
+        top: 1vmin;
+    }
+}
+
+@keyframes monkey-animation-wrong {
+    0% {
+        top: 1vmin;
+    }
+    30% {
+        top: 3vmin;
+        transform: rotate(5deg);
+    }
+    90% {
+        top: 4vmin;
+        transform: rotate(8deg);
+    }
+    100% {
+        top: 1vmin;
+    }
 }

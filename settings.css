@@ -37,12 +37,12 @@ header {
     color: white;
     
     padding: 1vmin 6vmin;
-    margin: 5vmin;
-    margin-bottom: 8vmin;
+    margin: 1vmin;
 }
 
 #settings-container {
     min-width: 50vmin;
+    max-width: 90vw;
     padding: 2vmin;
 }
 
@@ -59,26 +59,54 @@ header {
 
 .setting {
     margin: 2vmin;
+    /*display: flex;*/
+}
+
+#input-table-button-container {
+    /* horizontal flow layout */
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#input-exercise-button-container {
+    /* horizontal flow layout */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.settings-button {
+    border: 1vmin solid burlywood;
+    color: white;
+    font-size:6vmin;
+    
+    background-color: burlywood;
+    border-radius: 2.5vmin;
+    
+    min-width: 8vmin;
+    min-height: 8vmin;
+    margin: 1vmin;
+    padding: 1vmin;
+    
+    cursor: pointer;
+    
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+}
+
+.selected {
+    background-color: sandybrown;
+    border: 1vmin solid chocolate;
 }
 
 label {
     color: white;
-    flex: 1;
     font-size: 8vmin;
-    margin-right: 4vmin;
-}
-
-input {
-    width: 25vmin;
-    padding: 1vmin;
-    color: black;
-    font-size: 8vmin;
-    font-family: "raleway-bold";
-    text-align: right;
 }
 
 #back-button {
+    text-align: center;
     font-size: 7vmin;
     color: white;
     background-color: burlywood;
@@ -89,6 +117,10 @@ input {
     padding: 1vmin;
     
     cursor: pointer;
+}
+
+#back-button:hover{
+    background-color: sandybrown;
 }
 
 /* class which centers its content */

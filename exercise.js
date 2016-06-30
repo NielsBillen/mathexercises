@@ -29,7 +29,8 @@ var Exercise = (function () {
         this.input.className = "center noselect";
         
         Keyboard.apppendListener(function (value) {
-            var length = this.input.innerHTML.length;
+            var length, v;
+            length = this.input.innerHTML.length;
 
             if (this.enabled) {
                 if (value === "enter") {
@@ -41,7 +42,10 @@ var Exercise = (function () {
                         this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
                     }
                 } else {
-                    this.input.innerHTML = parseInt(this.input.innerHTML + value, 10);
+                    v = parseInt(this.input.innerHTML + value, 10);
+                    if (v < 999) {
+                        this.input.innerHTML = v;
+                    }
                 }
             }
         }.bind(this));

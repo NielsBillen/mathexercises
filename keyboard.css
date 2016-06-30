@@ -25,13 +25,13 @@
  */
 .keyboard-button {
     color: white;
-    font-size: 5vmin;
+    font-size: 8vmin;
     
     background-color: burlywood;
     border-radius: 2.5vmin;
     
-    min-width: 6vmin;
-    min-height: 6vmin;
+    min-width: 9vmin;
+    min-height: 9vmin;
     margin: 1vmin;
     padding: 1vmin;
     
