@@ -1,13 +1,18 @@
-/*global console*/
+/*global localsettings*/
 
+/*-----------------------------------------------------------------------------
+ * Controls the settings and writes them to local storage.
+ *
+ * @author  Niels Billen
+ * @version 0.1
+ *---------------------------------------------------------------------------*/
 
-
-var Settings = (function () {
+(function () {
     "use strict";
     
-    var my = {}, addTouchListener, inputTableButtonContainer, inputExerciseContainer;
+    var addTouchListener;
     
-    /**
+    /*
      * Adds the given callback function as a touch listener to the given element.
      *
      * When touch events are supported, it will be added as a touchstart event, 
@@ -21,134 +26,169 @@ var Settings = (function () {
         }
     };
     
-    inputTableButtonContainer = document.getElementById("input-table-button-container");
-    inputExerciseContainer = document.getElementById("input-exercise-button-container");
+    /**************************************************************************
+     * Initialize the buttons which allow to pick which tables will be present 
+     * in the exercises.
+     *************************************************************************/
     
-    /**
-     * Control the value of the table.
-     */
     (function () {
-        var i, button, tableStorage, table, addTableClickHandler;
+        var i, container, button, tables, click;
         
         /* read the table as a string from storage */
-        tableStorage = localStorage.getItem("exercise-multiplication-table");
-        
-        /* convert the string to a valid integer */
-        if (tableStorage) {
-            table = parseInt(tableStorage, 10);
-            
-            if (table < 1 || table > 10) {
-                table = 5;
-            }
-        } else {
-            table = 5;
-        }
-        
-        addTableClickHandler = function (button, i) {
-            addTouchListener(button, function () {
-                var previousButton;
+        container = document.getElementById("input-table-button-container");
+        tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        /* create the function which creates click handlers */
+        click = function (button, i) {
+            return function () {
+                var index;
                 
-                /* remove the selection */
-                previousButton = document.getElementById("table-button" + table);
-                previousButton.classList.remove("selected");
-
-                /* set the table */
-                table = i;
-
-                /* add the selection */
-                button.classList.add("selected");
+                if (button.classList.contains("selected")) {
+                    // break if this is the last element
+                    if (tables.length === 1) {
+                        return;
+                    }
+                    
+                    // remove table from selection
+                    index = tables.indexOf(i);
+                    
+                    if (index > -1) {
+                        tables.splice(index, 1);
+                    }
+                    button.classList.remove("selected");
+                } else {
+                    // add table to selection
+                    tables.push(i);
+                    button.classList.add("selected");
+                }
                 
                 /* store the table */
-                localStorage.setItem("exercise-multiplication-table", i);
-            });
+                localsettings.setTables(tables);
+            };
         };
-
+        
         /* create the buttons */
         for (i = 1; i <= 10; i += 1) {
             button = document.createElement("div");
             button.innerHTML = i;
-            button.id = "table-button" + i;
-            
-            inputTableButtonContainer.appendChild(button);
-            
-            if (i === table) {
+            button.id = "table-button-" + i;
+                        
+            if (tables.indexOf(i) > -1) {
                 button.className = "settings-button center selected";
             } else {
                 button.className = "settings-button center";
             }
+                        
+            addTouchListener(button, click(button, i));
             
-            addTableClickHandler(button, i);
+            container.appendChild(button);
         }
     }());
     
-    /**
-     * Control the number of exercises of the table.
-     */
+    /**************************************************************************
+     * Initialize the buttons which allow to pick which tables will be present 
+     * in the exercises.
+     *************************************************************************/
+    
     (function () {
-        var i, j, array, button, exerciseStorage, exercise, addTableClickHandler;
+        var i, container, array, button, buttonCount, previousButton, exerciseCount, click;
         
+        container = document.getElementById("input-exercise-button-container");
+
         /* create the buttons */
         array = [1, 5, 10, 15, 20];
         
         /* read the table as a string from storage */
-        exerciseStorage = localStorage.getItem("exercise-multiplication-exercisecount");
+        exerciseCount = localsettings.getNumberOfExercises(5);
         
-        /* convert the string to a valid integer */
-        if (exerciseStorage) {
-            exercise = parseInt(exerciseStorage, 10);
-            
-            (function () {
-                var i, found = false;
-                for (i = 0; i < array.length; i += 1) {
-                    if (array[i] === exercise) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    exercise = array[1];
-                }
-            }());
-        } else {
-            exercise = array[1];
+        /* check if present between the options */
+        if (array.indexOf(exerciseCount) === -1) {
+            exerciseCount = array[Math.min(2, array.length - 1)];
+            localsettings.setNumberOfExercises(exerciseCount);
         }
         
-        addTableClickHandler = function (button, i) {
-            addTouchListener(button, function () {
+        click = function (button, i) {
+            return function () {
                 var previousButton;
                 
                 /* remove the selection */
-                previousButton = document.getElementById("exercise-button" + exercise);
+                previousButton = document.getElementById("exercise-button-" + exerciseCount);
                 previousButton.classList.remove("selected");
 
                 /* set the table */
-                exercise = i;
+                exerciseCount = i;
 
                 /* add the selection */
                 button.classList.add("selected");
                 
                 /* store the table */
-                localStorage.setItem("exercise-multiplication-exercisecount", i);
-            });
+                localsettings.setNumberOfExercises(exerciseCount);
+            };
         };
         
-        for (j = 0; j < array.length; j += 1) {
-            i = array[j];
+        for (i = 0; i < array.length; i += 1) {
+            buttonCount = array[i];
             button = document.createElement("div");
-            button.innerHTML = i;
-            button.id = "exercise-button" + i;
+            button.innerHTML = buttonCount;
+            button.id = "exercise-button-" + buttonCount;
             
-            inputExerciseContainer.appendChild(button);
+            container.appendChild(button);
             
-            if (i === exercise) {
+            if (buttonCount === exerciseCount) {
                 button.className = "settings-button center selected";
             } else {
                 button.className = "settings-button center";
             }
             
-            addTableClickHandler(button, i);
+            addTouchListener(button, click(button, buttonCount));
         }
     }());
     
-    return my;
+    /**************************************************************************
+     * Initialize the buttons which allow to pick the types of exercises
+     *************************************************************************/
+    
+    (function () {
+        var i, all, type, selected, button, click;
+        
+        all = ["left", "right", "solution"];
+        selected = localsettings.getTypes(["solution"]);
+        
+        click = function (button, type) {
+            return function () {
+                if (button.classList.contains("selected")) {
+                    // break if this is the last element
+                    if (selected.length === 1) {
+                        return;
+                    }
+                    
+                    // remove table from selection
+                    var index = selected.indexOf(type);
+                    
+                    if (index > -1) {
+                        selected.splice(index, 1);
+                    }
+                    button.classList.remove("selected");
+                } else {
+                    // add table to selection
+                    selected.push(type);
+                    button.classList.add("selected");
+                }
+                
+                /* store the table */
+                localsettings.setTypes(selected);
+            };
+        };
+        
+        for (i = 0; i < all.length; i += 1) {
+            type = all[i];
+            button = document.getElementById("type-" + type);
+            
+            if (selected.indexOf(type) > -1) {
+                button.classList.add("selected");
+            }
+            
+            addTouchListener(button, click(button, type));
+        }
+    }());
 }());

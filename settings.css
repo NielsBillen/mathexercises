@@ -43,9 +43,8 @@ header {
 }
 
 #settings-container {
-    min-width: 50vmin;
-    max-width: 80vw;
     padding: 2vmin;
+    margin: 1vmin;
     background-color: saddlebrown;
     border-radius: 2vmin;
 }
@@ -63,18 +62,10 @@ header {
 }
 
 .setting {
-    margin: 2vmin;
+    margin: 1vmin;
 }
 
-#input-table-button-container {
-    /* horizontal flow layout */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-#input-exercise-button-container {
-    /* horizontal flow layout */
+.button-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -83,13 +74,13 @@ header {
 .settings-button {
     border: 1vmin solid burlywood;
     color: white;
-    font-size:6vmin;
+    font-size:4vmin;
     
     background-color: burlywood;
     border-radius: 2.5vmin;
     
-    min-width: 8vmin;
-    min-height: 8vmin;
+    min-width: 6vmin;
+    min-height: 6vmin;
     margin: 1vmin;
     padding: 1vmin;
     
@@ -106,18 +97,17 @@ header {
 
 label {
     color: white;
-    font-size: 6vmin;
+    font-size: 4vmin;
 }
 
 #back-button {
     text-align: center;
-    font-size: 7vmin;
+    font-size: 5vmin;
     color: white;
     background-color: burlywood;
     border-radius: 2.5vmin;
     
-    min-height: 8vmin;
-    margin: 4vmin 2vmin;
+    margin: 2vmin 2vmin;
     padding: 1vmin;
     
     cursor: pointer;

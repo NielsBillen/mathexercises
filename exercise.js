@@ -1,170 +1,72 @@
-/*global Keyboard, console*/
+/******************************************************************************
+ * Controls the execution of the exercise using the Model-View-Controller 
+ * design pattern.
+ * 
+ * The view implements methods to modify the relevant parts of the graphical
+ * user interface.
+ *
+ * The model implements the data for the exercises.
+ *
+ * The controller controls the flow.
+ *****************************************************************************/
 
-/*-----------------------------------------------------------------------------
- * Javascript file which controls the exercise
- *---------------------------------------------------------------------------*/
+/*global Keyboard, localsettings, console*/
 
-var Exercise = (function () {
+var model, view, controller, utility;
+
+utility = (function () {
     "use strict";
     
     var my = {};
     
-    my.Multiplication = function (left, operator, right, solution, score, nbOfExercises, correctCallBack, wrongCallBack, resetCallBack) {
-        this.left = left;                           /* left operand container */
-        this.operator = operator;                   /* operator container */
-        this.right = right;                         /* right operand container */
-        this.solution = solution;                   /* solution container */
-        this.score = score;                         /* container showing the score */
-        this.correctCallBack = correctCallBack;     /* callback to function which is called when the correct answer is given */
-        this.wrongCallBack = wrongCallBack;         /* callback to function which is called when the wrong answer is given */
-        this.resetCallBack = resetCallBack;         /* callback to fuction which is called when the question is reset */
-        this.enabled = true;                        /* whether any input is accepted */
-        this.nbOfExercises = nbOfExercises;         /* number of exercises before starting over */
+    my.permutateNumbers = function (from, to, size) {
+        var result, array, i, j;
         
-        this.correct = 0;                           /* the statistics */
-        this.questions = 0;                         /* the question */
+        result = [];
         
-        this.input = document.createElement("div"); /* the element in which the input is shown */
-        this.input.id = "exercise-input";
-        this.input.className = "center noselect";
-        
-        Keyboard.apppendListener(function (value) {
-            var length, v;
-            length = this.input.innerHTML.length;
-
-            if (this.enabled) {
-                if (value === "enter") {
-                    if (length > 0) {
-                        this.check();
-                    }
-                } else if (value === "backspace") {
-                    if (length > 0) {
-                        this.input.innerHTML = this.input.innerHTML.substring(0, length - 1);
-                    }
-                } else {
-                    v = parseInt(this.input.innerHTML + value, 10);
-                    if (v < 999) {
-                        this.input.innerHTML = v;
-                    }
-                }
+        while (result.length < size) {
+            // generate an array
+            array = [];
+            for (i = from; i <= to; i += 1) {
+                array.push(i);
             }
-        }.bind(this));
-        
-        this.table = 1;
-        this.unknown = "solution";
-        this.index = 0;
-        this.numbers = my.getPermutation(2, 10);
-        
-        this.score.innerHTML = "Oefening: " + (this.questions + 1) + "/" + this.nbOfExercises;
-    };
-    
-    my.Multiplication.prototype.setUnknown = function (unknown) {
-        if (unknown === "solution" || unknown === "left" || unknown === "right") {
-            this.unknown = unknown;
-        } else {
-            throw "unknown input '" + unknown + "' for Multiplication.prototype.setUnknown";
-        }
-    };
-    
-    my.Multiplication.prototype.setTable = function (table) {
-        if (table < 1) {
-            throw "the table should be larger than 1!";
-        }
-        this.table = table;
-    };
-    
-    my.Multiplication.prototype.generate = function () {
-        var solution, rightOperand, previousEnd;
-        
-        if (this.index === 0) {
-            previousEnd = this.numbers[this.numbers.length - 1];
+            my.shuffle(array);
             
-            do {
-                my.shuffle(this.numbers);
-            } while (this.numbers[0] === previousEnd);
-        }
-                
-        my.clearElement(this.left);
-        my.clearElement(this.right);
-        my.clearElement(this.operator);
-        my.clearElement(this.solution);
-        my.clearElement(this.input);
-        
-        this.input.style.color = "";
-        this.enabled = true;
-        this.resetCallBack();
-        
-        if (this.unknown === "solution") {
-            rightOperand = this.numbers[this.index];
-            
-            this.left.innerHTML = this.table;
-            this.right.innerHTML = rightOperand;
-            this.operator.innerHTML = "&times;";
-            this.solution.appendChild(this.input);
-
-            this.exerciseSolution = rightOperand * this.table;
-        } else if (this.unknown === "left") {
-            solution = this.numbers[this.index];
-            
-            this.right.innerHTML = this.table;
-            this.solution.innerHTML = (solution * this.table);
-            this.operator.innerHTML = "&times;";
-            this.left.appendChild(this.input);
-
-            this.exerciseSolution = solution;
-        } else if (this.unknown === "right") {
-            solution = this.numbers[this.index];
-            
-            this.left.innerHTML = this.table;
-            this.solution.innerHTML = (solution * this.table);
-            this.operator.innerHTML = "&times;";
-            this.right.appendChild(this.input);
-            
-            this.exerciseSolution = solution;
-        }
-        
-        this.index = (this.index + 1) % (this.numbers.length);
-    };
-    
-    my.Multiplication.prototype.check = function () {
-        if (this.enabled) {
-            this.enabled = false;
-
-            this.questions += 1;
-            
-            if (parseInt(this.input.innerHTML, 10) === this.exerciseSolution) {
-                this.correct += 1;
-                this.input.style.color = "lime";
-                this.correctCallBack();
-
-                setTimeout(this.generate.bind(this), 2000);
-            } else {
-                setTimeout(function () {
-                    this.input.innerHTML = this.exerciseSolution;
-                    this.input.style.color = "red";
-                }.bind(this), 1000);
-
-                setTimeout(this.generate.bind(this), 3000);
-
-                this.wrongCallBack();
+            // add the required amount
+            for (i = 0; i < Math.min(array.length, size - result.length); i += 1) {
+                result.push(array[i]);
             }
-            
-            this.score.innerHTML = "Oefening: " + Math.min(this.questions + 1, this.nbOfExercises) + "/" + this.nbOfExercises;
         }
+        
+        return result;
     };
     
-    my.getPermutation = function (from, to) {
-        var i, j, array, temp;
-        array = [];
+    my.permutateArray = function (array, size) {
+        var result, temp, i;
         
-        for (i = from; i <= to; i += 1) {
-            array.push(i);
+        result = [];
+        
+        while (result.length < size) {
+            // generate an array
+            temp = array.slice(0);
+            my.shuffle(temp);
+            
+            // add the required amount
+            for (i = 0; i < Math.min(temp.length, size - result.length); i += 1) {
+                result.push(temp[i]);
+            }
         }
         
-        return my.shuffle(array);
+        return result;
     };
     
     my.shuffle = function (array) {
+        if (!array) {
+            throw "array is undefined!";
+        } else if (!Array.isArray(array)) {
+            throw "argument is not an array!";
+        }
+        
         var i, j, temp;
         
         // yates-shuffle
@@ -178,100 +80,495 @@ var Exercise = (function () {
         return array;
     };
     
-    my.clearElement = function (element) {
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
+    return my;
+}());
+
+/**************************************************************************
+ * View for the exercise
+ *************************************************************************/
+
+var view = (function () {
+    "use strict";
+    
+    var my, monkey, progress, left, right, operator, solution, clear, input, unknown;
+
+    my = {};
+
+    /* retrieve the graphical user interface elements */
+    monkey = document.getElementById("monkey");
+    progress = document.getElementById("progress");
+    left = document.getElementById("exercise-operator-left");
+    right = document.getElementById("exercise-operator-right");
+    operator = document.getElementById("exercise-operand");
+    solution = document.getElementById("exercise-solution");
+
+    /* style the user's input text field */
+    input = document.createElement("div");
+    input.id = "exercise-input";
+    input.className = "center noselect";
+    
+    /* sets the color of the input field */
+    my.setInputColor = function (color) {
+        input.style.color = color;
+    };
+    
+    /* happy animation */
+    my.happyAnimation = function (callback) {
+        var image, replacement;
+        
+        // initialize the image
+        image = new Image();
+        
+        image.onload = function () {
+            monkey.style.backgroundImage = "url(" + image.src + ")";
+            monkey.style.animationDelay = "0s";
+            monkey.style.animationDuration = "2s";
+            
+            replacement = monkey.cloneNode(true);
+            monkey.parentElement.replaceChild(replacement, monkey);
+            
+            monkey = replacement;
+            monkey.addEventListener("animationend", callback);
+            monkey.style.animationName = "monkey-animation-correct";
+        };
+        
+        image.src = "images/monkey-happy.svg";
+    };
+    
+    /* sad animation */
+    my.sadAnimation = function (callback) {
+        var image, replacement;
+        
+        // initialize the image
+        image = new Image();
+        
+        image.onload = function () {
+            monkey.style.backgroundImage = "url(" + image.src + ")";
+            monkey.style.animationDelay = "0s";
+            monkey.style.animationDuration = "3s";
+            
+            replacement = monkey.cloneNode(true);
+            monkey.parentElement.replaceChild(replacement, monkey);
+            
+            monkey = replacement;
+            monkey.addEventListener("animationend", callback);
+            monkey.style.animationName = "monkey-animation-wrong";
+        };
+        
+        image.src = "images/monkey-sad.svg";
+    };
+    
+    /* thinking image */
+    my.thinking = function () {
+        var image = new Image();
+        
+        image.onload = function () {
+            monkey.style.backgroundImage = "url(" + image.src + ")";
+        };
+        
+        image.src = "images/monkey-thinking.svg";
+    };
+    
+    /* sets the progress */
+    my.setProgress = function (currentExercise, totalExercises) {
+        progress.innerHTML = "Oefening: " + currentExercise + "/" + totalExercises;
+    };
+    
+    /* sets the operator to the given value (+, -, x, /) */
+    my.setOperator = function (value) {
+        // throw an exception
+        if (operator === unknown) {
+            throw "trying to explicitely set the unknown of the exercise!";
+        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "/") {
+            throw "unsupported operator " + value + "!";
         }
-        element.innerHTML = "";
+
+        operator.innerHTML = value;
+    };
+
+    /* returns the operator as a string */
+    my.getOperator = function () {
+        return operator.innerHTML;
+    };
+
+    /* sets the value of the input field */
+    my.setInput = function (value) {
+        if (!Number.isInteger(value)) {
+            throw "the given value '" + value + "' does not have the integer type!";
+        }
+        input.innerHTML = value.toString();
+    };
+
+    /* returns the input*/
+    my.getInput = function (value) {
+        return input.innerHTML;
+    };
+    
+    /* clears the input */
+    my.clearInput = function () {
+        input.innerHTML = "";
+    };
+
+    /* set the left operand to the given integer value */
+    my.setLeftOperand = function (value) {
+        if (left === unknown) {
+            throw "trying to explicitely set the unknown of the exercise! use setInput(value) instead!";
+        }
+        if (!Number.isInteger(value)) {
+            throw "the given value '" + value + "' does not have the integer type!";
+        }
+        left.innerHTML = value.toString();
+    };
+
+    /* returns the value of the left operand as an integer */
+    my.getLeftOperand = function () {
+        return parseInt(left.innerHTML, 10);
+    };
+
+    /* set the right operand to the given integer value */
+    my.setRightOperand = function (value) {
+        if (solution === right) {
+            throw "trying to explicitely set the unknown of the exercise!";
+        }
+        if (!Number.isInteger(value)) {
+            throw "the given value '" + value + "' does not have the integer type!";
+        }
+        right.innerHTML = value.toString();
+    };
+
+    /* returns the value of the right operand as an integer */
+    my.getRightOperand = function () {
+        return parseInt(right.innerHTML, 10);
+    };
+
+    /* sets the solution to the given integer value */
+    my.setSolution = function (value) {
+        if (solution === unknown) {
+            throw "trying to explicitely set the unknown of the exercise!";
+        }
+        if (!Number.isInteger(value)) {
+            throw "the given value '" + value + "' does not have the integer type!";
+        }
+        solution.innerHTML = value.toString();
+    };
+
+    /* returns the value of the solution as an integer */
+    my.getSolution = function () {
+        return parseInt(solution.innerHTML, 10);
+    };
+
+    /* sets the unknown ("left", "right", "operator", "solution") */
+    my.setUnknown = function (value) {
+        if (value !== "left" && value !== "right" && value !== "operator" && value !== "solution") {
+            throw "cannot set the unknown to solve for to " + value + "!";
+        }
+
+        // remove the input from the previous unknown
+        if (unknown) {
+            unknown.removeChild(input);
+        }
+
+        switch (value) {
+        case "left":
+            unknown = left;
+            break;
+        case "right":
+            unknown = right;
+            break;
+        case "solution":
+            unknown = solution;
+            break;
+        case "operator":
+            unknown = operator;
+            break;
+        }
+
+        // clear the unknown
+        while (unknown.firstChild) {
+            unknown.removeChild(unknown.firstChild);
+        }
+        unknown.innerHTML = "";
+        unknown.appendChild(input);
+    };
+
+    return my;
+}());
+
+var model = (function () {
+    "use strict";
+    var my;
+
+    my = {};
+
+    /**********************************************************************
+     * Creates a new exercise
+     *********************************************************************/
+
+    my.Exercise = function (left, right, operator, solution, unknown) {
+        if (!Number.isInteger(left)) {
+            throw "the given left operand is not an integer!";
+        }
+        if (!Number.isInteger(left)) {
+            throw "the given right operand is not an integer!";
+        }
+        if (!Number.isInteger(solution)) {
+            throw "the given solution is not an integer!";
+        }
+        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/") {
+            throw "unsupported operator '" + operator + "'!";
+        }
+        if (unknown !== "left" && unknown !== "right" && unknown !== "solution" && unknown !== "operator") {
+            throw "unsupported unknown '" + unknown + "'!";
+        }
+
+        this.left = left;
+        this.right = right;
+        this.operator = operator;
+        this.solution = solution;
+        this.unknown = unknown;
+    };
+
+    // checks whether the exercise is correctly solved
+    my.Exercise.prototype.check = function (view) {
+        var input = view.getInput();
+
+        if (this.unknown === "left") {
+            return this.left === parseInt(input, 10);
+        } else if (this.unknown === "right") {
+            return this.right === parseInt(input, 10);
+        } else if (this.unknown === "operator") {
+            return this.operator === input.toString();
+        } else if (this.unknown === "solution") {
+            return this.solution === parseInt(input, 10);
+        } else {
+            return false;
+        }
+    };
+
+    // shows the exercise 
+    my.Exercise.prototype.show = function (view) {
+        view.setUnknown(this.unknown);
+        if (this.unknown !== "left") {
+            view.setLeftOperand(this.left);
+        }
+        if (this.unknown !== "right") {
+            view.setRightOperand(this.right);
+        }
+        if (this.unknown !== "operator") {
+            view.setOperator(this.operator);
+        }
+        if (this.unknown !== "solution") {
+            view.setSolution(this.solution);
+        }
+    };
+
+    // override the print
+    my.Exercise.prototype.toString = function () {
+        return this.left + this.operator + this.right + "=" + this.solution;
+    };
+
+    // returns an array of multiplication exercises
+    my.Multiplications = function (count, tableArray, unknownArray) {
+        if (count < 1) {
+            throw "the requested number of multiplication exercises is smaller than one!";
+        }
+        if (!Array.isArray(tableArray)) {
+            throw "the given tables are not an array!" + tableArray;
+        }
+        if (tableArray.length === 0) {
+            throw "the array with tables is empty!";
+        }
+        if (!Array.isArray(unknownArray)) {
+            throw "the given unknowns are not an array!" + unknownArray;
+        }
+        if (unknownArray.length === 0) {
+            throw "the array with unknown positions is empty!";
+        }
+
+        var i, result, exercise, left, right, solution, unknown, previous, valid, lefts, rights, unknowns;
+
+        // initialize the result
+        result = [];
+        lefts = utility.permutateArray(tableArray, count);
+        rights = utility.permutateNumbers(1, 10, count);
+        unknowns = utility.permutateArray(unknownArray, count);
+        
+        for (i = 0; i < count; i += 1) {
+            left = lefts[i];
+            right = rights[i];
+            solution = left * right;
+            unknown = unknowns[i];
+            
+            result[i] = new my.Exercise(left, right, "x", solution, unknown);
+        }
+        
+        /*
+        // create the exercises            
+        while (result.length < count) {
+            // left operand from array
+            left = tableArray[Math.floor(Math.random() * tableArray.length)];
+
+            // right operand between 1 and 10
+            right = Math.floor(Math.random() * 10) + 1;
+
+            // solution 
+            solution = left * right;
+            
+            // unknown 
+            unknown = unknownArray[Math.floor(Math.random() * unknownArray.length)];
+            
+            // check if previous exercise happens to be identical
+            valid = true;
+            if (result.length > 0) {
+                previous = result[result.length - 1];
+
+                if (tableArray.length > 1 && previous.left === left) {
+                    valid = false;
+                } else if (previous.left === left && previous.right === right) {
+                    valid = false;
+                }
+                if (unknownArray.length > 1 && previous.unknown === unknown) {
+                    valid = false;
+                }
+            }
+
+            // push the exercise
+            if (valid) {
+                exercise = new my.Exercise(left, right, "x", solution, unknown);
+                result.push(exercise);
+            }
+        }
+        */
+
+        return result;
+    };
+
+    return my;
+}());
+
+controller = (function () {
+    "use strict";
+    
+    var my, currentExercise, exercises, accept, listener, check, correct, wrong, advance;
+    
+    // initialize the variables
+    my = {};
+    accept = true;
+    currentExercise = -1;
+    
+    // initialize the keyboard listener
+    listener = function (key) {
+        var inputValue, keyValue, newInput;
+
+        // exit when not accepting input
+        if (accept === false) {
+            console.log("input disabled!");
+            return;
+        } else if (key === "enter") {
+            check();
+        } else if (key === "backspace") {
+            inputValue = view.getInput();
+            newInput = Math.floor(inputValue * 0.1);
+            
+            view.setInput(newInput);
+        } else {
+            inputValue = view.getInput();
+            keyValue = parseInt(key, 10);
+            newInput = 10 * inputValue + keyValue;
+            
+            if (newInput > 999) {
+                return;
+            }
+            view.setInput(newInput);
+        }
+    };
+    
+    check = function () {
+        var exercise;
+        
+        exercise = exercises[currentExercise];
+        
+        if (exercise.check(view)) {
+            correct();
+            console.log("correct!");
+        } else {
+            wrong();
+            console.log("incorrect!");
+        }
+    };
+    
+    advance = function () {
+        accept = true;
+        currentExercise += 1;
+        
+        if (currentExercise === exercises.length) {
+            window.location = "index.html";
+        } else {
+            exercises[currentExercise].show(view);
+            view.clearInput();
+            view.thinking();
+            view.setInputColor("black");
+            view.setProgress(currentExercise + 1, exercises.length);
+        }
+    };
+    
+    correct = function () {
+        var callback = function (e) {
+            // detach this callback
+            e.srcElement.removeEventListener("animationend", this);
+            advance();
+        };
+        
+        accept = false;
+        
+        view.setInputColor("lime");
+        view.happyAnimation(callback);
+    };
+    
+    wrong = function () {
+        var callback = function (e) {
+            // detach this callback
+            e.srcElement.removeEventListener("animationeend", this);
+            advance();
+        };
+        
+        accept = false;
+        view.setInputColor("red");
+        view.sadAnimation(callback);
+    };
+    
+    // append the listener
+    Keyboard.apppendListener(listener);
+    
+    my.init = function (e) {
+        if (!Array.isArray(e)) {
+            throw "the given argument is not an array of exercises!";
+        }
+        if (e.length < 1) {
+            throw "the given list of exercises is empty!";
+        }
+        
+        exercises = e;
+        accept = true;
+        currentExercise = 0;
+        exercises[currentExercise].show(view);
+        view.setProgress(currentExercise + 1, exercises.length);
     };
     
     return my;
 }());
 
-var exercise = document.getElementById("exercise");
-var leftOperator = document.getElementById("exercise-operator-left");
-var rightOperator = document.getElementById("exercise-operator-right");
-var operator = document.getElementById("exercise-operand");
-var solution = document.getElementById("exercise-solution");
-var score = document.getElementById("score");
-var monkey = document.getElementById("monkey");
-
-var setBackgroundImage = function (element, imageFilename, callBack) {
+/******************************************************************************
+ * Start the multiplication exercises
+ *****************************************************************************/
+(function () {
     "use strict";
-    var image = new Image();
     
-    image.onload = function () {
-        element.style.backgroundImage = "url(" + image.src + ")";
-        
-        if (callBack) {
-            callBack();
-        }
-    };
+    var tables, count, types;
     
-    image.src = imageFilename;
-};
-
-monkey.addEventListener("animationend", function () {
-    "use strict";
-    if (monkey.style.animationName === "monkey-animation-start") {
-        monkey.style.top = "1vmin";
-    }
-});
-
-var exerciseCountItem = localStorage.getItem("exercise-multiplication-exercisecount");
-var exerciseCount = 10;
-if (exerciseCountItem) {
-    exerciseCount = parseInt(exerciseCountItem, 10);
+    count = localsettings.getNumberOfExercises(10);
+    tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    types = localsettings.getTypes(["solution"]);
     
-    if (!isNaN(exerciseCount)) {
-        if (exerciseCount < 1) {
-            exerciseCount = 1;
-        }
-    }
-}
-
-var multiplication = new Exercise.Multiplication(leftOperator, operator, rightOperator, solution, score, exerciseCount, function () {
-    "use strict";
-    setBackgroundImage(monkey, "images/monkey-happy.svg", function () {
-        monkey.style.animationDelay = "0s";
-        monkey.style.animationDuration = "2s";
-        monkey.style.animationName = "none";
-        setTimeout(function () {
-            monkey.style.animationName = "monkey-animation-correct";
-        }, 10);
-    });
-}, function () {
-    "use strict";
-    setBackgroundImage(monkey, "images/monkey-sad.svg", function () {
-        monkey.style.animationDelay = "0s";
-        monkey.style.animationDuration = "3s";
-        monkey.style.animationName = "none";
-        setTimeout(function () {
-            monkey.style.animationName = "monkey-animation-wrong";
-        }, 10);
-    });
-}, function () {
-    "use strict";
-    setBackgroundImage(monkey, "images/monkey-thinking.svg");
-    
-    if (this.questions === this.nbOfExercises) {
-        window.location = "index.html";
-    }
-});
-
-var exerciseTableItem = localStorage.getItem("exercise-multiplication-table");
-var exerciseTable = 3;
-
-if (exerciseTableItem) {
-    exerciseTable = parseInt(exerciseTableItem, 10);
-    
-    if (!isNaN(exerciseTable)) {
-        if (exerciseTable < 1) {
-            exerciseTable = 1;
-        }
-    }
-}
-
-multiplication.setTable(exerciseTable);
-multiplication.setUnknown("solution");
-multiplication.generate();
+    controller.init(model.Multiplications(count, tables, types));
+}());

@@ -26,7 +26,7 @@
     </head>
     <body>
         <header class = "wood">Maal</header>
-        <div id = "score" class = "wood">Oefening: 0/0</div>
+        <div id = "progress" class = "wood">Oefening: 0/0</div>
         <div class = "jungle-border left"></div>
         <div class = "jungle-border right"></div>
         <!--<div class = "jungle-grass"></div>-->
@@ -36,27 +36,28 @@
                 <span class = "exercise-operand center" id = "exercise-operator-left">?</span>
                 <span class = "exercise-operand center" id = "exercise-operand">x</span>
                 <span class = "exercise-operand center" id = "exercise-operator-right">?</span>
-                <span class = "exercise-operand center">=</span>
+                <span class = "exercise-operand center" id = "exercise-equals">=</span>
                 <span class = "exercise-operand center" id = "exercise-solution">?</span>
             </div>
         </div>
         <div id = "keyboard" class = "keyboard wood">
             <audio id = "keyboard-button-click" src="click.mp3" preload></audio>
-            <div id = "button0" class = "keyboard-button center noselect">0</div>
-            <div id = "button1" class = "keyboard-button center noselect">1</div>
-            <div id = "button2" class = "keyboard-button center noselect">2</div>
-            <div id = "button3" class = "keyboard-button center noselect">3</div>
-            <div id = "button4" class = "keyboard-button center noselect">4</div>
-            <div id = "button5" class = "keyboard-button center noselect">5</div>
-            <div id = "button6" class = "keyboard-button center noselect">6</div>
-            <div id = "button7" class = "keyboard-button center noselect">7</div>
-            <div id = "button8" class = "keyboard-button center noselect">8</div>
-            <div id = "button9" class = "keyboard-button center noselect">9</div>
-            <div id = "button_enter" class = "keyboard-button center noselect">Ok</div>
-            <div id = "button_back" class = "keyboard-button center noselect">Wis</div>
+            <div id = "button-0" class = "keyboard-button center noselect">0</div>
+            <div id = "button-1" class = "keyboard-button center noselect">1</div>
+            <div id = "button-2" class = "keyboard-button center noselect">2</div>
+            <div id = "button-3" class = "keyboard-button center noselect">3</div>
+            <div id = "button-4" class = "keyboard-button center noselect">4</div>
+            <div id = "button-5" class = "keyboard-button center noselect">5</div>
+            <div id = "button-6" class = "keyboard-button center noselect">6</div>
+            <div id = "button-7" class = "keyboard-button center noselect">7</div>
+            <div id = "button-8" class = "keyboard-button center noselect">8</div>
+            <div id = "button-9" class = "keyboard-button center noselect">9</div>
+            <div id = "button-enter" class = "keyboard-button center noselect">Ok</div>
+            <div id = "button-back" class = "keyboard-button center noselect">Wis</div>
         </div>
         
         <script src = "keyboard.js"></script>
+        <script src = "localsettings.js"></script>
         <script src = "exercise.js"></script>
     </body>
 </html>

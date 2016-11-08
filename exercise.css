@@ -50,7 +50,7 @@ header {
     color: white;
 }
 
-#score {
+#progress {
     position: fixed;
     right: 1vmin;
     top: 1vmin;

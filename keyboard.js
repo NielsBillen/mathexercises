@@ -1,8 +1,8 @@
 /*global console*/
 
 /*-----------------------------------------------------------------------------
- * Javascript file creates and controls a virtual keyboard containing the 
- * numbers, a enter and a backspace key.
+ * Controls a customized keyboard containing the numbers, an enter key and a 
+ * backspace key.
  *
  * @author  Niels Billen
  * @version 0.1
@@ -85,9 +85,11 @@ var Keyboard = (function () {
     };
     
     /*
-     * Appends the given listener callback to this keyboard. When a key
-     * is pressed, the given listener will be called with the value of 
-     * the pressed button.
+     * Appends the given listener, which is notified on keypresses, to this
+     * keyboard. 
+     *
+     * When a key is pressed, the given listener will be called with the value
+     * of the pressed button.
      */
     my.apppendListener = function (listener) {
         listeners.push(listener);
@@ -101,14 +103,14 @@ var Keyboard = (function () {
         var i, button;
         
         for (i = 0; i <= 9; i += 1) {
-            button = document.getElementById("button" + i);
+            button = document.getElementById("button-" + i);
             addTouchListener(button, buttonClicked.bind(this, button, i));
         }
     
-        button = document.getElementById("button_enter");
+        button = document.getElementById("button-enter");
         addTouchListener(button, buttonClicked.bind(this, button, "enter"));
         
-        button = document.getElementById("button_back");
+        button = document.getElementById("button-back");
         addTouchListener(button, buttonClicked.bind(this, button, "backspace"));
     }());
         

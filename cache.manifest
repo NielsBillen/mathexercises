@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 30/06/2016 15:00
+# Updated 08/11/2016 13:04
 
 CACHE:
 fonts/Raleway-Bold.ttf
@@ -27,6 +27,7 @@ settings.css
 exercise.js
 keyboard.js
 settings.js
+localsettings.js
 
 favicon.ico
 
