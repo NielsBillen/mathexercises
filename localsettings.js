@@ -7,6 +7,15 @@ var localsettings = (function () {
     
     var my = {};
     
+    /* */
+    my.setResults = function (results) {
+        localStorage.setItem("exercise-results", JSON.stringify(results));
+    };
+    
+    my.getResults = function () {
+        return JSON.parse(localStorage.getItem("exercise-results"));
+    };
+    
     /* returns the types of exercises or the default when it is not set yet */
     my.getTypes = function (defaultValues) {
         if (!Array.isArray(defaultValues)) {

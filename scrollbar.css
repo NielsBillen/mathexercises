@@ -1,0 +1,20 @@
+::-webkit-scrollbar {
+    width: 2vmin;
+}
+
+::-webkit-scrollbar-track {
+      background-color: #5c2f0f;
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+      /*background-color: rgba(0, 0, 0, 0.2); */
+    background-color: burlywood;
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button:no-button{
+      background-color: black;
+}
+ 
+::-webkit-scrollbar-corner {
+      background-color: black;
+}

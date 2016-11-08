@@ -1,4 +1,4 @@
-/******************************************************************************
+/*-----------------------------------------------------------------------------
  * Controls the execution of the exercise using the Model-View-Controller 
  * design pattern.
  * 
@@ -8,50 +8,46 @@
  * The model implements the data for the exercises.
  *
  * The controller controls the flow.
- *****************************************************************************/
+ *---------------------------------------------------------------------------*/
 
 /*global Keyboard, localsettings, console*/
 
 var model, view, controller, utility;
+
+/******************************************************************************
+ * Utility function to generate the exercises
+ *****************************************************************************/
 
 utility = (function () {
     "use strict";
     
     var my = {};
     
+    /*
+     * Generates an array of the given size, containing successive permutations
+     * of the numbers in the closed interval [from, to] (inclusive).
+     */
     my.permutateNumbers = function (from, to, size) {
-        var result, array, i, j;
-        
-        result = [];
-        
-        while (result.length < size) {
-            // generate an array
-            array = [];
-            for (i = from; i <= to; i += 1) {
-                array.push(i);
-            }
-            my.shuffle(array);
-            
-            // add the required amount
-            for (i = 0; i < Math.min(array.length, size - result.length); i += 1) {
-                result.push(array[i]);
-            }
+        if (from >= to) {
+            throw "from must be strictly smaller than to!";
+        } else if (size < 0) {
+            throw "the array must be positive!";
         }
         
-        return result;
-    };
-    
-    my.permutateArray = function (array, size) {
         var result, temp, i;
         
+        // initialize a temporary array which contains the range of numbers
+        temp = [];
+        for (i = from; i <= to; i += 1) {
+            temp.push(i);
+        }
+
         result = [];
-        
         while (result.length < size) {
-            // generate an array
-            temp = array.slice(0);
+            // shuffle the temporary array
             my.shuffle(temp);
             
-            // add the required amount
+            // add as much of the 'temp' array to the result.
             for (i = 0; i < Math.min(temp.length, size - result.length); i += 1) {
                 result.push(temp[i]);
             }
@@ -60,6 +56,40 @@ utility = (function () {
         return result;
     };
     
+    /*
+     * Generates an array of the given size, containing successive permutations
+     * of the given array.
+     */
+    my.permutateArray = function (array, size) {
+        if (!array) {
+            throw "array is undefined!";
+        } else if (!Array.isArray(array)) {
+            throw "argument is not an array!";
+        } else if (size < 0) {
+            throw "the array must be positive!";
+        }
+        
+        var result, temp, i;
+        
+        temp = array.slice(0);
+
+        result = [];
+        while (result.length < size) {
+            // shuffle the temporary array
+            my.shuffle(temp);
+            
+            // add as much of the 'temp' array to the result.
+            for (i = 0; i < Math.min(temp.length, size - result.length); i += 1) {
+                result.push(temp[i]);
+            }
+        }
+        
+        return result;
+    };
+    
+    /*
+     * Shuffle the given array.
+     */
     my.shuffle = function (array) {
         if (!array) {
             throw "array is undefined!";
@@ -128,7 +158,9 @@ var view = (function () {
             monkey.parentElement.replaceChild(replacement, monkey);
             
             monkey = replacement;
-            monkey.addEventListener("animationend", callback);
+            if (callback) {
+                monkey.addEventListener("animationend", callback);
+            }
             monkey.style.animationName = "monkey-animation-correct";
         };
         
@@ -151,7 +183,9 @@ var view = (function () {
             monkey.parentElement.replaceChild(replacement, monkey);
             
             monkey = replacement;
-            monkey.addEventListener("animationend", callback);
+            if (callback) {
+                monkey.addEventListener("animationend", callback);
+            }
             monkey.style.animationName = "monkey-animation-wrong";
         };
         
@@ -329,9 +363,7 @@ var model = (function () {
     };
 
     // checks whether the exercise is correctly solved
-    my.Exercise.prototype.check = function (view) {
-        var input = view.getInput();
-
+    my.Exercise.prototype.check = function (input) {
         if (this.unknown === "left") {
             return this.left === parseInt(input, 10);
         } else if (this.unknown === "right") {
@@ -365,6 +397,12 @@ var model = (function () {
     // override the print
     my.Exercise.prototype.toString = function () {
         return this.left + this.operator + this.right + "=" + this.solution;
+    };
+    
+    
+    my.Result = function (exercise, value) {
+        this.exercise = exercise;
+        this.value = value;
     };
 
     // returns an array of multiplication exercises
@@ -401,44 +439,6 @@ var model = (function () {
             
             result[i] = new my.Exercise(left, right, "x", solution, unknown);
         }
-        
-        /*
-        // create the exercises            
-        while (result.length < count) {
-            // left operand from array
-            left = tableArray[Math.floor(Math.random() * tableArray.length)];
-
-            // right operand between 1 and 10
-            right = Math.floor(Math.random() * 10) + 1;
-
-            // solution 
-            solution = left * right;
-            
-            // unknown 
-            unknown = unknownArray[Math.floor(Math.random() * unknownArray.length)];
-            
-            // check if previous exercise happens to be identical
-            valid = true;
-            if (result.length > 0) {
-                previous = result[result.length - 1];
-
-                if (tableArray.length > 1 && previous.left === left) {
-                    valid = false;
-                } else if (previous.left === left && previous.right === right) {
-                    valid = false;
-                }
-                if (unknownArray.length > 1 && previous.unknown === unknown) {
-                    valid = false;
-                }
-            }
-
-            // push the exercise
-            if (valid) {
-                exercise = new my.Exercise(left, right, "x", solution, unknown);
-                result.push(exercise);
-            }
-        }
-        */
 
         return result;
     };
@@ -449,60 +449,65 @@ var model = (function () {
 controller = (function () {
     "use strict";
     
-    var my, currentExercise, exercises, accept, listener, check, correct, wrong, advance;
+    var my, currentExercise, exercises, accept, check, correct, wrong, advance, results;
     
     // initialize the variables
     my = {};
     accept = true;
     currentExercise = -1;
+    results = [];
     
     // initialize the keyboard listener
-    listener = function (key) {
+    Keyboard.apppendListener(function (key) {
         var inputValue, keyValue, newInput;
 
         // exit when not accepting input
         if (accept === false) {
-            console.log("input disabled!");
             return;
         } else if (key === "enter") {
             check();
         } else if (key === "backspace") {
             inputValue = view.getInput();
             newInput = Math.floor(inputValue * 0.1);
-            
             view.setInput(newInput);
         } else {
             inputValue = view.getInput();
             keyValue = parseInt(key, 10);
             newInput = 10 * inputValue + keyValue;
             
-            if (newInput > 999) {
-                return;
+            if (newInput >= 0 && newInput < 1000) {
+                view.setInput(newInput);
             }
-            view.setInput(newInput);
         }
-    };
+    });
     
+    // check whether the current exercise is correct
     check = function () {
-        var exercise;
+        var exercise, input, result;
         
+        input = view.getInput();
         exercise = exercises[currentExercise];
+        result = new model.Result(exercise, input);
+        results.push(result);
         
-        if (exercise.check(view)) {
+        
+        if (exercise.check(input)) {
             correct();
-            console.log("correct!");
         } else {
             wrong();
-            console.log("incorrect!");
         }
     };
     
+    // advance to the next exercise
     advance = function () {
         accept = true;
         currentExercise += 1;
         
         if (currentExercise === exercises.length) {
-            window.location = "index.html";
+            localsettings.setResults(results);
+            console.log(results);
+            
+            window.location = "results.html";
         } else {
             exercises[currentExercise].show(view);
             view.clearInput();
@@ -520,7 +525,6 @@ controller = (function () {
         };
         
         accept = false;
-        
         view.setInputColor("lime");
         view.happyAnimation(callback);
     };
@@ -536,9 +540,6 @@ controller = (function () {
         view.setInputColor("red");
         view.sadAnimation(callback);
     };
-    
-    // append the listener
-    Keyboard.apppendListener(listener);
     
     my.init = function (e) {
         if (!Array.isArray(e)) {

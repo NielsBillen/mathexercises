@@ -1,0 +1,120 @@
+/* font definition for bold fonts */
+@font-face {
+    font-family: raleway-bold;
+    src: url("fonts/Roboto-Black.ttf");
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* body styling */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    font-family: "raleway-bold";
+    
+    background-color: rgb(228,232,229);
+    background-image: url("images/tree.svg");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+header {
+    font-size: 6vmin;
+    color: white;
+    
+    padding: 1vmin 4vmin;
+    margin: 1vmin;
+    margin-bottom: 2vmin;
+}
+
+#results-container {
+    flex: 1;
+    padding: 2vmin;
+    margin: 2vmin;
+    background-color: saddlebrown;
+    border-radius: 2vmin;
+    
+    overflow-y: auto;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#back {
+    font-size: 4vmin;
+    color:  white;
+    padding: 2vmin;
+    margin: 2vmin;
+    background-color: saddlebrown;
+    border-radius: 2vmin;
+    cursor: pointer;
+}
+#score {
+    font-size: 4vmin;
+    color:  white;
+    padding: 2vmin;
+    margin: 2vmin;
+    background-color: saddlebrown;
+    border-radius: 2vmin;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    font-size: 5vmin;
+    color:  white;
+}
+
+.operand {
+    min-width: 6vmin;
+    height: 6vmin;
+    color: white;
+}
+
+.unknown {
+    border-radius: 1vmin;
+    background-color: white;
+    color: black;
+}
+
+.correct {
+    color: lime;
+}
+
+.wrong {
+    color: red;
+}
+
+.evaluation {
+    margin-left: 4vmin;
+    margin-right: 4vmin;
+    text-align: right;
+}
+
+/* class which centers its content */
+.center {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
