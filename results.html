@@ -20,11 +20,12 @@
         <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
 
         <!-- style sheets inclusions -->
-        <link type="text/css" rel="stylesheet" href="results.css"/>
-        <link type="text/css" rel="stylesheet" href="jungle.css"/>
-        <link type="text/css" rel="stylesheet" href="scrollbar.css"/>
+        <link type="text/css" rel="stylesheet" href="css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="css/results.css"/>
+        <link type="text/css" rel="stylesheet" href="css/scrollbar.css"/>
     </head>
-    <body>
+    <body class = "vertical center-horizontal">
         <div class = "jungle-border left"></div>
         <div class = "jungle-border right"></div>
         <div class = "jungle-grass"></div>
@@ -34,11 +35,11 @@
             </table>
         </div>
         
-        <div id = "button-container">
+        <div class = "horizontal">
             <div id = "score"></div>
             <div id = "back" onclick="window.location='index.html'">Naar instellingen</div>
         </div>
-        <script src = "localsettings.js"></script>
-        <script src = "results.js"></script>
+        <script src = "scripts/localsettings.js"></script>
+        <script src = "scripts/results.js"></script>
     </body>
 </html>

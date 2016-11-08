@@ -72,12 +72,11 @@
             button = document.createElement("div");
             button.innerHTML = i;
             button.id = "table-button-" + i;
+            button.className = "button bordered";
                         
             if (tables.indexOf(i) > -1) {
-                button.className = "settings-button center selected";
-            } else {
-                button.className = "settings-button center";
-            }
+                button.classList.add("selected");
+            } 
                         
             addTouchListener(button, click(button, i));
             
@@ -131,13 +130,12 @@
             button = document.createElement("div");
             button.innerHTML = buttonCount;
             button.id = "exercise-button-" + buttonCount;
+            button.className = "button bordered";
             
             container.appendChild(button);
             
             if (buttonCount === exerciseCount) {
-                button.className = "settings-button center selected";
-            } else {
-                button.className = "settings-button center";
+                button.classList.add("selected");
             }
             
             addTouchListener(button, click(button, buttonCount));

@@ -25,39 +25,6 @@ utility = (function () {
     
     /*
      * Generates an array of the given size, containing successive permutations
-     * of the numbers in the closed interval [from, to] (inclusive).
-     */
-    my.permutateNumbers = function (from, to, size) {
-        if (from >= to) {
-            throw "from must be strictly smaller than to!";
-        } else if (size < 0) {
-            throw "the array must be positive!";
-        }
-        
-        var result, temp, i;
-        
-        // initialize a temporary array which contains the range of numbers
-        temp = [];
-        for (i = from; i <= to; i += 1) {
-            temp.push(i);
-        }
-
-        result = [];
-        while (result.length < size) {
-            // shuffle the temporary array
-            my.shuffle(temp);
-            
-            // add as much of the 'temp' array to the result.
-            for (i = 0; i < Math.min(temp.length, size - result.length); i += 1) {
-                result.push(temp[i]);
-            }
-        }
-        
-        return result;
-    };
-    
-    /*
-     * Generates an array of the given size, containing successive permutations
      * of the given array.
      */
     my.permutateArray = function (array, size) {
@@ -86,6 +53,28 @@ utility = (function () {
         
         return result;
     };
+    
+    /*
+     * Generates an array of the given size, containing successive permutations
+     * of the numbers in the closed interval [from, to] (inclusive).
+     */
+    my.permutateNumbers = function (from, to, size) {
+        if (from >= to) {
+            throw "from must be strictly smaller than to!";
+        } else if (size < 0) {
+            throw "the array must be positive!";
+        }
+        
+        
+        // initialize a temporary array which contains the range of numbers
+        var temp = [], i;
+        for (i = from; i <= to; i += 1) {
+            temp.push(i);
+        }
+
+        return my.permutateArray(temp, size);
+    };
+    
     
     /*
      * Shuffle the given array.
@@ -120,7 +109,7 @@ utility = (function () {
 var view = (function () {
     "use strict";
     
-    var my, monkey, progress, left, right, operator, solution, clear, input, unknown;
+    var my, monkey, progress, left, right, operator, solution, clear, input, unknown, animate;
 
     my = {};
 
@@ -142,54 +131,40 @@ var view = (function () {
         input.style.color = color;
     };
     
-    /* happy animation */
-    my.happyAnimation = function (callback) {
+    /* applies an animation to the monkey */
+    animate = function (callback, src, animation, duration, iterations) {
         var image, replacement;
         
-        // initialize the image
         image = new Image();
         
         image.onload = function () {
-            monkey.style.backgroundImage = "url(" + image.src + ")";
+            monkey.style.backgroundImage = "url(" + src + ")";
             monkey.style.animationDelay = "0s";
-            monkey.style.animationDuration = "2s";
+            monkey.style.animationDuration = duration + "s";
+            monkey.style.animationIterationCount = iterations;
             
+            // replace the node to force the animation to replay
             replacement = monkey.cloneNode(true);
             monkey.parentElement.replaceChild(replacement, monkey);
-            
             monkey = replacement;
+            
             if (callback) {
                 monkey.addEventListener("animationend", callback);
             }
-            monkey.style.animationName = "monkey-animation-correct";
+            monkey.style.animationName = animation;
         };
         
-        image.src = "images/monkey-happy.svg";
+        image.src = src;
+    };
+    
+    /* happy animation */
+    my.happyAnimation = function (callback) {
+        animate(callback, "images/monkey-happy.svg", "monkey-animation-correct", 0.5, 4);
     };
     
     /* sad animation */
     my.sadAnimation = function (callback) {
-        var image, replacement;
-        
-        // initialize the image
-        image = new Image();
-        
-        image.onload = function () {
-            monkey.style.backgroundImage = "url(" + image.src + ")";
-            monkey.style.animationDelay = "0s";
-            monkey.style.animationDuration = "3s";
-            
-            replacement = monkey.cloneNode(true);
-            monkey.parentElement.replaceChild(replacement, monkey);
-            
-            monkey = replacement;
-            if (callback) {
-                monkey.addEventListener("animationend", callback);
-            }
-            monkey.style.animationName = "monkey-animation-wrong";
-        };
-        
-        image.src = "images/monkey-sad.svg";
+        animate(callback, "images/monkey-sad.svg", "monkey-animation-wrong", 3, 1);
     };
     
     /* thinking image */

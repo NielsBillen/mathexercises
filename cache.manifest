@@ -1,11 +1,14 @@
 CACHE MANIFEST
-# Updated 08/11/2016 13:04
+# Updated 08/11/2016 22:42
 
 CACHE:
+
+# Fonts
 fonts/Raleway-Bold.ttf
 fonts/Raleway-Light.ttf
 fonts/Roboto-Black.ttf
 
+# Images
 icons/icon512x512.png
 images/grass.svg
 images/jungleborder-left.svg
@@ -15,20 +18,27 @@ images/monkey-sad.svg
 images/monkey-thinking.svg
 images/tree.svg
 images/woodenframe.svg
-
-exercise.html
-index.html
-
-exercise.css
-jungle.css
-keyboard.css
-settings.css
-
-exercise.js
-keyboard.js
-settings.js
-localsettings.js
-
 favicon.ico
 
+# HTML
+exercise.html
+index.html
+results.html
+
+# CSS
+css/core.css
+css/exercise.css
+css/jungle.css
+css/keyboard.css
+css/scrollbar.css
+css/settings.css
+
+# Scripts
+scripts/exercise.js
+scripts/keyboard.js
+scripts/localsettings.js
+scripts/results.js
+scripts/settings.js
+
+# Sounds
 click.mp3

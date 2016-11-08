@@ -1,0 +1,100 @@
+/* fixes the position of the exercise type */
+#type {
+    position: fixed;
+    left: 1vmin;
+    top: 1vmin;
+}
+
+/* fixes the position of the progress */
+#progress {
+    position: fixed;
+    right: 1vmin;
+    top: 1vmin;
+}
+
+/* styling for the monkey */
+#monkey {
+    position: relative;
+    overflow: hidden;
+    top: 24vmin;
+    
+    width: 24vmin;
+    height: 24vmin;
+    transform: translateX(0);
+    z-index: -100;
+    
+    background-image: url("../images/monkey-thinking.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    animation-name: monkey-animation-start;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+#exercise-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+#exercise {
+    padding: 2vmin 2vmin;
+    min-height: 22vmin;
+}
+
+#exercise-input {
+    min-width: 18vmin;
+    height: 16vmin;
+
+    border-radius: 4vmin;
+    background-color: white;
+    color: black;
+}
+
+.button {
+    height: 8vmin;
+    min-width: 8vmin;
+    font-size: 7vmin;
+}
+
+@keyframes monkey-animation-start {
+    0% {
+        top: 24vmin;
+    }
+    100% {
+        top: 1vmin;
+    }
+}
+
+@keyframes monkey-animation-correct {
+    0% {
+        top: 1vmin;
+    }
+    50% {
+        top: 4vmin;
+    }
+    100% {
+        top: 1vmin;
+    }
+}
+
+@keyframes monkey-animation-wrong {
+    0% {
+        top: 1vmin;
+    }
+    30% {
+        top: 3vmin;
+        transform: rotate(5deg);
+    }
+    90% {
+        top: 4vmin;
+        transform: rotate(8deg);
+    }
+    100% {
+        top: 1vmin;
+    }
+}

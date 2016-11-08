@@ -1,0 +1,21 @@
+/*-----------------------------------------------------------------------------
+ * CSS styling for the custom on screen keyboard
+ *---------------------------------------------------------------------------*/
+
+/*
+ * Styling for the keyboard.
+ */
+.keyboard {
+    /* horizontal flow layout */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    /* center the content */
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    /* add margins to sides */
+    padding: 1vmin
+}

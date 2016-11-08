@@ -5,59 +5,61 @@
         
         <!-- metadata settings -->
         <meta charset="utf-8"/>        
-        <meta name="mobileoptimized" content="true"></meta>
+        <meta name="mobileoptimized" content="true"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-        <meta name="mobile-web-app-capable" content="yes"></meta>
-        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black"></meta>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
         <!-- manifest inclusion -->
-        <link rel="manifest" href="manifest.json"></link>
+        <link rel="manifest" href="manifest.json"/>
 
         <!-- icons inclusion -->
-        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="favicon.ico"></link>
-        <link rel="shortcut icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"></link>
-        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"></link>
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
 
         <!-- style sheets inclusions -->
-        <link type="text/css" rel="stylesheet" href="jungle.css"></link>
-        <link type="text/css" rel="stylesheet" href="exercise.css"></link>
-        <link type="text/css" rel="stylesheet" href="keyboard.css"></link>
+        <link type="text/css" rel="stylesheet" href="css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="css/exercise.css"/>
+        <link type="text/css" rel="stylesheet" href="css/keyboard.css"/>
     </head>
     <body>
-        <header class = "wood">Maal</header>
-        <div id = "progress" class = "wood">Oefening: 0/0</div>
+        <header id = "type" class = "wood">Maal</header>
+        <header id = "progress" class = "wood">Oefening: 0/0</header>
+        
         <div class = "jungle-border left"></div>
         <div class = "jungle-border right"></div>
         <!--<div class = "jungle-grass"></div>-->
         <div id = "exercise-wrapper" class = "center">
             <div id = "monkey"></div>
             <div id = "exercise" class = "wood center">
-                <span class = "exercise-operand center" id = "exercise-operator-left">?</span>
-                <span class = "exercise-operand center" id = "exercise-operand">x</span>
-                <span class = "exercise-operand center" id = "exercise-operator-right">?</span>
-                <span class = "exercise-operand center" id = "exercise-equals">=</span>
-                <span class = "exercise-operand center" id = "exercise-solution">?</span>
+                <span class = "exercise-span center" id = "exercise-operator-left">?</span>
+                <span class = "exercise-span center" id = "exercise-operand">x</span>
+                <span class = "exercise-span center" id = "exercise-operator-right">?</span>
+                <span class = "exercise-span center" id = "exercise-equals">=</span>
+                <span class = "exercise-span center" id = "exercise-solution">?</span>
             </div>
         </div>
         <div id = "keyboard" class = "keyboard wood">
             <audio id = "keyboard-button-click" src="click.mp3" preload></audio>
-            <div id = "button-0" class = "keyboard-button center noselect">0</div>
-            <div id = "button-1" class = "keyboard-button center noselect">1</div>
-            <div id = "button-2" class = "keyboard-button center noselect">2</div>
-            <div id = "button-3" class = "keyboard-button center noselect">3</div>
-            <div id = "button-4" class = "keyboard-button center noselect">4</div>
-            <div id = "button-5" class = "keyboard-button center noselect">5</div>
-            <div id = "button-6" class = "keyboard-button center noselect">6</div>
-            <div id = "button-7" class = "keyboard-button center noselect">7</div>
-            <div id = "button-8" class = "keyboard-button center noselect">8</div>
-            <div id = "button-9" class = "keyboard-button center noselect">9</div>
-            <div id = "button-enter" class = "keyboard-button center noselect">Ok</div>
-            <div id = "button-back" class = "keyboard-button center noselect">Wis</div>
+            <div id = "button-0" class = "button noselect">0</div>
+            <div id = "button-1" class = "button noselect">1</div>
+            <div id = "button-2" class = "button noselect">2</div>
+            <div id = "button-3" class = "button noselect">3</div>
+            <div id = "button-4" class = "button noselect">4</div>
+            <div id = "button-5" class = "button noselect">5</div>
+            <div id = "button-6" class = "button noselect">6</div>
+            <div id = "button-7" class = "button noselect">7</div>
+            <div id = "button-8" class = "button noselect">8</div>
+            <div id = "button-9" class = "button noselect">9</div>
+            <div id = "button-enter" class = "button noselect">Ok</div>
+            <div id = "button-back" class = "button noselect">Wis</div>
         </div>
         
-        <script src = "keyboard.js"></script>
-        <script src = "localsettings.js"></script>
-        <script src = "exercise.js"></script>
+        <script src = "scripts/keyboard.js"></script>
+        <script src = "scripts/localsettings.js"></script>
+        <script src = "scripts/exercise.js"></script>
     </body>
 </html>

@@ -1,0 +1,20 @@
+#settings-container {
+    flex: 1;
+    background-color: saddlebrown;
+    border-radius: 2vmin;
+}
+
+#settings-version {
+    padding: 1vmin;
+    margin: 1vmin;    
+}
+
+#start {
+    align-self: flex-end;
+}
+
+.button {
+    font-size: 4vmin;
+    min-width: 5vmin;
+    height: 5vmin;
+}

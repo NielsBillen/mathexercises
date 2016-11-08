@@ -19,36 +19,38 @@
         <link rel="shortcut icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
         <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
 
-        <!-- style sheets inclusions -->
-        <link type="text/css" rel="stylesheet" href="settings.css"/>
-        <link type="text/css" rel="stylesheet" href="jungle.css"/>
+        <!-- style sheets inclusions -->        
+        <link type="text/css" rel="stylesheet" href="css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="css/settings.css"/>
     </head>
-    <body>
+    <body class = "vertical center-horizontal">
         <div class = "jungle-border left"></div>
         <div class = "jungle-border right"></div>
         <div class = "jungle-grass"></div>
         <header class = "wood">Instellingen</header>
-        <div id = "settings-container">
-            <div class = "setting">
+        <div class = "vertical .center-horizontal padded" id = "settings-container">
+            <div class = "padded">
                 <label for = "input-table">Tafels:</label>
-                <div class = "button-container"  id = "input-table-button-container"></div>
+                <div class = "horizontal"  id = "input-table-button-container"></div>
             </div>
-            <div class = "setting">
+            <div class = "padded">
                 <label for = "input-exercise-type">Type oefening:</label>
-                <div class = "button-container" id = "input-type-button-container">
-                    <div class ="settings-button center" id="type-solution">2 x 4 = ...</div>
-                    <div class ="settings-button center" id="type-left">... x 4 = 8</div>
-                    <div class ="settings-button center" id="type-right">2 x ... = 8</div>
+                <div class = "horizontal" id = "input-type-button-container">
+                    <div class ="button bordered" id="type-solution">2 x 4 = ...</div>
+                    <div class ="button bordered" id="type-left">... x 4 = 8</div>
+                    <div class ="button bordered" id="type-right">2 x ... = 8</div>
                 </div>
             </div>
-            <div class = "setting">
+            <div class = "padded">
                 <label for="input-exercise-count">Aantal oefeningen:</label>
-                <div class = "button-container" id = "input-exercise-button-container"></div>
+                <div class = "horizontal" id = "input-exercise-button-container"></div>
             </div>
-            <div id = "back-button" onclick="window.location = 'exercise.html'">Start</div>
+            <div id = "start" class = "button" onclick="window.location = 'exercise.html'">Start</div>
         </div>
-        <div id = "settings-version" class = "wood">v0.1.6</div>
-        <script src = "localsettings.js"></script>
-        <script src = "settings.js"></script>
+        <div id = "settings-version" class = "wood padded">v0.1.6</div>
+        
+        <script src = "scripts/localsettings.js"></script>
+        <script src = "scripts/settings.js"></script>
     </body>
 </html>

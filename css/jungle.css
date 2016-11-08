@@ -5,9 +5,17 @@
  * @version 0.1
  *---------------------------------------------------------------------------*/
 
+body {
+    background-color: rgb(228,232,229);
+    background-image: url("../images/tree.svg");
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
 /* wooden frame background decorations */
 .wood {
-    background-image: url("images/woodenframe.svg");
+    background-image: url("../images/woodenframe.svg");
     background-repeat: repeat-x;
     background-size: contain;
 }
@@ -18,7 +26,7 @@
     left: 0;
     right: 0;
     height: 16vmax;
-    background-image: url("images/grass.svg");
+    background-image: url("../images/grass.svg");
     background-size: contain;
     background-repeat: repeat-x;
     z-index: -10;
@@ -43,16 +51,12 @@
 
 .jungle-border.left {
     left: 0;
-    background-image: url("images/jungleborder-left.svg");
-    
-    /*animation-name: jungle-border-left-animation;*/
+    background-image: url("../images/jungleborder-left.svg");
 }
 
 .jungle-border.right {
     right: 0;
-    background-image: url("images/jungleborder-right.svg");
-    
-    /*animation-name: jungle-border-right-animation;*/
+    background-image: url("../images/jungleborder-right.svg");
 }
 
 /*
