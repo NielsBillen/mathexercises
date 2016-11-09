@@ -48,6 +48,7 @@
 }
 
 #exercise-input {
+    margin: 0 2vmin;
     min-width: 18vmin;
     height: 16vmin;
 
@@ -59,7 +60,7 @@
 .button {
     height: 8vmin;
     min-width: 8vmin;
-    font-size: 7vmin;
+    font-size: 8vmin;
 }
 
 .exercise-wide {
@@ -69,7 +70,7 @@
 
 .exercise-tight {
     min-width: 8vmin;
-    height:16vmin;
+    height: 16vmin;
 }
 
 .exercise-wide.boxed {
