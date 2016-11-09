@@ -28,7 +28,7 @@ window.addEventListener("load", function (e) {
         console.log(e);
     });
     
-    if (navigator.online) {
+    if (navigator.online === "true") {
         appcache.update();
     } else {
         console.log("not online!");
