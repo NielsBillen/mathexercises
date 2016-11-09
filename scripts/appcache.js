@@ -9,12 +9,14 @@ window.addEventListener("load", function (loadEvent) {
     
     appcache = window.applicationCache;
     version = document.getElementById("version");
-    versionNumber = "v0.2.3.1";
+    versionNumber = "v0.2.3.2";
     
     /*
      * Listens whether an update is ready.
      */
     appcache.addEventListener("updateready", function (e) {
+        console.log(e);
+        
         if (appcache.status === appcache.UPDATEREADY) {
             // update available
             if (confirm("A new version of this application is available. Load it?")) {
@@ -23,19 +25,26 @@ window.addEventListener("load", function (loadEvent) {
         }
     });
     
+    appcache.addEventListener("checking", function (e) {
+        console.log("checking for update!");
+        console.log(e);
+        version.innerHTML = "zoeken naar updates...";
+    });
     
     appcache.addEventListener("noupdate", function (e) {
         console.log("no update available!");
+        version.innerHTML = "geen updates beschikbaar";
+        setVersionNumber(1000);
     });
     
     appcache.addEventListener("downloading", function (e) {
         console.log(e);
-        version.innerHTML = "downloading...";
+        version.innerHTML = "update downloaden...";
     });
     
     appcache.addEventListener("progress", function (e) {
         console.log(e);
-        version.innerHTML = "progress...";
+        version.innerHTML = "downloaded " + e.loaded + " / " + e.total;
     });
     
     /*
@@ -43,7 +52,7 @@ window.addEventListener("load", function (loadEvent) {
      */
     appcache.addEventListener("error", function (e) {
         console.log(e);
-        version.innerHTML = "error during update...";
+        version.innerHTML = "fout tijdens update...";
         setVersionNumber(1000);
     });
     
