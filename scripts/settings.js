@@ -34,7 +34,7 @@
         var version = document.getElementById("version");
         
         if (version) {
-            version.innerHTML = "v0.2.2";
+            version.innerHTML = "v0.2.3";
         }
     }());
     

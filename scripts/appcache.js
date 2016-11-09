@@ -1,31 +1,17 @@
 /*global console, confirm*/
-/*var cache = (function () {
-    "use strict";
-    
-    window.addEventListener("load", function (e) {
-        
-    });
-    
-    var my, appcache;
-    
-    my = {};
-    appcache = window.applicationCache;
-    
-    my.update = function () {
-        // update the cache
-        appcache.update();
-    };
-    
-    return my;
-}());*/
 
 /* listen for load */
 window.addEventListener("load", function (e) {
     "use strict";
     
     
-    var appcache = window.applicationCache;
+    var appcache;
     
+    appcache = window.applicationCache;
+    
+    /*
+     * Listens whether an update is ready.
+     */
     appcache.addEventListener("updateready", function (e) {
         if (appcache.status === appcache.UPDATEREADY) {
             // update available
@@ -35,5 +21,16 @@ window.addEventListener("load", function (e) {
         }
     });
     
-    appcache.update();
+    /*
+     * Listens for errors.
+     */
+    appcache.addEventListener("error", function (e) {
+        console.log(e);
+    });
+    
+    if (navigator.online) {
+        appcache.update();
+    } else {
+        console.log("not online!");
+    }
 });
