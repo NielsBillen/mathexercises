@@ -12,6 +12,12 @@ window.addEventListener("load", function (loadEvent) {
     
     appcache.addEventListener("cached", function (e) {
         console.log(e);
+        setVersionNumber(1000);
+        
+        // update available
+        if (confirm("A new version of this application is available. Load it?")) {
+            window.location.reload();
+        }
     }, false);
     
     appcache.addEventListener("checking", function (e) {
