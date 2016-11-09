@@ -33,6 +33,11 @@ window.addEventListener("load", function (loadEvent) {
         version.innerHTML = "downloading...";
     });
     
+    appcache.addEventListener("progress", function (e) {
+        console.log(e);
+        version.innerHTML = "progress...";
+    });
+    
     /*
      * Listens for errors.
      */
