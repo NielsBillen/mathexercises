@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 08/11/2016 22:46
+# Updated 09/11/2016 09:41
 
 CACHE:
 
@@ -10,6 +10,7 @@ fonts/Roboto-Black.ttf
 
 # Images
 icons/icon512x512.png
+images/billboard.svg
 images/grass.svg
 images/jungleborder-left.svg
 images/jungleborder-right.svg

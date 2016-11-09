@@ -27,6 +27,18 @@
     };
     
     /**************************************************************************
+     * Set the version number
+     *************************************************************************/
+    
+    (function () {
+        var version = document.getElementById("version");
+        
+        if (version) {
+            version.innerHTML = "v0.2.1";
+        }
+    }());
+    
+    /**************************************************************************
      * Initialize the buttons which allow to pick which tables will be present 
      * in the exercises.
      *************************************************************************/
@@ -76,8 +88,8 @@
                         
             if (tables.indexOf(i) > -1) {
                 button.classList.add("selected");
-            } 
-                        
+            }
+            
             addTouchListener(button, click(button, i));
             
             container.appendChild(button);

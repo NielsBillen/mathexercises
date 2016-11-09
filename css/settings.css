@@ -1,11 +1,15 @@
 #settings-container {
-    flex: 1;
-    background-color: saddlebrown;
-    border-radius: 2vmin;
+    background-image: url("../images/billboard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 4vmin 6vmin;
+
+    overflow-y: hidden;
 }
 
 #settings-version {
-    padding: 1vmin;
+    padding: 1vmin 4vmin;
     margin: 1vmin;    
 }
 

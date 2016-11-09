@@ -1,40 +1,44 @@
-#results-container {
+#results-wrapper {
     flex: 1;
-    padding: 2vmin;
-    margin: 2vmin;
-    background-color: saddlebrown;
-    border-radius: 2vmin;
-    
-    overflow-y: auto;
 }
 
-#button-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+#results-container {
+    flex: 1;
+    
+    min-width: 70vmin;
+    
+    background-image: url("../images/billboard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 4vmin 8vmin;
+}
+
+#table-wrapper {
+    overflow-y: auto;
+    padding: 0vmin 1vmin;
+}
+.button {
+    font-size: 4vmin;
+    min-width: 5vmin;
+    height: 5vmin;
+    border-radius: 0;
+}
+
+.panel {
+    margin: 1vmin;
+    padding: 2vmin 4vmin;
 }
 
 #back {
-    font-size: 4vmin;
-    color:  white;
-    padding: 2vmin;
-    margin: 2vmin;
-    background-color: saddlebrown;
-    border-radius: 2vmin;
+    flex: 1;
     cursor: pointer;
 }
 
 #score {
-    font-size: 4vmin;
-    color:  white;
-    padding: 2vmin;
-    margin: 2vmin;
-    background-color: saddlebrown;
-    border-radius: 2vmin;
+    
 }
 
-table {
-}
 
 td {
     font-size: 5vmin;
