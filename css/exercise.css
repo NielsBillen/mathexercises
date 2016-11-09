@@ -20,8 +20,18 @@
     
     width: 24vmin;
     height: 24vmin;
+    
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -o-transform: translateX(0);
     transform: translateX(0);
-    z-index: -1;
+    
+    -webkit-transform: translateZ(-10px);
+    -moz-transform: translateZ(-10px);
+    -o-transform: translateZ(-10px);
+    transform: translateZ(-10px);
+    
+    z-index: -10;
     
     background-image: url("../images/monkey-thinking.svg");
     background-size: contain;
