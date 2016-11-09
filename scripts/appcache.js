@@ -8,7 +8,7 @@ window.addEventListener("load", function (loadEvent) {
     
     appcache = window.applicationCache;
     version = document.getElementById("version");
-    versionNumber = "v0.2.3.4";
+    versionNumber = "v0.2.3.5";
     
     appcache.addEventListener("cached", function (e) {
         console.log(e);
