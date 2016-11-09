@@ -1,13 +1,15 @@
 /*global console, confirm*/
 
 /* listen for load */
-window.addEventListener("load", function (e) {
+window.addEventListener("load", function (loadEvent) {
     "use strict";
     
     
-    var appcache;
+    var appcache, version, versionNumber, setVersionNumber;
     
     appcache = window.applicationCache;
+    version = document.getElementById("version");
+    versionNumber = "v0.2.3.1";
     
     /*
      * Listens whether an update is ready.
@@ -21,16 +23,41 @@ window.addEventListener("load", function (e) {
         }
     });
     
+    
+    appcache.addEventListener("noupdate", function (e) {
+        console.log("no update available!");
+    });
+    
+    appcache.addEventListener("downloading", function (e) {
+        console.log(e);
+        version.innerHTML = "downloading...";
+    });
+    
     /*
      * Listens for errors.
      */
     appcache.addEventListener("error", function (e) {
         console.log(e);
+        version.innerHTML = "error during update...";
+        setVersionNumber(1000);
     });
     
-    if (navigator.online === "true") {
+    setVersionNumber = function (timeout) {
+        if (timeout && timeout > 0) {
+            setTimeout(function () {
+                version.innerHTML = versionNumber;
+            }, timeout);
+        } else {
+            version.innerHTML = versionNumber;
+        }
+    };
+    
+    // force update
+    try {
+        version.innerHTML = "checking for updates...";
         appcache.update();
-    } else {
-        console.log("not online!");
+    } catch (e) {
+        version.innerHTML = "error during update...";
+        setVersionNumber(1000);
     }
 });
