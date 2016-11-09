@@ -1,8 +1,15 @@
-#settings-version {
-    padding: 1vmin 8vmin;
-    margin: 0.5vmin;    
+#container {
+    margin-left: 1vmin;
+    margin-right: 1vmin;
 }
 
+#version {
+    flex: 1;
+}
+
+#update {
+    padding: 0vmin 4vmin;
+}
 
 .button {
     min-width: 4.5vmin;

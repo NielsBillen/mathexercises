@@ -37,26 +37,31 @@
         
         <header class = "wood">Instellingen</header>
         
-        <div class = "billboard vertical">
-            <div class = "padded">
-                <label for = "input-table">Tafels:</label>
-                <div class = "horizontal"  id = "input-table-button-container"></div>
-            </div>
-            <div class = "padded">
-                <label for = "input-exercise-type">Type oefening:</label>
-                <div class = "horizontal" id = "input-type-button-container">
-                    <div class ="button bordered type noselect" id="type-solution">2 x 4 = <span class = "unknown">?</span></div>
-                    <div class ="button bordered type noselect" id="type-left"><span class = "unknown">?</span> x 4 = 8</div>
-                    <div class ="button bordered type noselect" id="type-right">2 x <span class = "unknown">?</span> = 8</div>
+        <div id = "container">
+            <div class = "billboard vertical">
+                <div class = "padded">
+                    <label for = "input-table">Tafels:</label>
+                    <div class = "horizontal"  id = "input-table-button-container"></div>
                 </div>
+                <div class = "padded">
+                    <label for = "input-exercise-type">Type oefening:</label>
+                    <div class = "horizontal" id = "input-type-button-container">
+                        <div class ="button bordered type noselect" id="type-solution">2 x 4 = <span class = "unknown">?</span></div>
+                        <div class ="button bordered type noselect" id="type-left"><span class = "unknown">?</span> x 4 = 8</div>
+                        <div class ="button bordered type noselect" id="type-right">2 x <span class = "unknown">?</span> = 8</div>
+                    </div>
+                </div>
+                <div class = "padded">
+                    <label for="input-exercise-count">Aantal oefeningen:</label>
+                    <div class = "horizontal" id = "input-exercise-button-container"></div>
+                </div>
+                <div id = "start" class = "button" onclick="window.location = 'exercise.html'">Start</div>
             </div>
-            <div class = "padded">
-                <label for="input-exercise-count">Aantal oefeningen:</label>
-                <div class = "horizontal" id = "input-exercise-button-container"></div>
+            <div class = "horizontal">
+                <div id = "update" class = "wood padded center">Update</div>
+                <div id = "version" class = "wood padded center"></div>
             </div>
-            <div id = "start" class = "button" onclick="window.location = 'exercise.html'">Start</div>
         </div>
-        <div id = "version" class = "wood padded"></div>
         
         <script src = "scripts/localsettings.js"></script>
         <script src = "scripts/settings.js"></script>

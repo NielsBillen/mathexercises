@@ -1,57 +1,49 @@
-/*global console, confirm*/
+/*global confirm*/
 
 /* listen for load */
 window.addEventListener("load", function (loadEvent) {
     "use strict";
     
-    var appcache, version, versionNumber, update,  setVersionNumber;
+    var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
+    versionNumber = "v0.2.4";
     version = document.getElementById("version");
-    versionNumber = "v0.2.3.5";
+    version.innerHTML = versionNumber;
+    updateButton = document.getElementById("update");
     
     appcache.addEventListener("cached", function (e) {
-        console.log(e);
         setVersionNumber(1000);
     }, false);
     
     appcache.addEventListener("checking", function (e) {
-        console.log("checking for update!");
-        console.log(e);
-        version.innerHTML = "zoeken naar updates...";
+        version.innerHTML = "zoeken naar updates ...";
     }, false);
     
     appcache.addEventListener("downloading", function (e) {
-        console.log(e);
-        version.innerHTML = "update downloaden...";
+        version.innerHTML = "update downloaden ...";
     }, false);
 
     appcache.addEventListener("error", function (e) {
-        console.log(e);
-        version.innerHTML = "fout tijdens update...";
+        version.innerHTML = "fout tijdens update ...";
         setVersionNumber(1000);
     }, false);
     
     appcache.addEventListener("noupdate", function (e) {
-        console.log("no update available!");
         version.innerHTML = "geen updates beschikbaar";
         setVersionNumber(1000);
     }, false);
     
     appcache.addEventListener("obsolete", function (e) {
-        console.log(e);
     }, false);
     
     appcache.addEventListener("progress", function (e) {
-        console.log(e);
         version.innerHTML = "downloaded " + e.loaded + " / " + e.total;
     }, false);
     
     appcache.addEventListener("updateready", function (e) {
-        console.log(e);
-        
         // update available
-        if (confirm("A new version of this application is available. Load it?")) {
+        if (confirm("Er is een update beschikbaar. Wil je updaten?")) {
             window.location.reload();
         }
     }, false);
@@ -66,20 +58,14 @@ window.addEventListener("load", function (loadEvent) {
         }
     };
     
-    update = function () {
+    updateButton.onclick = function () {
         // force update
         try {
-            version.innerHTML = "checking for updates...";
+            version.innerHTML = "zoeken naar updates...";
             appcache.update();
         } catch (e) {
-            version.innerHTML = "error during update...";
+            version.innerHTML = "fout tijdens het updaten...";
             setVersionNumber(1000);
         }
     };
-    
-    version.onclick = update;
-    version.style.cursor = "pointer";
-    
-    update();
-    
 });
