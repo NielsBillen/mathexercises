@@ -3,11 +3,21 @@
     margin: 0.5vmin;    
 }
 
-#start {
-}
 
 .button {
-    font-size: 4vmin;
     min-width: 4.5vmin;
     height: 4.5vmin;
+}
+
+.type {
+    padding: 2vmin;
+}
+
+.unknown {
+    margin: 0vmin 1vmin;
+    min-width: 6vmin;
+    height: 6vmin;
+    color: black;
+    background-color: white;
+    border-radius: 1vmin;
 }

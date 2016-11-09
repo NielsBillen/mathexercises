@@ -10,14 +10,8 @@
 
 /* font definition for bold fonts */
 @font-face {
-    font-family: raleway-bold;
-    src: url("../fonts/Roboto-Black.ttf");
-}
-
-/* font definition for regular fonts */
-@font-face {
-    font-family: raleway-regular;
-    src: url("../fonts/Raleway-Light.ttf");
+    font-family: "default";
+    src: url("../fonts/Petanque.otf");
 }
 
 /************************************************
@@ -42,13 +36,13 @@ body {
     padding: 0;
     overflow: hidden;
     
-    font-family: "raleway-bold";
-    font-size: 4vmin;
+    font-family: "default";
+    font-size: 6vmin;
     color: white;
 }
 
 header {
-    font-size: 7vmin;
+    font-size: 8vmin;
     
     margin: 1vmin;
     padding: 1vmin 4vmin;
@@ -71,19 +65,8 @@ header {
     padding-left: 4vmin;
     padding-right: 4vmin;
     padding-bottom: 4vmin;
+    
     overflow-y: auto;
-}
-
-.exercise-span {
-    min-width: 18vmin;
-    height 16vmin;
-    font-size: 14vmin;
-}
-
-.exercise-span.boxed {
-    border-radius: 4vmin;
-    background-color: white;
-    color: black;
 }
 
 .button {
@@ -108,14 +91,6 @@ header {
     
     animation-duration: 0.2s;
     animation-timing-function: ease-out;
-}
-
-.button:first-child {
-    margin-left: 0;
-}
-
-.button:last-child {
-    margin-right: 0;
 }
 
 .button:hover {

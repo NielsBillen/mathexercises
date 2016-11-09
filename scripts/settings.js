@@ -50,6 +50,11 @@
         container = document.getElementById("input-table-button-container");
         tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
+        /* validate the input */
+        if (!tables || !Array.isArray(tables) || tables.length === 0) {
+            tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        }
+        
         /* create the function which creates click handlers */
         click = function (button, i) {
             return function () {

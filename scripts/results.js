@@ -5,7 +5,6 @@
     
     var check, correctValue;
     
-    
     correctValue = function (result) {
         var exercise, value;
         
@@ -159,10 +158,12 @@
             evaluation = document.createElement("div");
             evaluation.className = "evaluation";
             if (correct) {
-                evaluation.innerHTML = "correct";
+                evaluation.innerHTML = "juist";
+                evaluation.classList.add("outline-black");
             } else {
                 evaluation.classList.add("wrong");
                 evaluation.innerHTML = "fout";
+                evaluation.classList.add("outline-white");
             }
             row.insertCell().appendChild(evaluation);
             
@@ -238,6 +239,6 @@
             }
         }
         
-        document.getElementById("score").innerHTML = "Score: " + count + "/" + results.length;
+        document.getElementById("score").innerHTML = "Resultaat: " + count + "/" + results.length;
     }());
 }());

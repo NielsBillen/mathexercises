@@ -33,21 +33,13 @@
         <div class = "jungle-border left"></div>
         <div class = "jungle-border right"></div>
         
-        <header class = "wood">Resultaten</header>
+        <header id = "score" class = "wood">Resultaat</header>
         
-        <div id = "results-wrapper" class = "vertical">
-            <div id = "results-container" class = "vertical">
-                <div id = "table-wrapper">
-                <table id = "results-table">
-                </table>
-                </div>
-            </div>
-            
-            <div class = "horizontal">
-                <div id = "score" class = "panel center wood"></div>
-                <div id = "back" class = "panel center wood" onclick="window.location='index.html'">Naar instellingen</div>
-            </div>
+        <div id = "results-container" class = "billboard vertical">
+            <table id = "results-table"></table>
         </div>
+            
+        <div id = "back" class = "button selected bordered" onclick="window.location='index.html'">Naar instellingen</div>
         
         <script src = "scripts/localsettings.js"></script>
         <script src = "scripts/results.js"></script>

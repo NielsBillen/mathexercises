@@ -1,53 +1,6 @@
-#results-wrapper {
-    flex: 1;
-}
-
-#results-container {
-    flex: 1;
-    
-    min-width: 70vmin;
-    
-    background-image: url("../images/billboard.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 4vmin 8vmin;
-}
-
-#table-wrapper {
-    overflow-y: auto;
-    padding: 0vmin 1vmin;
-}
-.button {
-    font-size: 4vmin;
-    min-width: 5vmin;
-    height: 5vmin;
-    border-radius: 0;
-}
-
-.panel {
-    margin: 1vmin;
-    padding: 2vmin 4vmin;
-}
-
-#back {
-    flex: 1;
-    cursor: pointer;
-}
-
-#score {
-    
-}
-
-
-td {
-    font-size: 5vmin;
-    color:  white;
-}
-
 .operand {
-    min-width: 7vmin;
-    height: 7vmin;
+    min-width: 6vmin;
+    height: 6vmin;
     color: white;
 }
 
@@ -55,6 +8,22 @@ td {
     border-radius: 1vmin;
     background-color: white;
     color: black;
+}
+
+.outline-black {
+    text-shadow: 
+         1px  1px 0 black,
+         1px -1px 0 black,
+        -1px -1px 0 black,
+        -1px  1px 0 black;
+}
+
+.outline-white {
+    text-shadow: 
+         1px  1px 0 white,
+         1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px  1px 0 white;
 }
 
 .correct {
@@ -68,13 +37,5 @@ td {
 .evaluation {
     margin-left: 4vmin;
     margin-right: 4vmin;
-    text-align: right;
-}
-
-/* class which centers its content */
-.center {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+    text-align: center;
 }

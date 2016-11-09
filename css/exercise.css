@@ -44,6 +44,7 @@
 #exercise {
     padding: 2vmin 2vmin;
     min-height: 22vmin;
+    font-size: 18vmin;
 }
 
 #exercise-input {
@@ -59,6 +60,22 @@
     height: 8vmin;
     min-width: 8vmin;
     font-size: 7vmin;
+}
+
+.exercise-wide {
+    min-width: 18vmin;
+    height 16vmin;
+}
+
+.exercise-tight {
+    min-width: 8vmin;
+    height:16vmin;
+}
+
+.exercise-wide.boxed {
+    border-radius: 4vmin;
+    background-color: white;
+    color: black;
 }
 
 @keyframes monkey-animation-start {

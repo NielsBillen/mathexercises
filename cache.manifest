@@ -1,17 +1,28 @@
 CACHE MANIFEST
-# Updated 09/11/2016 09:41
+# Updated 09/11/2016 17:19
 
 CACHE:
 
+# CSS
+css/core.css
+css/exercise.css
+css/jungle.css
+css/keyboard.css
+css/scrollbar.css
+css/settings.css
+
 # Fonts
+fonts/Petanque.otf
 fonts/Raleway-Bold.ttf
 fonts/Raleway-Light.ttf
 fonts/Roboto-Black.ttf
 
 # Images
 icons/icon512x512.png
+images/background-hills.svg
+images/background-trees.svg
 images/billboard.svg
-images/grass.svg
+images/foreground-grass.svg
 images/jungleborder-left.svg
 images/jungleborder-right.svg
 images/monkey-happy.svg
@@ -25,14 +36,6 @@ favicon.ico
 exercise.html
 index.html
 results.html
-
-# CSS
-css/core.css
-css/exercise.css
-css/jungle.css
-css/keyboard.css
-css/scrollbar.css
-css/settings.css
 
 # Scripts
 scripts/exercise.js

@@ -19,7 +19,7 @@ body {
 /* background decorative elements */
 .jungle-decoration {
     position: fixed;
-    bottom: 0;
+    bottom: 0vmin;
     left: 0;
     right: 0;
     
@@ -31,21 +31,21 @@ body {
 /* grass */
 .jungle-decoration.grass {
     height: 20vmax;
-    background-image: url("../images/jungle/foreground-grass.svg");
+    background-image: url("../images/foreground-grass.svg");
     z-index: -12;
 }
 
 /* trees */
 .jungle-decoration.trees {
     height: 32vmax;
-    background-image: url("../images/jungle/background-trees.svg");
+    background-image: url("../images/background-trees.svg");
     z-index: -13;
 }
 
 /* hills */
 .jungle-decoration.hills {
     height: 90vh;
-    background-image: url("../images/jungle/background-hills.svg");
+    background-image: url("../images/background-hills.svg");
     z-index: -14;
 }
 
