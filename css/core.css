@@ -58,6 +58,22 @@ header {
  * common classes
  ***********************************************/
 
+.billboard {
+    background-image: url("../images/billboard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+    margin-left: 1vmin;
+    margin-right: 1vmin;
+    
+    padding-top: 1vmin;
+    padding-left: 4vmin;
+    padding-right: 4vmin;
+    padding-bottom: 4vmin;
+    overflow-y: auto;
+}
+
 .exercise-span {
     min-width: 18vmin;
     height 16vmin;
@@ -120,8 +136,8 @@ header {
 }
 
 .padded {
-    margin: 1vmin;
-    padding: 1vmin;
+    margin: 0.5vmin;
+    padding: 0.5vmin;
 }
 
 .horizontal {

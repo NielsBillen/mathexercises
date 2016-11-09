@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="640"
+   height="640"
+   viewBox="0 0 640.00001 640.00001"
+   id="svg4765"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="background-hills.svg">
+  <defs
+     id="defs4767" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="191.31576"
+     inkscape:cy="378.86456"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1353"
+     inkscape:window-x="1920"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata4770">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-412.36216)">
+    <path
+       style="fill:#abf5e4;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 421.86328 238.32812 L 399.28516 319.28516 L 363.57227 305 L 289.28516 189.28516 L 221.42773 145 L 213.74805 96.251953 L 198.57227 74.285156 L 182.14258 175 L 172.14258 71.427734 L 162.85742 100 L 152.85742 70 L 134.28516 112.85742 L 122.1582 78.125 L 97.142578 164.28516 L 57.142578 208.57227 L 0 340 L 0 640 L 640 640 L 640 340 L 604.28516 320.71484 L 592.83984 244.55664 L 564.28516 223.57227 L 540.71484 309.28516 L 519.28516 256.42773 L 508.57227 288.57227 L 487.85742 199.28516 L 459.28516 265.71484 L 452.14258 224.28516 L 421.86328 238.32812 z "
+       id="path5350"
+       transform="translate(0,412.36216)" />
+    <path
+       style="fill:#c5f8e9;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 421.86328 238.32812 L 452.14258 224.28516 L 459.28516 265.71484 L 487.85742 199.28516 L 508.57227 288.57227 L 519.28516 256.42773 L 540.71484 309.28516 L 564.28516 223.57227 L 592.83984 244.55664 L 585.71484 197.14258 L 556.42773 155 L 522.14258 149.28516 L 482.85742 106.42773 L 449.28516 140 L 421.86328 238.32812 z "
+       id="path5345"
+       transform="translate(0,412.36216)" />
+    <path
+       style="fill:#c5f8e9;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 122.1582 78.125 L 134.28516 112.85742 L 152.85742 70 L 162.85742 100 L 172.14258 71.427734 L 182.14258 175 L 198.57227 74.285156 L 213.74805 96.251953 L 205 40.714844 L 173.57227 4.2851562 L 135.71484 31.427734 L 122.1582 78.125 z "
+       id="path4792"
+       transform="translate(0,412.36216)" />
+  </g>
+</svg>

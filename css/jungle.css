@@ -6,11 +6,7 @@
  *---------------------------------------------------------------------------*/
 
 body {
-    background-color: rgb(228,232,229);
-    background-image: url("../images/tree.svg");
-    background-size: contain;
-    background-repeat: repeat-x;
-    background-position: bottom;
+    background-color: rgb(221,248,255);
 }
 
 /* wooden frame background decorations */
@@ -20,18 +16,40 @@ body {
     background-size: contain;
 }
 
-.jungle-grass {
+/* background decorative elements */
+.jungle-decoration {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 16vmax;
-    background-image: url("../images/grass.svg");
+    
     background-size: contain;
     background-repeat: repeat-x;
-    z-index: -10;
+    
 }
 
+/* grass */
+.jungle-decoration.grass {
+    height: 20vmax;
+    background-image: url("../images/jungle/foreground-grass.svg");
+    z-index: -12;
+}
+
+/* trees */
+.jungle-decoration.trees {
+    height: 32vmax;
+    background-image: url("../images/jungle/background-trees.svg");
+    z-index: -13;
+}
+
+/* hills */
+.jungle-decoration.hills {
+    height: 90vh;
+    background-image: url("../images/jungle/background-hills.svg");
+    z-index: -14;
+}
+
+/* border */
 .jungle-border {
     position: fixed;
     top: 0;
@@ -42,11 +60,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    
-    z-index: -1000;
+    z-index: -10;
 }
 
 .jungle-border.left {
@@ -59,44 +73,3 @@ body {
     background-image: url("../images/jungleborder-right.svg");
 }
 
-/*
- * Animation for the key which is pressed.
- */
-@keyframes jungle-border-left-animation {
-    0% {
-        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
-    }
-    25% {
-        transform: translate(-50%,-50%) rotate(2deg) translate(45%, 45%);
-    }
-    50% {
-        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
-    }
-    75% {
-        transform: translate(-50%,-50%) rotate(-2deg) translate(45%, 45%);
-    }
-    100% {
-        transform: translate(-50%,-50%) rotate(0deg) translate(45%, 45%);
-    }
-}
-
-/*
- * Animation for the key which is pressed.
- */
-@keyframes jungle-border-right-animation {
-    0% {
-        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
-    }
-    25% {
-        transform: translate(50%,-50%) rotate(-2deg) translate(-45%, 45%);
-    }
-    50% {
-        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
-    }
-    75% {
-        transform: translate(50%,-50%) rotate(2deg) translate(-45%, 45%);
-    }
-    100% {
-        transform: translate(50%,-50%) rotate(0deg) translate(-45%, 45%);
-    }
-}

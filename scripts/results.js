@@ -83,7 +83,7 @@
                 left.innerHTML = exercise.left.toString();
             }
             
-            row.insertCell().append(left);
+            row.insertCell().appendChild(left);
             
             /******************************************************************
              * operand
@@ -103,7 +103,7 @@
             } else {
                 operator.innerHTML = exercise.operator.toString();
             }
-            row.insertCell().append(operator);
+            row.insertCell().appendChild(operator);
 
             /******************************************************************
              * right operand
@@ -123,7 +123,7 @@
                 right.innerHTML = exercise.right.toString();
             }
             
-            row.insertCell().append(right);
+            row.insertCell().appendChild(right);
 
             /******************************************************************
              * equals sign
@@ -132,7 +132,7 @@
             equals = document.createElement("div");
             equals.innerHTML = "=";
             equals.className = "operand equals center";
-            row.insertCell().append(equals);
+            row.insertCell().appendChild(equals);
 
             /******************************************************************
              * solution operand
@@ -152,7 +152,7 @@
                 solution.innerHTML = exercise.solution.toString();
             }
             
-            row.insertCell().append(solution);
+            row.insertCell().appendChild(solution);
 
             
             // evalution
@@ -182,7 +182,7 @@
                 }
 
 
-                row.insertCell().append(left);
+                row.insertCell().appendChild(left);
 
                 /******************************************************************
                  * operand
@@ -196,7 +196,7 @@
                     operator.classList.add("unknown");
                     operator.classList.add("correct");
                 }
-                row.insertCell().append(operator);
+                row.insertCell().appendChild(operator);
 
                 /******************************************************************
                  * right operand
@@ -211,7 +211,7 @@
                     right.classList.add("correct");
                 }
 
-                row.insertCell().append(right);
+                row.insertCell().appendChild(right);
 
                 /******************************************************************
                  * equals sign
@@ -220,7 +220,7 @@
                 equals = document.createElement("div");
                 equals.innerHTML = "=";
                 equals.className = "operand equals center";
-                row.insertCell().append(equals);
+                row.insertCell().appendChild(equals);
 
                 /******************************************************************
                  * solution operand
@@ -234,7 +234,7 @@
                     solution.classList.add("correct");
                 }
 
-                row.insertCell().append(solution);
+                row.insertCell().appendChild(solution);
             }
         }
         

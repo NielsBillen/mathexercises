@@ -1,16 +1,6 @@
-#settings-container {
-    background-image: url("../images/billboard.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 4vmin 6vmin;
-
-    overflow-y: hidden;
-}
-
 #settings-version {
-    padding: 1vmin 4vmin;
-    margin: 1vmin;    
+    padding: 1vmin 8vmin;
+    margin: 0.5vmin;    
 }
 
 #start {
@@ -18,6 +8,6 @@
 
 .button {
     font-size: 4vmin;
-    min-width: 5vmin;
-    height: 5vmin;
+    min-width: 4.5vmin;
+    height: 4.5vmin;
 }
