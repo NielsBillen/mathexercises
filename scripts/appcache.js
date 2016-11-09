@@ -4,11 +4,11 @@
 window.addEventListener("load", function (loadEvent) {
     "use strict";
     
-    var appcache, version, versionNumber, setVersionNumber;
+    var appcache, version, versionNumber, update,  setVersionNumber;
     
     appcache = window.applicationCache;
     version = document.getElementById("version");
-    versionNumber = "v0.2.3.3";
+    versionNumber = "v0.2.3.4";
     
     appcache.addEventListener("cached", function (e) {
         console.log(e);
@@ -65,12 +65,20 @@ window.addEventListener("load", function (loadEvent) {
         }
     };
     
-    // force update
-    try {
-        version.innerHTML = "checking for updates...";
-        appcache.update();
-    } catch (e) {
-        version.innerHTML = "error during update...";
-        setVersionNumber(1000);
-    }
+    update = function () {
+        // force update
+        try {
+            version.innerHTML = "checking for updates...";
+            appcache.update();
+        } catch (e) {
+            version.innerHTML = "error during update...";
+            setVersionNumber(1000);
+        }
+    };
+    
+    version.onclick = update;
+    version.style.cursor = "pointer";
+    
+    update();
+    
 });
