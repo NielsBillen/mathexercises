@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 10/11/2016 13:27
+# Updated 10/11/2016 13:30
 
 CACHE:
 
@@ -46,3 +46,6 @@ scripts/settings.js
 
 # Sounds
 sound/click.mp3
+
+NETWORK:
+*
