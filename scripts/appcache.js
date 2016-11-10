@@ -7,12 +7,13 @@ window.addEventListener("load", function (loadEvent) {
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.2.7";
+    versionNumber = "v0.2.7.1";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");
     
     appcache.addEventListener("cached", function (e) {
+        version.innerHTML = "geen updates beschikbaar";
         setVersionNumber(1000);
     }, false);
     
