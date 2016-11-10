@@ -44,6 +44,7 @@ body {
 /* */
 header {
     font-size: 8vmin;
+    min-height: 8vmin;
     
     margin: 1vmin;
     padding: 1vmin 4vmin;
@@ -56,6 +57,7 @@ header {
 .text {
     margin: 1vmin;
     padding: 0.5vmin;
+    overflow-y: auto;
 }
 
 .text:first-child {
