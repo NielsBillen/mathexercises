@@ -7,7 +7,7 @@ window.addEventListener("load", function (loadEvent) {
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.2.7.1";
+    versionNumber = "v0.2.7.2";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");
@@ -44,9 +44,11 @@ window.addEventListener("load", function (loadEvent) {
     
     appcache.addEventListener("updateready", function (e) {
         // update available
-        if (confirm("Er is een update beschikbaar. Wil je updaten?")) {
-            appcache.swapCache();
-            window.location.reload();
+        if (appcache.status === appcache.UPDATEREADY) {
+            if (confirm("Er is een update beschikbaar. Wil je updaten?")) {
+                appcache.swapCache();
+                window.location.reload();
+            }
         }
     }, false);
     
