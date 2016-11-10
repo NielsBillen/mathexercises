@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 09/11/2016 22:55
+# Updated 10/11/2016 07:15
 
 CACHE:
 
@@ -37,6 +37,7 @@ index.html
 results.html
 
 # Scripts
+scripts/appcache.js
 scripts/exercise.js
 scripts/keyboard.js
 scripts/localsettings.js
