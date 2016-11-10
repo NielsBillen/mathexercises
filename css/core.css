@@ -11,7 +11,7 @@
 /* font definition for bold fonts */
 @font-face {
     font-family: "default";
-    src: url("/fonts/Petanque.otf");
+    src: url("../fonts/Petanque.otf");
 }
 
 /************************************************

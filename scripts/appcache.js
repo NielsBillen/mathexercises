@@ -7,7 +7,7 @@ window.addEventListener("load", function (loadEvent) {
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.2.6";
+    versionNumber = "v0.2.7";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");
@@ -64,9 +64,8 @@ window.addEventListener("load", function (loadEvent) {
             version.innerHTML = "zoeken naar updates...";
             appcache.update();
         } catch (e) {
-            version.innerHTML = "fout tijdens het updaten...";
+            version.innerHTML = "up-to-date...";
             setVersionNumber(1000);
-            console.log(e);
         }
     };
 });
