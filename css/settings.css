@@ -1,14 +1,10 @@
-#container {
-    margin-left: 1vmin;
-    margin-right: 1vmin;
-}
-
 #version {
     flex: 1;
 }
 
 #update {
     padding: 0vmin 4vmin;
+    cursor: pointer;
 }
 
 .button {
@@ -27,4 +23,12 @@
     color: black;
     background-color: white;
     border-radius: 1vmin;
+}
+
+.unknown:first-child {
+    margin-left: 0;
+}
+
+.unknown:last-child {
+    margin-right: 0;
 }

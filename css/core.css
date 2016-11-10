@@ -27,13 +27,11 @@ html {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    
     overflow: hidden;
     
     font-family: "default";
@@ -51,6 +49,19 @@ header {
 /************************************************
  * common classes
  ***********************************************/
+
+.panel {
+    margin: 1vmin;
+    padding: 1vmin 4vmin;
+}
+
+.panel:first-child {
+    margin-left: 0;
+}
+
+.panel:lasts-child {
+    margin-right: 0;
+}
 
 .billboard {
     background-image: url("../images/billboard.svg");
@@ -110,9 +121,9 @@ header {
     border: 1vmin solid chocolate;
 }
 
-.padded {
-    margin: 0.5vmin;
+.container {
     padding: 0.5vmin;
+    margin: 0.5vmin;
 }
 
 .horizontal {

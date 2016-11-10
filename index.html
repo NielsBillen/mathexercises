@@ -28,38 +28,36 @@
         <script src = "scripts/appcache.js"></script>
     </head>
     <body class = "vertical center">
-        <!-- jungle decorations -->
-        <div class = "jungle-decoration hills"></div>
-        <div class = "jungle-decoration trees"></div>
-        <div class = "jungle-decoration grass"></div>
-        <div class = "jungle-border left"></div>
-        <div class = "jungle-border right"></div>
+        <!-- decorations -->
+        <div class = "theme-border left"></div>
+        <div class = "theme-border right"></div>
         
-        <header class = "wood">Instellingen</header>
+        <header class = "panel">Instellingen</header>
         
-        <div id = "container">
+        <div class = "container">
             <div class = "billboard vertical">
-                <div class = "padded">
+                <div class = "container">
                     <label for = "input-table">Tafels:</label>
                     <div class = "horizontal"  id = "input-table-button-container"></div>
                 </div>
-                <div class = "padded">
+                <div class = "container">
                     <label for = "input-exercise-type">Type oefening:</label>
                     <div class = "horizontal" id = "input-type-button-container">
-                        <div class ="button bordered type noselect" id="type-solution">2 x 4 = <span class = "unknown">?</span></div>
-                        <div class ="button bordered type noselect" id="type-left"><span class = "unknown">?</span> x 4 = 8</div>
-                        <div class ="button bordered type noselect" id="type-right">2 x <span class = "unknown">?</span> = 8</div>
+                        <div class ="button bordered type noselect" id="type-solution"><span>2 x 4 = </span><span class = "unknown">?</span></div>
+                        <div class ="button bordered type noselect" id="type-left"><span class = "unknown">?</span><span> x 4 = 8</span></div>
+                        <div class ="button bordered type noselect" id="type-right"><span>2 x </span><span class = "unknown">?</span><span> = 8</span></div>
                     </div>
                 </div>
-                <div class = "padded">
+                <div class = "container">
                     <label for="input-exercise-count">Aantal oefeningen:</label>
                     <div class = "horizontal" id = "input-exercise-button-container"></div>
                 </div>
                 <div id = "start" class = "button" onclick="window.location = 'exercise.html'">Start</div>
             </div>
+            
             <div class = "horizontal">
-                <div id = "update" class = "wood padded center">Update</div>
-                <div id = "version" class = "wood padded center"></div>
+                <div id = "update" class = "panel center">Update</div>
+                <div id = "version" class = "panel center"></div>
             </div>
         </div>
         

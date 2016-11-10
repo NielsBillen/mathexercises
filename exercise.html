@@ -23,22 +23,18 @@
         <link type="text/css" rel="stylesheet" href="css/core.css"/>
         <link type="text/css" rel="stylesheet" href="css/jungle.css"/>
         <link type="text/css" rel="stylesheet" href="css/exercise.css"/>
-        <link type="text/css" rel="stylesheet" href="css/keyboard.css"/>
     </head>
-    <body>
-        <header id = "type" class = "wood">Maal</header>
-        <header id = "progress" class = "wood">Oefening: 0/0</header>
+    <body class = "vertical">
+        <!-- decorations -->
+        <div class = "theme-border left"></div>
+        <div class = "theme-border right"></div>
         
-        <!-- jungle decorations -->
-        <div class = "jungle-decoration hills"></div>
-        <div class = "jungle-decoration trees"></div>
-        <div class = "jungle-decoration grass"></div>
-        <div class = "jungle-border left"></div>
-        <div class = "jungle-border right"></div>
+        <header id = "type" class = "panel">Maal</header>
+        <header id = "progress" class = "panel">Oefening: 0/0</header>
 
         <div id = "exercise-wrapper" class = "center">
             <div id = "monkey"></div>
-            <div id = "exercise" class = "wood center">
+            <div id = "exercise" class = "panel center">
                 <span class = "exercise-wide center" id = "exercise-operator-left">?</span>
                 <span class = "exercise-tight center" id = "exercise-operand">x</span>
                 <span class = "exercise-wide center" id = "exercise-operator-right">?</span>
@@ -46,7 +42,8 @@
                 <span class = "exercise-wide center" id = "exercise-solution">?</span>
             </div>
         </div>
-        <div id = "keyboard" class = "horizontal center wood">
+        
+        <div id = "keyboard" class = "panel container horizontal center">
             <div id = "button-0" class = "button noselect">0</div>
             <div id = "button-1" class = "button noselect">1</div>
             <div id = "button-2" class = "button noselect">2</div>

@@ -131,6 +131,13 @@ var view = (function () {
         input.style.color = color;
     };
     
+    /* listen for end of start animation */
+    monkey.addEventListener("animationend", function (e) {
+        if (e.animationName === "monkey-animation-start") {
+            monkey.style.top = "1vmin";
+        }
+    });
+    
     /* applies an animation to the monkey */
     animate = function (callback, src, animation, duration, iterations) {
         var image, replacement;
@@ -138,6 +145,7 @@ var view = (function () {
         image = new Image();
         
         image.onload = function () {
+            monkey.style.top = "1vmin";
             monkey.style.backgroundImage = "url(" + src + ")";
             monkey.style.animationDelay = "0s";
             monkey.style.animationDuration = duration + "s";

@@ -52,6 +52,7 @@
 }
 
 #exercise {
+    margin: 0;
     padding: 2vmin 2vmin;
     min-height: 22vmin;
     font-size: 18vmin;
