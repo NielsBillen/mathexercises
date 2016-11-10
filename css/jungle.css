@@ -7,17 +7,60 @@
 
 body {
     background-color: rgb(221,248,255);
-    background-image: url("../images/jungle.svg");
+    background-image: url("/images/jungle.svg");
     background-size: contain;
     background-repeat: repeat-x;
     background-position: bottom;
 }
 
+#character {
+    background-image: url("/images/monkey-thinking.svg");
+}
+
+#character.correct {
+    background-image: url("/images/monkey-happy.svg");
+}
+
+#character.wrong {
+    background-image: url("/images/monkey-sad.svg");
+
+}
+
+/* button styling */
+.button {
+    background-color: burlywood;
+}
+
+.button:hover {
+    background-color: sandybrown;
+}
+
+.button.bordered {
+    border-color: burlywood;
+}
+
+.button.bordered:hover {
+    border-color: sandybrown;
+}
+
+.button.bordered.selected {
+    background-color: sandybrown;
+    border-color: chocolate;
+}
+
 /* wooden frame background decorations */
-.panel {
-    background-image: url("../images/woodenframe.svg");
+.text.small {
+    background-image: url("/images/woodenframe.svg");
     background-repeat: repeat-x;
     background-size: contain;
+}
+
+/* wooden frame background decoration */
+.text.large {
+    background-image: url("/images/billboard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 /* border */
@@ -40,11 +83,11 @@ body {
 
 .theme-border.left {
     left: 0;
-    background-image: url("../images/jungleborder-left.svg");
+    background-image: url("/images/jungleborder-left.svg");
 }
 
 .theme-border.right {
     right: 0;
-    background-image: url("../images/jungleborder-right.svg");
+    background-image: url("/images/jungleborder-right.svg");
 }
 

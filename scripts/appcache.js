@@ -1,4 +1,4 @@
-/*global confirm*/
+/*global console, confirm*/
 
 /* listen for load */
 window.addEventListener("load", function (loadEvent) {
@@ -7,7 +7,7 @@ window.addEventListener("load", function (loadEvent) {
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.2.5";
+    versionNumber = "v0.2.6";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");
@@ -66,6 +66,7 @@ window.addEventListener("load", function (loadEvent) {
         } catch (e) {
             version.innerHTML = "fout tijdens het updaten...";
             setVersionNumber(1000);
+            console.log(e);
         }
     };
 });

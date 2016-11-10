@@ -77,7 +77,7 @@
             button = document.createElement("div");
             button.innerHTML = i;
             button.id = "table-button-" + i;
-            button.className = "button bordered noselect";
+            button.className = "button square bordered noselect";
                         
             if (tables.indexOf(i) > -1) {
                 button.classList.add("selected");
@@ -135,7 +135,7 @@
             button = document.createElement("div");
             button.innerHTML = buttonCount;
             button.id = "exercise-button-" + buttonCount;
-            button.className = "button bordered noselect";
+            button.className = "button square bordered noselect";
             
             container.appendChild(button);
             

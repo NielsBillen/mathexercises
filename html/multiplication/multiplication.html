@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html manifest = "cache.manifest">
+<html manifest = "/cache.manifest">-->
+<html>
     <head>
         <title>Oefening</title>
         
@@ -12,29 +13,29 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
         <!-- manifest inclusion -->
-        <link rel="manifest" href="manifest.json"/>
+        <link rel="manifest" href="/manifest.json"/>
 
         <!-- icons inclusion -->
-        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="favicon.ico"/>
-        <link rel="shortcut icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
-        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon512x512.png"/>
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="/images/icon512x512.png"/>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/images/icon512x512.png"/>
 
         <!-- style sheets inclusions -->
-        <link type="text/css" rel="stylesheet" href="css/core.css"/>
-        <link type="text/css" rel="stylesheet" href="css/jungle.css"/>
-        <link type="text/css" rel="stylesheet" href="css/exercise.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/exercise.css"/>
     </head>
     <body class = "vertical">
         <!-- decorations -->
         <div class = "theme-border left"></div>
         <div class = "theme-border right"></div>
         
-        <header id = "type" class = "panel">Maal</header>
-        <header id = "progress" class = "panel">Oefening: 0/0</header>
+        <header id = "type" class = "text small">Maal</header>
+        <header id = "progress" class = "text small">Oefening: 0/0</header>
 
-        <div id = "exercise-wrapper" class = "center">
-            <div id = "monkey"></div>
-            <div id = "exercise" class = "panel center">
+        <div id = "exercise-wrapper" class = "vertical center grow">
+            <div id = "character"></div>
+            <div id = "exercise" class = "text small center">
                 <span class = "exercise-wide center" id = "exercise-operator-left">?</span>
                 <span class = "exercise-tight center" id = "exercise-operand">x</span>
                 <span class = "exercise-wide center" id = "exercise-operator-right">?</span>
@@ -43,7 +44,7 @@
             </div>
         </div>
         
-        <div id = "keyboard" class = "panel container horizontal center">
+        <div id = "keyboard" class = "text small horizontal center">
             <div id = "button-0" class = "button noselect">0</div>
             <div id = "button-1" class = "button noselect">1</div>
             <div id = "button-2" class = "button noselect">2</div>
@@ -58,10 +59,10 @@
             <div id = "button-back" class = "button noselect">Wis</div>
         </div>
         
-        <audio id = "keyboard-button-click" src="click.mp3" preload></audio>
+        <audio id = "keyboard-button-click" src="/sound/click.mp3" preload></audio>
         
-        <script src = "scripts/keyboard.js"></script>
-        <script src = "scripts/localsettings.js"></script>
-        <script src = "scripts/exercise.js"></script>
+        <script src = "/scripts/keyboard.js"></script>
+        <script src = "/scripts/localsettings.js"></script>
+        <script src = "/scripts/exercise.js"></script>
     </body>
 </html>

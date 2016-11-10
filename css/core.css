@@ -11,13 +11,14 @@
 /* font definition for bold fonts */
 @font-face {
     font-family: "default";
-    src: url("../fonts/Petanque.otf");
+    src: url("/fonts/Petanque.otf");
 }
 
 /************************************************
  * element overrides
  ***********************************************/
 
+/* let html fill the entire page */
 html {
     width: 100%;
     height: 100%;
@@ -26,6 +27,7 @@ html {
     font-size: 100%;
 }
 
+/* let the body fill the entire page */
 body {
     width: 100%;
     height: 100%;
@@ -39,6 +41,7 @@ body {
     color: white;
 }
 
+/* */
 header {
     font-size: 8vmin;
     
@@ -50,34 +53,25 @@ header {
  * common classes
  ***********************************************/
 
-.panel {
+.text {
     margin: 1vmin;
-    padding: 1vmin 4vmin;
+    padding: 0.5vmin;
 }
 
-.panel:first-child {
+.text:first-child {
     margin-left: 0;
 }
 
-.panel:lasts-child {
+.text:lasts-child {
     margin-right: 0;
 }
 
-.billboard {
-    background-image: url("../images/billboard.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    
-    /*margin-left: 1vmin;
-    margin-right: 1vmin;*/
-    
-    padding-top: 3vmin;
-    padding-left: 4vmin;
-    padding-right: 4vmin;
-    padding-bottom: 3vmin;
-    
-    overflow-y: auto;
+.text.small {
+    padding: 0.5vmin 4vmin;
+}
+
+.text.large {
+    padding: 2vmin;
 }
 
 .button {
@@ -88,11 +82,10 @@ header {
     text-align: center;
     
     
-    min-width: 7vmin;
-    height: 7min;
-    font-size: 6vmin;
+    min-width: 5vmin;
+    min-height: 5vmin;
+    font-size: 5vmin;
     
-    background-color: burlywood;
     border-radius: 2vmin;
     
     margin: 0.5vmin;
@@ -104,27 +97,20 @@ header {
     animation-timing-function: ease-out;
 }
 
-.button:hover {
-    background-color: sandybrown;
+.button.square {
+    width: 5vmin;
+    height: 5vmin;
+    padding: 0;
 }
 
-.button.bordered {
-    border: 1vmin solid burlywood;
+.bordered {
+    border-width: 0.75vmin;
+    border-style: solid;
 }
 
-.button.bordered:hover {
-    border: 1vmin solid sandybrown;
-}
-
-.button.bordered.selected {
-    background-color: sandybrown;
-    border: 1vmin solid chocolate;
-}
-
-.container {
-    padding: 0.5vmin;
-    margin: 0.5vmin;
-}
+/************************************************
+ * Layout stying
+ ***********************************************/
 
 .horizontal {
     display: flex;
@@ -153,6 +139,10 @@ header {
     display: flex;
     align-content: center;
     justify-content: center;
+}
+
+.grow {
+    flex: 1;
 }
 
 .noselect {

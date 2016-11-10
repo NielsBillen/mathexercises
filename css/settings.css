@@ -7,15 +7,6 @@
     cursor: pointer;
 }
 
-.button {
-    min-width: 4.5vmin;
-    height: 4.5vmin;
-}
-
-.type {
-    padding: 2vmin;
-}
-
 .unknown {
     margin: 0vmin 1vmin;
     min-width: 6vmin;

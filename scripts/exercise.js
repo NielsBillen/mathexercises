@@ -109,12 +109,12 @@ utility = (function () {
 var view = (function () {
     "use strict";
     
-    var my, monkey, progress, left, right, operator, solution, clear, input, unknown, animate;
+    var my, character, progress, left, right, operator, solution, clear, input, unknown, animate;
 
     my = {};
 
     /* retrieve the graphical user interface elements */
-    monkey = document.getElementById("monkey");
+    character = document.getElementById("character");
     progress = document.getElementById("progress");
     left = document.getElementById("exercise-operator-left");
     right = document.getElementById("exercise-operator-right");
@@ -132,58 +132,45 @@ var view = (function () {
     };
     
     /* listen for end of start animation */
-    monkey.addEventListener("animationend", function (e) {
-        if (e.animationName === "monkey-animation-start") {
-            monkey.style.top = "1vmin";
+    character.addEventListener("animationend", function (e) {
+        if (e.animationName === "animation-start") {
+            character.style.top = "1vmin";
         }
     });
     
-    /* applies an animation to the monkey */
-    animate = function (callback, src, animation, duration, iterations) {
-        var image, replacement;
+    /* applies an animation to the character */
+    animate = function (callback, style, animation, duration, iterations) {
+        var replacement;
         
-        image = new Image();
-        
-        image.onload = function () {
-            monkey.style.top = "1vmin";
-            monkey.style.backgroundImage = "url(" + src + ")";
-            monkey.style.animationDelay = "0s";
-            monkey.style.animationDuration = duration + "s";
-            monkey.style.animationIterationCount = iterations;
             
-            // replace the node to force the animation to replay
-            replacement = monkey.cloneNode(true);
-            monkey.parentElement.replaceChild(replacement, monkey);
-            monkey = replacement;
-            
-            if (callback) {
-                monkey.addEventListener("animationend", callback);
-            }
-            monkey.style.animationName = animation;
-        };
+        // replace the node to force the animation to replay
+        replacement = character.cloneNode(true);
+        character.parentElement.replaceChild(replacement, character);
         
-        image.src = src;
+        character = replacement;
+        character.classList.add(style);
+        character.style.top = "1vmin";
+        character.style.animationDelay = "0s";
+        character.style.animationDuration = duration + "s";
+        character.style.animationIterationCount = iterations;
+            
+        if (callback) {
+            character.addEventListener("animationend", callback);
+            character.addEventListener("animationend", function (e) {
+                character.classList.remove(style);
+            });
+        }
+        character.style.animationName = animation;
     };
     
     /* happy animation */
     my.happyAnimation = function (callback) {
-        animate(callback, "images/monkey-happy.svg", "monkey-animation-correct", 0.5, 4);
+        animate(callback, "correct", "animation-correct", 0.5, 4);
     };
     
     /* sad animation */
     my.sadAnimation = function (callback) {
-        animate(callback, "images/monkey-sad.svg", "monkey-animation-wrong", 3, 1);
-    };
-    
-    /* thinking image */
-    my.thinking = function () {
-        var image = new Image();
-        
-        image.onload = function () {
-            monkey.style.backgroundImage = "url(" + image.src + ")";
-        };
-        
-        image.src = "images/monkey-thinking.svg";
+        animate(callback, "wrong", "animation-wrong", 3, 1);
     };
     
     /* sets the progress */
@@ -494,7 +481,6 @@ controller = (function () {
         } else {
             exercises[currentExercise].show(view);
             view.clearInput();
-            view.thinking();
             view.setInputColor("black");
             view.setProgress(currentExercise + 1, exercises.length);
         }

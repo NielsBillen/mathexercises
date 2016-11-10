@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 10/11/2016 07:15
+# Updated 10/11/2016 13:02
 
 CACHE:
 
@@ -7,6 +7,7 @@ CACHE:
 css/core.css
 css/exercise.css
 css/jungle.css
+css/results.css
 css/scrollbar.css
 css/settings.css
 
@@ -16,24 +17,24 @@ fonts/Raleway-Bold.ttf
 fonts/Raleway-Light.ttf
 fonts/Roboto-Black.ttf
 
+#HTML
+html/multiplication/multiplication.html
+html/multiplication/results.html
+html/multiplication/settings.html
+index.html
+
 # Images
-icons/icon512x512.png
-images/background-hills.svg
-images/background-trees.svg
 images/billboard.svg
-images/foreground-grass.svg
+images/favicon.ico
+images/icon512x512.png
+images/jungle.svg
 images/jungleborder-left.svg
 images/jungleborder-right.svg
 images/monkey-happy.svg
 images/monkey-sad.svg
 images/monkey-thinking.svg
 images/woodenframe.svg
-favicon.ico
 
-# HTML
-exercise.html
-index.html
-results.html
 
 # Scripts
 scripts/appcache.js
@@ -44,4 +45,4 @@ scripts/results.js
 scripts/settings.js
 
 # Sounds
-click.mp3
+sound/click.mp3

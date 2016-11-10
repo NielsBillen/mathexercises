@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html html manifest = "/cache.manifest">
+    <head>        
+        <title>Instellingen</title>
+        
+        <!-- metadata settings -->
+        <meta charset="utf-8"/>        
+        <meta name="mobileoptimized" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+        <!-- manifest inclusion -->
+        <link rel="manifest" href="/manifest.json"/>
+
+        <!-- icons inclusion -->
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="/images/icon512x512.png"/>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/images/icon512x512.png"/>
+
+        <!-- style sheets inclusions -->        
+        <link type="text/css" rel="stylesheet" href="/css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/settings.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/scrollbar.css"/>
+        
+        <script src = "/scripts/appcache.js"></script>
+    </head>
+    <body class = "vertical center">
+        <!-- decorations -->
+        <div class = "theme-border left"></div>
+        <div class = "theme-border right"></div>
+        
+        <header class = "text small">Instellingen</header>
+        
+        <div>
+            <div class = "text large vertical">
+                <div class = "container">
+                    <label for = "input-table">Tafels:</label>
+                    <div class = "horizontal"  id = "input-table-button-container"></div>
+                </div>
+                <div class = "container">
+                    <label for = "input-exercise-type">Type oefening:</label>
+                    <div class = "horizontal" id = "input-type-button-container">
+                        <div class ="button bordered noselect" id="type-solution"><span>2 x 4 = </span><span class = "unknown">?</span></div>
+                        <div class ="button bordered noselect" id="type-left"><span class = "unknown">?</span><span> x 4 = 8</span></div>
+                        <div class ="button bordered noselect" id="type-right"><span>2 x </span><span class = "unknown">?</span><span> = 8</span></div>
+                    </div>
+                </div>
+                <div class = "container">
+                    <label for="input-exercise-count">Aantal oefeningen:</label>
+                    <div class = "horizontal" id = "input-exercise-button-container"></div>
+                </div>
+                <div id = "start" class = "button" onclick="window.location = 'multiplication.html'">Start</div>
+            </div>
+            
+            <div class = "horizontal">
+                <div id = "update" class = "text small center">Update</div>
+                <div id = "version" class = "text small center"></div>
+            </div>
+        </div>
+        
+        <script src = "/scripts/localsettings.js"></script>
+        <script src = "/scripts/settings.js"></script>
+    </body>
+</html>

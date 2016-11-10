@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html html manifest = "/cache.manifest">
+    <head>        
+        <title>Resultaten</title>
+        
+        <!-- metadata settings -->
+        <meta charset="utf-8"/>        
+        <meta name="mobileoptimized" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+        <!-- manifest inclusion -->
+        <link rel="manifest" href="/manifest.json"/>
+
+        <!-- icons inclusion -->
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="/icons/icon512x512.png"/>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/icons/icon512x512.png"/>
+
+        <!-- style sheets inclusions -->
+        <link type="text/css" rel="stylesheet" href="/css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/results.css"/>
+        <link type="text/css" rel="stylesheet" href="/css/scrollbar.css"/>
+    </head>
+    <body class = "vertical center">
+        <!-- jungle decorations -->
+        <div class = "theme-border left"></div>
+        <div class = "theme-border right"></div>
+        
+        <header id = "score" class = "text small">Resultaat</header>
+        
+        <div id = "results-container" class = "text large vertical center">
+            <table id = "results-table"></table>
+        </div>
+            
+        <div id = "back" class = "button selected bordered" onclick="window.location='settings.html'">Naar instellingen</div>
+        
+        <script src = "/scripts/localsettings.js"></script>
+        <script src = "/scripts/results.js"></script>
+    </body>
+</html>

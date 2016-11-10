@@ -13,7 +13,7 @@
 }
 
 /* styling for the monkey */
-#monkey {
+#character {
     position: relative;
     overflow: hidden;
     top: 24vmin;
@@ -22,34 +22,24 @@
     height: 24vmin;
     
     -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -o-transform: translateX(0);
     transform: translateX(0);
     
     -webkit-transform: translateZ(-10px);
-    -moz-transform: translateZ(-10px);
-    -o-transform: translateZ(-10px);
     transform: translateZ(-10px);
     
     z-index: -10;
     
-    background-image: url("../images/monkey-thinking.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     
-    animation-name: monkey-animation-start;
+    animation-name: animation-start;
     animation-duration: 1s;
     animation-delay: 1s;
     animation-timing-function: linear;
     animation-fill-mode: both;
 }
 
-#exercise-wrapper {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-}
 
 #exercise {
     margin: 0;
@@ -57,6 +47,7 @@
     min-height: 22vmin;
     font-size: 18vmin;
 }
+
 
 #exercise-input {
     margin: 0 2vmin;
@@ -68,9 +59,14 @@
     color: black;
 }
 
+#keyboard {
+    margin: 0;
+    padding: 0.5vmin 0vmin;
+}
 
 
 .button {
+    padding: 0.5vmin;
     height: 7vmin;
     min-width: 7vmin;
     font-size: 7vmin;
@@ -92,7 +88,7 @@
     color: black;
 }
 
-@keyframes monkey-animation-start {
+@keyframes animation-start {
     0% {
         top: 24vmin;
     }
@@ -101,7 +97,7 @@
     }
 }
 
-@keyframes monkey-animation-correct {
+@keyframes animation-correct {
     0% {
         top: 1vmin;
     }
@@ -113,17 +109,29 @@
     }
 }
 
-@keyframes monkey-animation-wrong {
+@keyframes animation-wrong {
     0% {
         top: 1vmin;
     }
-    30% {
-        top: 3vmin;
+    25% {
+        top: 4vmin;
+        -webkit-transform: rotate(-5deg);
+        transform: rotate(-5deg);
+    }
+    50% {
+        top: 7vmin;
+        -webkit-transform: rotate(5deg);
         transform: rotate(5deg);
     }
+    75% {
+        top: 10vmin;
+        -webkit-transform: rotate(-5deg);
+        transform: rotate(-5deg);
+    }
     90% {
-        top: 4vmin;
-        transform: rotate(8deg);
+        top: 13vmin;
+        -webkit-transform: rotate(5deg);
+        transform: rotate(5deg);
     }
     100% {
         top: 1vmin;
