@@ -67,9 +67,9 @@
 
 .button {
     padding: 0.5vmin;
-    height: 7.5vmin;
-    min-width: 7.5vmin;
-    font-size: 7.5vmin;
+    min-height: 8.5vmin;
+    min-width: 8.5vmin;
+    font-size: 8.5vmin;
 }
 
 .exercise-wide {
