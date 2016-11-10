@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+#result-container {
+    overflow-y: auto;
+}
+
 .unknown {
     margin: 0vmin 1vmin;
     min-width: 6vmin;
