@@ -124,7 +124,7 @@ var view = (function () {
     /* style the user's input text field */
     input = document.createElement("div");
     input.id = "exercise-input";
-    input.className = "center noselect";
+    input.className = "center";
     
     /* sets the color of the input field */
     my.setInputColor = function (color) {
