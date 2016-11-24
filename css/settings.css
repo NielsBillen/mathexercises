@@ -12,6 +12,11 @@
 }
 
 .unknown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
     margin: 0vmin 1vmin;
     min-width: 6vmin;
     height: 6vmin;

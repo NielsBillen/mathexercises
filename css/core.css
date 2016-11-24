@@ -11,7 +11,7 @@
 /* font definition for bold fonts */
 @font-face {
     font-family: "default";
-    src: url("../fonts/Petanque.otf");
+    src: url("../fonts/Roboto-Black.ttf");
 }
 
 /************************************************
@@ -34,17 +34,16 @@ body {
     margin: 0;
     padding: 0;
     
-    overflow: hidden;
-    
     font-family: "default";
-    font-size: 6vmin;
+    font-size: 4vmin;
     color: white;
+    
+    overflow: hidden;
 }
 
 /* */
 header {
-    font-size: 8vmin;
-    min-height: 8vmin;
+    font-size: 200%;
     
     margin: 1vmin;
     padding: 1vmin 4vmin;
@@ -85,7 +84,6 @@ header {
     
     min-width: 6vmin;
     min-height: 6vmin;
-    font-size: 6vmin;
     
     border-radius: 2vmin;
     

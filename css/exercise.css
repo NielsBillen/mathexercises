@@ -45,7 +45,7 @@
     margin: 0;
     padding: 2vmin 2vmin;
     min-height: 22vmin;
-    font-size: 18vmin;
+    font-size: 300%;
 }
 
 
@@ -69,12 +69,12 @@
     padding: 0.5vmin;
     min-height: 8.5vmin;
     min-width: 8.5vmin;
-    font-size: 8.5vmin;
+    font-size: 150%;
 }
 
 .exercise-wide {
     min-width: 18vmin;
-    height 16vmin;
+    height: 16vmin;
 }
 
 .exercise-tight {
