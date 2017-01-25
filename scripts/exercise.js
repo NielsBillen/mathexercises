@@ -169,7 +169,11 @@ var view = (function () {
     };
     
     /* sad animation */
-    my.sadAnimation = function (callback) {
+    my.sadAnimation = function (callback, correctAnswer) {
+        setTimeout(function () {
+            my.setInput(correctAnswer);
+        }, 1000);
+        
         animate(callback, "wrong", "animation-wrong", 3, 1);
     };
     
@@ -331,6 +335,21 @@ var model = (function () {
         this.solution = solution;
         this.unknown = unknown;
     };
+    
+    // returns the correct answer of the exercise
+    my.Exercise.prototype.getAnswer = function () {
+        if (this.unknown === "left") {
+            return this.left;
+        } else if (this.unknown === "right") {
+            return this.right;
+        } else if (this.unknown === "operator") {
+            return this.operator;
+        } else if (this.unknown === "solution") {
+            return this.solution;
+        } else {
+            throw "the unknown field '" + this.unknown + "' does not correspont to any of the valid options!";
+        }
+    };
 
     // checks whether the exercise is correctly solved
     my.Exercise.prototype.check = function (input) {
@@ -464,7 +483,7 @@ controller = (function () {
         if (exercise.check(input)) {
             correct();
         } else {
-            wrong();
+            wrong(exercise.getAnswer());
         }
     };
     
@@ -498,7 +517,7 @@ controller = (function () {
         view.happyAnimation(callback);
     };
     
-    wrong = function () {
+    wrong = function (correctAnswer) {
         var callback = function (e) {
             // detach this callback
             e.srcElement.removeEventListener("animationeend", this);
@@ -507,7 +526,7 @@ controller = (function () {
         
         accept = false;
         view.setInputColor("red");
-        view.sadAnimation(callback);
+        view.sadAnimation(callback, correctAnswer);
     };
     
     my.init = function (e) {

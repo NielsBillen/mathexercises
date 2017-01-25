@@ -1,3 +1,9 @@
+#results-table-wrapper {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    overflow-y: auto;
+}
+
 .operand {
     min-width: 6vmin;
     height: 6vmin;
