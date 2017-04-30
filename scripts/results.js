@@ -45,7 +45,7 @@
     };
     
     (function () {
-        var i, count, table, row, left, right, operator, equals, solution, results, result, exercise, correct, evaluation, correction;
+        var i, count, table, row, left, right, operator, equals, solution, results, result, exercise, correct, evaluation, correction, elapsed, hours, minutes, seconds, timeString;
 
         // retrieve the results
         results = localsettings.getResults();
@@ -239,6 +239,33 @@
             }
         }
         
-        document.getElementById("score").innerHTML = "Resultaat: " + count + "/" + results.length;
+        elapsed = Date.now() - localsettings.getExerciseStartTime();
+        elapsed = Math.floor(elapsed / 1000);
+        seconds = elapsed % 60;
+        elapsed = Math.floor(elapsed / 60);
+        minutes = elapsed % 60;
+        elapsed = Math.floor(elapsed / 60);
+        hours = elapsed;
+                
+        timeString = "";
+        if (hours > 0) {
+            timeString += hours + "u";
+        }
+        if (minutes > 0 || hours > 0) {
+            if (timeString !== "") {
+                timeString += " ";
+            }
+                
+            timeString += minutes + "m";
+        }
+        if (seconds > 0) {
+            if (timeString !== "") {
+                timeString += " ";
+            }
+            timeString += seconds + "s";
+        }
+        
+        document.getElementById("score").innerHTML = "Score: " + count + "/" + results.length;
+        document.getElementById("time").innerHTML = "Tijd: " + timeString;
     }());
 }());

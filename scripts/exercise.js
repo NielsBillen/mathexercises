@@ -33,7 +33,7 @@ utility = (function () {
         } else if (!Array.isArray(array)) {
             throw "argument is not an array!";
         } else if (size < 0) {
-            throw "the array must be positive!";
+            throw "the array size cannot be smaller than zero!";
         }
         
         var result, temp, i;
@@ -141,7 +141,6 @@ var view = (function () {
     /* applies an animation to the character */
     animate = function (callback, style, animation, duration, iterations) {
         var replacement;
-        
             
         // replace the node to force the animation to replay
         replacement = character.cloneNode(true);
@@ -550,6 +549,7 @@ controller = (function () {
 /******************************************************************************
  * Start the multiplication exercises
  *****************************************************************************/
+
 (function () {
     "use strict";
     
@@ -558,6 +558,8 @@ controller = (function () {
     count = localsettings.getNumberOfExercises(10);
     tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     types = localsettings.getTypes(["solution"]);
+    
+    localsettings.setExerciseStartTime();
     
     controller.init(model.Multiplications(count, tables, types));
 }());

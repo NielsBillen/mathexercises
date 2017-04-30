@@ -7,6 +7,14 @@ var localsettings = (function () {
     
     var my = {};
     
+    my.setExerciseStartTime = function () {
+        localStorage.setItem("exercise-start-time", JSON.stringify(Date.now()));
+    };
+    
+    my.getExerciseStartTime = function () {
+        return JSON.parse(localStorage.getItem("exercise-start-time"));
+    };
+    
     /* */
     my.setResults = function (results) {
         localStorage.setItem("exercise-results", JSON.stringify(results));
