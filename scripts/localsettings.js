@@ -16,31 +16,37 @@ var localsettings = (function () {
     };
     
     /*  */
-    my.getExerciseChoice = function (defaultValue) {
-        if (!(typeof defaultValue === "string" || defaultValue instanceof String)) {
-            throw "the default value is not of type string!";
-        } else if (defaultValue !== "multiply" && defaultValue !== "divide") {
-            throw "the default value should either be multiply or divide";
+    my.getExerciseOperators = function (defaultValues) {
+        if (!Array.isArray(defaultValues)) {
+            throw "the given default values are not an array!";
+        }
+        if (defaultValues.length === 0) {
+            throw "the given array is empty!";
         }
         
-        var result = localStorage.getItem("exercise-choice");
+        var result = JSON.parse(localStorage.getItem("exercise-operators"));
         
-        if (result && (result === "multiply" || result === "divide")) {
-            return result;
+        if (result) {
+            if (Array.isArray(result)) {
+                return result;
+            } else {
+                return defaultValues;
+            }
         } else {
-            return defaultValue;
+            return defaultValues;
         }
     };
     
-    /* sets the number of exercises to the given value */
-    my.setExerciseChoice = function (value) {
-        if (!(typeof value === "string" || value instanceof String)) {
-            throw "the default value is not of type string!";
-        } else if (value !== "multiply" && value !== "divide") {
-            throw "the default value should either be multiply or divide";
+    /* set the types */
+    my.setExerciseOperators = function (values) {
+        if (!Array.isArray(values)) {
+            throw "the given values are not an array!";
+        }
+        if (values.length === 0) {
+            throw "the given array is empty!";
         }
         
-        localStorage.setItem("exercise-choice", value);
+        localStorage.setItem("exercise-operators", JSON.stringify(values));
     };
     
     /* */

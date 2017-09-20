@@ -10,7 +10,7 @@
 (function () {
     "use strict";
     
-    var addTouchListener, setChoice;
+    var addTouchListener, setOperators;
     
     /*
      * Adds the given callback function as a touch listener to the given element.
@@ -29,14 +29,14 @@
     /*
      *
      */
-    setChoice = function (choice) {
-        localsettings.setExerciseChoice(choice);
+    setOperators = function (choice) {
+        localsettings.setExerciseOperators(choice);
         
         var i, elements, innerHTML;
         
         elements = document.getElementsByClassName("choice-operator");
         
-        if (choice === "divide") {
+        if (choice.length === 1 && choice[0] === "divide") {
             innerHTML = ":";
         } else {
             innerHTML = "&times;";
@@ -171,29 +171,49 @@
      *************************************************************************/
     
     (function () {
-        var i, all, type, selected, button, click, currentButton;
+        var i, all, type, selected, button, click;
         
         all = ["multiply", "divide"];
-        selected = localsettings.getExerciseChoice("multiply");
-        currentButton = document.getElementById("choice-" + selected);
-        currentButton.classList.add("selected");
+        selected = localsettings.getExerciseOperators(["multiply"]);
         
         click = function (button, type) {
             return function () {
-                currentButton.classList.remove("selected");
-                currentButton = button;
-                button.classList.add("selected");
-                setChoice(type);
+                if (button.classList.contains("selected")) {
+                    // break if this is the last element
+                    if (selected.length === 1) {
+                        return;
+                    }
+                    
+                    // remove table from selection
+                    var index = selected.indexOf(type);
+                    
+                    if (index > -1) {
+                        selected.splice(index, 1);
+                    }
+                    button.classList.remove("selected");
+                } else {
+                    // add table to selection
+                    selected.push(type);
+                    button.classList.add("selected");
+                }
+                
+                /* store the table */
+                setOperators(selected);
             };
         };
         
         for (i = 0; i < all.length; i += 1) {
             type = all[i];
             button = document.getElementById("choice-" + type);
+            
+            if (selected.indexOf(type) > -1) {
+                button.classList.add("selected");
+            }
+            
             addTouchListener(button, click(button, type));
         }
         
-        setChoice(selected);
+        setOperators(selected);
     }());
     
     /**************************************************************************

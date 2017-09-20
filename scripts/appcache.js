@@ -7,7 +7,7 @@ window.addEventListener("load", function (loadEvent) {
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.3.3";
+    versionNumber = "v0.4";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");

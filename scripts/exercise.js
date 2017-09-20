@@ -24,6 +24,24 @@ utility = (function () {
     var my = {};
     
     /*
+     * Returns a random element from the given array
+     */
+    my.getRandom = function (array) {
+        if (!array) {
+            throw "array is undefined!";
+        } else if (!Array.isArray(array)) {
+            throw "argument is not an array!";
+        } else if (array.length === 0) {
+            throw "the array is empty!";
+        }
+        return array[Math.floor(Math.random() * array.length)];
+    };
+    
+    my.getRandomInt = function (minimum, maximum) {
+        return minimum + Math.floor(Math.random() * (maximum - minimum + 1));
+    };
+    
+    /*
      * Generates an array of the given size, containing successive permutations
      * of the given array.
      */
@@ -382,6 +400,32 @@ var model = (function () {
         }
     };
 
+    // returns whether this exercise is equal to a previous exercise
+    my.Exercise.prototype.equals = function (other) {
+        return other && this.left === other.left && this.right === other.right && this.unknown === other.unknown && this.solution === other.solution && this.operator === other.operator;
+    };
+    
+    // returns whether this exercise shares an operand with another exercise
+    my.Exercise.prototype.sharesOperand = function (other) {
+        if (!other) {
+            return false;
+        }
+        
+        if (this.left === other.left || this.left === other.right || this.left === other.solution) {
+            return true;
+        }
+        
+        if (this.right === other.left || this.right === other.right || this.right === other.solution) {
+            return true;
+        }
+        
+        if (this.solution === other.left || this.solution === other.right || this.solution === other.solution) {
+            return true;
+        }
+        
+        return false;
+    };
+    
     // override the print
     my.Exercise.prototype.toString = function () {
         return this.left + this.operator + this.right + "=" + this.solution;
@@ -391,49 +435,34 @@ var model = (function () {
         this.exercise = exercise;
         this.value = value;
     };
-
-    // returns an array of multiplication exercises
-    my.Multiplications = function (count, tableArray, unknownArray) {
-        if (count < 1) {
-            throw "the requested number of multiplication exercises is smaller than one!";
-        }
-        if (!Array.isArray(tableArray)) {
-            throw "the given tables are not an array!" + tableArray;
-        }
-        if (tableArray.length === 0) {
-            throw "the array with tables is empty!";
-        }
-        if (!Array.isArray(unknownArray)) {
-            throw "the given unknowns are not an array!" + unknownArray;
-        }
-        if (unknownArray.length === 0) {
-            throw "the array with unknown positions is empty!";
-        }
-
-        var i, result, exercise, left, right, solution, unknown, previous, valid, lefts, rights, unknowns;
-
-        // initialize the result
-        result = [];
-        lefts = utility.permutateArray(tableArray, count);
-        rights = utility.permutateNumbers(1, 10, count);
-        unknowns = utility.permutateArray(unknownArray, count);
+    
+    // generate a random exercise
+    my.Generate = function (tableArray, unknownArray, operatorArray) {
+        var operator, left, right, solution,  unknown, operatorSign;
         
-        for (i = 0; i < count; i += 1) {
-            left = lefts[i];
-            right = rights[i];
+        operator = utility.getRandom(operatorArray);
+    
+        if (operator === "multiply") {
+            left = utility.getRandom(tableArray);
+            right = utility.getRandomInt(1, 10);
             solution = left * right;
-            unknown = unknowns[i];
-            
-            result[i] = new my.Exercise(left, right, "&times;", solution, unknown);
+            operatorSign = "&times;";
+        } else {
+            right = utility.getRandom(tableArray);
+            solution = utility.getRandomInt(1, 10);
+            left = solution * right;
+            operatorSign = ":";
         }
-
-        return result;
+            
+        unknown = utility.getRandom(unknownArray);
+        
+        return new my.Exercise(left, right, operatorSign, solution, unknown);
     };
 
-    // returns an array of division exercises
-    my.Divisions = function (count, tableArray, unknownArray) {
+    // returns an array containing exercises
+    my.Exercices = function (count, tableArray, unknownArray, operatorArray) {
         if (count < 1) {
-            throw "the requested number of multiplication exercises is smaller than one!";
+            throw "the requested number of exercises is smaller than one!";
         }
         if (!Array.isArray(tableArray)) {
             throw "the given tables are not an array!" + tableArray;
@@ -447,24 +476,84 @@ var model = (function () {
         if (unknownArray.length === 0) {
             throw "the array with unknown positions is empty!";
         }
-        
-        var i, result, exercise, left, right, solution, unknown, previous, valid, lefts, rights, unknowns;
-
-        // initialize the result
-        result = [];
-        lefts = utility.permutateNumbers(1, 10, count);
-        rights = utility.permutateArray(tableArray, count);
-        unknowns = utility.permutateArray(unknownArray, count);
-        
-        for (i = 0; i < count; i += 1) {
-            right = rights[i];
-            solution = lefts[i];
-            left = solution * right;
-            unknown = unknowns[i];
-            
-            result[i] = new my.Exercise(left, right, ":", solution, unknown);
+        if (!Array.isArray(operatorArray)) {
+            throw "the given operator array is not an array!" + operatorArray;
         }
+        if (operatorArray.length === 0) {
+            throw "the array with operators is empty!";
+        }
+        
+        var i, j, result, best, length, bestLength, exercise, retries, temp, noshares;
+        
+        
+        result = [];
+        
+        // initialize the result
+        for (i = 0; i < count; i += 1) {
+            retries = 0;
+            best = null;
+            bestLength = -1;
+            
+outer:
+            // try 100 times go generate a good exercise
+            while (retries < 100) {
+                // generate a random exercise
+                temp = my.Generate(tableArray, unknownArray, operatorArray);
+                
+                // initialise best (in case no exercise is ever going to be good!)
+                if (!best) {
+                    best = temp;
+                }
+                
+                // check whether it is acceptable
+                noshares = true;
+                if (unknownArray.length > 1 && i > 1 && temp.unknown === result[i - 1].unknown && temp.unknown === result[i - 2].unknown) {
+                    noshares = false;
+                } else if (operatorArray.length > 1 && i > 1 && temp.operator === result[i - 1].operator && temp.operator === result[i - 2].operator) {
+                    noshares = false;
+                }
 
+                if (noshares) {
+                    for (j = 0; j < i; j += 1) {
+                        if (temp.equals(result[j])) {
+                            // temp is equal to a previous exercise;
+                            noshares = false;
+                            break;
+                        }
+                    }
+                }
+                
+                if (noshares) {
+                    length = 0;
+                    for (j = i - 1; j >= 0; j -= 1) {
+                        if (temp.sharesOperand(result[j])) {
+                            if (length > bestLength) {
+                                best = temp;
+                                bestLength = length;
+                            }
+                            noshares = false;
+                            break;
+                        } else {
+                            length += 1;
+                        }
+                    }
+                }
+                
+                // does not share a single operand with the previous exercise
+                if (noshares === true) {
+                    best = temp;
+                    break;
+                }
+                
+                retries += 1;
+            }
+            
+            result[i] = best;
+            
+            /*console.log(retries + " " + bestLength);
+            console.log(best.left + " " + best.operator + " " + best.right + " = " + best.solution);*/
+        }
+        
         return result;
     };
     
@@ -590,21 +679,21 @@ controller = (function () {
 (function () {
     "use strict";
     
-    var tables, count, types, choice, typeHeader;
-    
-    typeHeader = document.getElementById("type");
-    
+    var tables, count, types, operators;
+        
     count = localsettings.getNumberOfExercises(10);
     tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     types = localsettings.getTypes(["solution"]);
-    choice = localsettings.getExerciseChoice("multiply");
+    operators = localsettings.getExerciseOperators(["multiply"]);
     localsettings.setExerciseStartTime();
     
+    controller.init(model.Exercices(count, tables, types, operators));
+    /*
     if (choice === "divide") {
         typeHeader.innerHTML = ":";
         controller.init(model.Divisions(count, tables, types));
     } else {
         typeHeader.innerHTML = "&times;";
         controller.init(model.Multiplications(count, tables, types));
-    }
+    }*/
 }());

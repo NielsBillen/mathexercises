@@ -1,8 +1,9 @@
 /* fixes the position of the exercise type */
-#type {
+#back {
     position: fixed;
     left: 1vmin;
     top: 1vmin;
+    cursor: pointer;
 }
 
 /* fixes the position of the progress */
