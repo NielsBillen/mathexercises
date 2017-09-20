@@ -46,7 +46,11 @@ window.addEventListener("load", function (loadEvent) {
         // update available
         if (appcache.status === appcache.UPDATEREADY) {
             if (confirm("Er is een update beschikbaar. Wil je updaten?")) {
-                appcache.swapCache();
+                try {
+                    appcache.swapCache();
+                } catch (error) {
+                    version.innerHTML = "up-to-date...";
+                }
                 window.location.reload();
             }
         }
