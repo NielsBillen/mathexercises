@@ -443,8 +443,14 @@ var model = (function () {
         operator = utility.getRandom(operatorArray);
     
         if (operator === "multiply") {
+            //if (Math.random() < 0.5) {
             left = utility.getRandom(tableArray);
             right = utility.getRandomInt(1, 10);
+            /*} else {
+                right = utility.getRandom(tableArray);
+                left = utility.getRandomInt(1, 10);
+            }*/
+            
             solution = left * right;
             operatorSign = "&times;";
         } else {
@@ -511,10 +517,12 @@ outer:
                     noshares = false;
                 } else if (operatorArray.length > 1 && i > 1 && temp.operator === result[i - 1].operator && temp.operator === result[i - 2].operator) {
                     noshares = false;
+                } else if (i > 0 && temp.solution === result[i - 1].solution) {
+                    noshares = false;
                 }
 
                 if (noshares) {
-                    for (j = 0; j < i; j += 1) {
+                    for (j = Math.max(0, i - 20); j < i; j += 1) {
                         if (temp.equals(result[j])) {
                             // temp is equal to a previous exercise;
                             noshares = false;
@@ -525,7 +533,7 @@ outer:
                 
                 if (noshares) {
                     length = 0;
-                    for (j = i - 1; j >= 0; j -= 1) {
+                    for (j = i - 1; j >= Math.max(0, i - 20); j -= 1) {
                         if (temp.sharesOperand(result[j])) {
                             if (length > bestLength) {
                                 best = temp;
