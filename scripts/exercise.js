@@ -186,7 +186,7 @@ var view = (function () {
         // throw an exception
         if (operator === unknown) {
             throw "trying to explicitely set the unknown of the exercise!";
-        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "/" && value !== "&divide;") {
+        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "&times;" && value !== "/" && value !== "&divide;") {
             throw "unsupported operator " + value + "!";
         }
 
@@ -321,7 +321,7 @@ var model = (function () {
         if (!Number.isInteger(solution)) {
             throw "the given solution is not an integer!";
         }
-        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/" && operator !== "&divide;") {
+        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/" && operator !== "&times;" && operator !== "&divide;") {
             throw "unsupported operator '" + operator + "'!";
         }
         if (unknown !== "left" && unknown !== "right" && unknown !== "solution" && unknown !== "operator") {
@@ -424,7 +424,7 @@ var model = (function () {
             solution = left * right;
             unknown = unknowns[i];
             
-            result[i] = new my.Exercise(left, right, "x", solution, unknown);
+            result[i] = new my.Exercise(left, right, "&times;", solution, unknown);
         }
 
         return result;
@@ -590,7 +590,9 @@ controller = (function () {
 (function () {
     "use strict";
     
-    var tables, count, types, choice;
+    var tables, count, types, choice, typeHeader;
+    
+    typeHeader = document.getElementById("type");
     
     count = localsettings.getNumberOfExercises(10);
     tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
@@ -599,8 +601,10 @@ controller = (function () {
     localsettings.setExerciseStartTime();
     
     if (choice === "divide") {
+        typeHeader.innerHTML = "&divide;";
         controller.init(model.Divisions(count, tables, types));
     } else {
+        typeHeader.innerHTML = "&times;";
         controller.init(model.Multiplications(count, tables, types));
     }
 }());
