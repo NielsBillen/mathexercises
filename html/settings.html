@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html manifest = "../cache.manifest">
-    <head>        
+    <head>
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51377216-6"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments)};
+            gtag('js', new Date());
+
+            gtag('config', 'UA-51377216-6');
+        </script>
+        
         <title>Rekenen</title>
         
         <!-- metadata settings -->
@@ -40,7 +50,7 @@
                     <label for = "input-exercise-choice">Oefening:</label>
                     <div class = "horizontal"  id = "input-choice-button-container">
                         <div class ="button square bordered noselect" id="choice-multiply">&times;</div>
-                        <div class ="button square bordered noselect" id="choice-divide">&divide;</div>
+                        <div class ="button square bordered noselect" id="choice-divide">:</div>
                     </div>
                 </div>
                 <div class = "container">
@@ -50,9 +60,9 @@
                 <div class = "container">
                     <label for = "input-exercise-type">Plaats onbekende:</label>
                     <div class = "horizontal" id = "input-type-button-container">
-                        <div class ="button bordered noselect" id="type-solution"><span>2 x 4 = </span><span class = "unknown">?</span></div>
-                        <div class ="button bordered noselect" id="type-left"><span class = "unknown">?</span><span> x 4 = 8</span></div>
-                        <div class ="button bordered noselect" id="type-right"><span>2 x </span><span class = "unknown">?</span><span> = 8</span></div>
+                        <div class ="button bordered noselect" id="type-solution"><span>2 <span class = "choice-operator">&times;</span> 4 = </span><span class = "unknown">?</span></div>
+                        <div class ="button bordered noselect" id="type-left"><span class = "unknown">?</span><span> <span class = "choice-operator">&times;</span> 4 = 8</span></div>
+                        <div class ="button bordered noselect" id="type-right"><span>2 <span class = "choice-operator">&times;</span> </span><span class = "unknown">?</span><span> = 8</span></div>
                     </div>
                 </div>
                 <div class = "container">

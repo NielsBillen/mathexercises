@@ -186,7 +186,7 @@ var view = (function () {
         // throw an exception
         if (operator === unknown) {
             throw "trying to explicitely set the unknown of the exercise!";
-        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "&times;" && value !== "/" && value !== "&divide;") {
+        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "&times;" && value !== "/" && value !== "&divide;" && value !== ':') {
             throw "unsupported operator " + value + "!";
         }
 
@@ -321,7 +321,7 @@ var model = (function () {
         if (!Number.isInteger(solution)) {
             throw "the given solution is not an integer!";
         }
-        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/" && operator !== "&times;" && operator !== "&divide;") {
+        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/" && operator !== "&times;" && operator !== "&divide;" && operator !== ':') {
             throw "unsupported operator '" + operator + "'!";
         }
         if (unknown !== "left" && unknown !== "right" && unknown !== "solution" && unknown !== "operator") {
@@ -462,7 +462,7 @@ var model = (function () {
             left = solution * right;
             unknown = unknowns[i];
             
-            result[i] = new my.Exercise(left, right, "&divide;", solution, unknown);
+            result[i] = new my.Exercise(left, right, ":", solution, unknown);
         }
 
         return result;
@@ -601,7 +601,7 @@ controller = (function () {
     localsettings.setExerciseStartTime();
     
     if (choice === "divide") {
-        typeHeader.innerHTML = "&divide;";
+        typeHeader.innerHTML = ":";
         controller.init(model.Divisions(count, tables, types));
     } else {
         typeHeader.innerHTML = "&times;";

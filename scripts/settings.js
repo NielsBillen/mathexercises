@@ -10,7 +10,7 @@
 (function () {
     "use strict";
     
-    var addTouchListener;
+    var addTouchListener, setChoice;
     
     /*
      * Adds the given callback function as a touch listener to the given element.
@@ -23,6 +23,27 @@
             element.addEventListener("click", callback);
         } else {
             element.addEventListener("touchstart", callback);
+        }
+    };
+    
+    /*
+     *
+     */
+    setChoice = function (choice) {
+        localsettings.setExerciseChoice(choice);
+        
+        var i, elements, innerHTML;
+        
+        elements = document.getElementsByClassName("choice-operator");
+        
+        if (choice === "divide") {
+            innerHTML = ":";
+        } else {
+            innerHTML = "&times;";
+        }
+        
+        for (i = 0; i < elements.length; i += 1) {
+            elements[i].innerHTML = innerHTML;
         }
     };
     
@@ -162,7 +183,7 @@
                 currentButton.classList.remove("selected");
                 currentButton = button;
                 button.classList.add("selected");
-                localsettings.setExerciseChoice(type);
+                setChoice(type);
             };
         };
         
@@ -171,6 +192,8 @@
             button = document.getElementById("choice-" + type);
             addTouchListener(button, click(button, type));
         }
+        
+        setChoice(selected);
     }());
     
     /**************************************************************************
