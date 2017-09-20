@@ -186,7 +186,7 @@ var view = (function () {
         // throw an exception
         if (operator === unknown) {
             throw "trying to explicitely set the unknown of the exercise!";
-        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "/") {
+        } else if (value !== "+" && value !== "-" && value !== "x" && value !== "/" && value !== "&divide;") {
             throw "unsupported operator " + value + "!";
         }
 
@@ -321,7 +321,7 @@ var model = (function () {
         if (!Number.isInteger(solution)) {
             throw "the given solution is not an integer!";
         }
-        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/") {
+        if (operator !== "+" && operator !== "-" && operator !== "x" && operator !== "/" && operator !== "&divide;") {
             throw "unsupported operator '" + operator + "'!";
         }
         if (unknown !== "left" && unknown !== "right" && unknown !== "solution" && unknown !== "operator") {
@@ -387,7 +387,6 @@ var model = (function () {
         return this.left + this.operator + this.right + "=" + this.solution;
     };
     
-    
     my.Result = function (exercise, value) {
         this.exercise = exercise;
         this.value = value;
@@ -431,6 +430,44 @@ var model = (function () {
         return result;
     };
 
+    // returns an array of division exercises
+    my.Divisions = function (count, tableArray, unknownArray) {
+        if (count < 1) {
+            throw "the requested number of multiplication exercises is smaller than one!";
+        }
+        if (!Array.isArray(tableArray)) {
+            throw "the given tables are not an array!" + tableArray;
+        }
+        if (tableArray.length === 0) {
+            throw "the array with tables is empty!";
+        }
+        if (!Array.isArray(unknownArray)) {
+            throw "the given unknowns are not an array!" + unknownArray;
+        }
+        if (unknownArray.length === 0) {
+            throw "the array with unknown positions is empty!";
+        }
+        
+        var i, result, exercise, left, right, solution, unknown, previous, valid, lefts, rights, unknowns;
+
+        // initialize the result
+        result = [];
+        lefts = utility.permutateNumbers(1, 10, count);
+        rights = utility.permutateArray(tableArray, count);
+        unknowns = utility.permutateArray(unknownArray, count);
+        
+        for (i = 0; i < count; i += 1) {
+            right = rights[i];
+            solution = lefts[i];
+            left = solution * right;
+            unknown = unknowns[i];
+            
+            result[i] = new my.Exercise(left, right, "&divide;", solution, unknown);
+        }
+
+        return result;
+    };
+    
     return my;
 }());
 
@@ -553,13 +590,17 @@ controller = (function () {
 (function () {
     "use strict";
     
-    var tables, count, types;
+    var tables, count, types, choice;
     
     count = localsettings.getNumberOfExercises(10);
     tables = localsettings.getTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     types = localsettings.getTypes(["solution"]);
-    
+    choice = localsettings.getExerciseChoice("multiply");
     localsettings.setExerciseStartTime();
     
-    controller.init(model.Multiplications(count, tables, types));
+    if (choice === "divide") {
+        controller.init(model.Divisions(count, tables, types));
+    } else {
+        controller.init(model.Multiplications(count, tables, types));
+    }
 }());

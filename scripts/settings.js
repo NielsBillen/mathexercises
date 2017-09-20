@@ -90,8 +90,6 @@
     }());
     
     /**************************************************************************
-     * Initialize the buttons which allow to pick which tables will be present 
-     * in the exercises.
      *************************************************************************/
     
     (function () {
@@ -144,6 +142,34 @@
             }
             
             addTouchListener(button, click(button, buttonCount));
+        }
+    }());
+    
+    /**************************************************************************
+     * Initialize the buttons which allow to pick whether to divide
+     *************************************************************************/
+    
+    (function () {
+        var i, all, type, selected, button, click, currentButton;
+        
+        all = ["multiply", "divide"];
+        selected = localsettings.getExerciseChoice("multiply");
+        currentButton = document.getElementById("choice-" + selected);
+        currentButton.classList.add("selected");
+        
+        click = function (button, type) {
+            return function () {
+                currentButton.classList.remove("selected");
+                currentButton = button;
+                button.classList.add("selected");
+                localsettings.setExerciseChoice(type);
+            };
+        };
+        
+        for (i = 0; i < all.length; i += 1) {
+            type = all[i];
+            button = document.getElementById("choice-" + type);
+            addTouchListener(button, click(button, type));
         }
     }());
     

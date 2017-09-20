@@ -15,6 +15,34 @@ var localsettings = (function () {
         return JSON.parse(localStorage.getItem("exercise-start-time"));
     };
     
+    /*  */
+    my.getExerciseChoice = function (defaultValue) {
+        if (!(typeof defaultValue === "string" || defaultValue instanceof String)) {
+            throw "the default value is not of type string!";
+        } else if (defaultValue !== "multiply" && defaultValue !== "divide") {
+            throw "the default value should either be multiply or divide";
+        }
+        
+        var result = localStorage.getItem("exercise-choice");
+        
+        if (result && (result === "multiply" || result === "divide")) {
+            return result;
+        } else {
+            return defaultValue;
+        }
+    };
+    
+    /* sets the number of exercises to the given value */
+    my.setExerciseChoice = function (value) {
+        if (!(typeof value === "string" || value instanceof String)) {
+            throw "the default value is not of type string!";
+        } else if (value !== "multiply" && value !== "divide") {
+            throw "the default value should either be multiply or divide";
+        }
+        
+        localStorage.setItem("exercise-choice", value);
+    };
+    
     /* */
     my.setResults = function (results) {
         localStorage.setItem("exercise-results", JSON.stringify(results));

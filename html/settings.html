@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest = "../../cache.manifest">
+<html manifest = "../cache.manifest">
     <head>        
         <title>Instellingen</title>
         
@@ -15,17 +15,17 @@
         <link rel="manifest" href="/manifest.json"/>
 
         <!-- icons inclusion -->
-        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../../images/favicon.ico"/>
-        <link rel="shortcut icon" type="image/png" sizes="512x512" href="../../images/icon512x512.png"/>
-        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="../../images/icon512x512.png"/>
+        <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" sizes="512x512" href="../images/icon512x512.png"/>
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="../images/icon512x512.png"/>
 
         <!-- style sheets inclusions -->        
-        <link type="text/css" rel="stylesheet" href="../../css/core.css"/>
-        <link type="text/css" rel="stylesheet" href="../../css/jungle.css"/>
-        <link type="text/css" rel="stylesheet" href="../../css/settings.css"/>
-        <link type="text/css" rel="stylesheet" href="../../css/scrollbar.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/core.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/jungle.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/settings.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/scrollbar.css"/>
         
-        <script src = "../../scripts/appcache.js"></script>
+        <script src = "../scripts/appcache.js"></script>
     </head>
     <body class = "noselect vertical center">
         <!-- decorations -->
@@ -36,12 +36,19 @@
         
         <div>
             <div class = "text large vertical">
+                 <div class = "container">
+                    <label for = "input-exercise-choice">Oefening:</label>
+                    <div class = "horizontal"  id = "input-choice-button-container">
+                        <div class ="button square bordered noselect" id="choice-multiply">&times;</div>
+                        <div class ="button square bordered noselect" id="choice-divide">&divide;</div>
+                    </div>
+                </div>
                 <div class = "container">
                     <label for = "input-table">Tafels:</label>
                     <div class = "horizontal"  id = "input-table-button-container"></div>
                 </div>
                 <div class = "container">
-                    <label for = "input-exercise-type">Type oefening:</label>
+                    <label for = "input-exercise-type">Plaats onbekende:</label>
                     <div class = "horizontal" id = "input-type-button-container">
                         <div class ="button bordered noselect" id="type-solution"><span>2 x 4 = </span><span class = "unknown">?</span></div>
                         <div class ="button bordered noselect" id="type-left"><span class = "unknown">?</span><span> x 4 = 8</span></div>
@@ -52,7 +59,7 @@
                     <label for="input-exercise-count">Aantal oefeningen:</label>
                     <div class = "horizontal" id = "input-exercise-button-container"></div>
                 </div>
-                <div id = "start" class = "button" onclick="window.location = 'multiplication.html'">Start</div>
+                <div id = "start" class = "button" onclick="window.location = 'exercise.html'">Start</div>
             </div>
             
             <div class = "horizontal">
@@ -61,7 +68,7 @@
             </div>
         </div>
         
-        <script src = "../../scripts/localsettings.js"></script>
-        <script src = "../../scripts/settings.js"></script>
+        <script src = "../scripts/localsettings.js"></script>
+        <script src = "../scripts/settings.js"></script>
     </body>
 </html>
