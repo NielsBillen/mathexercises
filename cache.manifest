@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Updated 21/09/2017 08:37
+# Updated 21/09/2017 09:04
 
 CACHE:
 
@@ -21,8 +21,9 @@ fonts/Roboto-Black.ttf
 html/exercise.html
 html/results.html
 html/settings.html
-index.html
 404.html
+error.html
+index.html
 
 # Images
 images/billboard.svg
