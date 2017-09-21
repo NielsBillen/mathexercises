@@ -1,7 +1,10 @@
 CACHE MANIFEST
-# Updated 21/09/2017 08:27
+# Updated 21/09/2017 08:30
 
 CACHE:
+
+# Miscellaneous
+.nojekyll
 
 # CSS
 css/core.css
