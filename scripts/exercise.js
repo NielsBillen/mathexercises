@@ -511,13 +511,18 @@ outer:
                     best = temp;
                 }
                 
-                // check whether it is acceptable
                 noshares = true;
                 if (unknownArray.length > 1 && i > 1 && temp.unknown === result[i - 1].unknown && temp.unknown === result[i - 2].unknown) {
+                    // avoid more than 2 consecutive equal places for the unknowns
                     noshares = false;
                 } else if (operatorArray.length > 1 && i > 1 && temp.operator === result[i - 1].operator && temp.operator === result[i - 2].operator) {
+                    // avoid more than 2 consecutive equal operators
                     noshares = false;
                 } else if (i > 0 && temp.solution === result[i - 1].solution) {
+                    // avoid consecutive exercises with the same solution
+                    noshares = false;
+                } else if (i > 0 && temp.left === temp.right && result[i - 1].left === result[i - 1].right) {
+                    // avoid consectucive exercises with have the same left and right operand
                     noshares = false;
                 }
 
