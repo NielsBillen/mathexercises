@@ -1,13 +1,13 @@
-/*global console, confirm*/
+/*global confirm, window, document*/
 
 /* listen for load */
-window.addEventListener("load", function (loadEvent) {
+window.addEventListener("load", function (e) {
     "use strict";
     
     var appcache, version, versionNumber, setVersionNumber, updateButton;
     
     appcache = window.applicationCache;
-    versionNumber = "v0.4.4";
+    versionNumber = "v0.4.5";
     version = document.getElementById("version");
     version.innerHTML = versionNumber;
     updateButton = document.getElementById("update");

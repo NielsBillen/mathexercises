@@ -1,4 +1,4 @@
-/*global localsettings*/
+/*global localsettings, document*/
 
 /*-----------------------------------------------------------------------------
  * Controls the settings and writes them to local storage.
@@ -32,14 +32,17 @@
     setOperators = function (choice) {
         localsettings.setExerciseOperators(choice);
         
-        var i, elements, innerHTML;
+        var i, elements, innerHTML, final;
         
         elements = document.getElementsByClassName("choice-operator");
+        final = document.getElementById("final");
         
         if (choice.length === 1 && choice[0] === "divide") {
             innerHTML = ":";
+            final.innerHTML = "2";
         } else {
             innerHTML = "&times;";
+            final.innerHTML = "8";
         }
         
         for (i = 0; i < elements.length; i += 1) {
@@ -114,7 +117,7 @@
      *************************************************************************/
     
     (function () {
-        var i, container, array, button, buttonCount, previousButton, exerciseCount, click;
+        var i, container, array, button, buttonCount, exerciseCount, click;
         
         container = document.getElementById("input-exercise-button-container");
 

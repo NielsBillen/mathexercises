@@ -405,6 +405,41 @@ var model = (function () {
         return other && this.left === other.left && this.right === other.right && this.unknown === other.unknown && this.solution === other.solution && this.operator === other.operator;
     };
     
+    my.Exercise.prototype.getOperands = function () {
+        return [ this.left, this.right, this.solution ];
+    };
+    
+    my.Exercise.prototype.nbOfDifferentOperands = function (other) {
+        if (!other) {
+            return;
+        }
+        
+        var i, current, operands, count, result;
+        
+        result = 0;
+        current = null;
+        
+        operands = this.getOperands().concat(other.getOperands());
+        operands.sort();
+        
+        for (i = 0; i < operands.length; i += 1) {
+            if (operands[i] !== current) {
+                if (count === 1) {
+                    result += 1;
+                }
+                
+                count = 1;
+                current = operands[i];
+            }
+        }
+        
+        if (count === 1) {
+            return result + 1;
+        } else {
+            return result;
+        }
+    };
+    
     // returns whether this exercise shares an operand with another exercise
     my.Exercise.prototype.sharesOperand = function (other) {
         if (!other) {
@@ -489,7 +524,7 @@ var model = (function () {
             throw "the array with operators is empty!";
         }
         
-        var i, j, result, best, length, bestLength, exercise, retries, temp, noshares;
+        var i, j, result, best, bestDifferent, different, exercise, retries, temp;
         
         
         result = [];
@@ -498,11 +533,14 @@ var model = (function () {
         for (i = 0; i < count; i += 1) {
             retries = 0;
             best = null;
-            bestLength = -1;
+            bestDifferent = 0;
             
 outer:
             // try 100 times go generate a good exercise
             while (retries < 100) {
+                retries += 1;
+
+                
                 // generate a random exercise
                 temp = my.Generate(tableArray, unknownArray, operatorArray);
                 
@@ -511,54 +549,41 @@ outer:
                     best = temp;
                 }
                 
-                noshares = true;
                 if (unknownArray.length > 1 && i > 1 && temp.unknown === result[i - 1].unknown && temp.unknown === result[i - 2].unknown) {
                     // avoid more than 2 consecutive equal places for the unknowns
-                    noshares = false;
+                    continue;
                 } else if (operatorArray.length > 1 && i > 1 && temp.operator === result[i - 1].operator && temp.operator === result[i - 2].operator) {
                     // avoid more than 2 consecutive equal operators
-                    noshares = false;
+                    continue;
                 } else if (i > 0 && temp.solution === result[i - 1].solution) {
                     // avoid consecutive exercises with the same solution
-                    noshares = false;
+                    continue;
                 } else if (i > 0 && temp.left === temp.right && result[i - 1].left === result[i - 1].right) {
                     // avoid consectucive exercises with have the same left and right operand
-                    noshares = false;
+                    continue;
+                } else if (i > 0 && temp.left === temp.solution && result[i - 1].left === result[i - 1].solution) {
+                    // avoid consectucive exercises with have the same left and right operand
+                    continue;
+                } else if (i > 0 && temp.right === temp.solution && result[i - 1].right === result[i - 1].solution) {
+                    // avoid consectucive exercises with have the same left and right operand
+                    continue;
                 }
-
-                if (noshares) {
-                    for (j = Math.max(0, i - 20); j < i; j += 1) {
-                        if (temp.equals(result[j])) {
-                            // temp is equal to a previous exercise;
-                            noshares = false;
-                            break;
-                        }
+                
+                different = 0;
+                for (j = i - 1; j >= Math.max(0, i - 20); j -= 1) {
+                    different += temp.nbOfDifferentOperands(result[j]) * (i + 1);
+                    if (different > bestDifferent) {
+                        best = temp;
+                        bestDifferent = different;
                     }
                 }
                 
-                if (noshares) {
-                    length = 0;
-                    for (j = i - 1; j >= Math.max(0, i - 20); j -= 1) {
-                        if (temp.sharesOperand(result[j])) {
-                            if (length > bestLength) {
-                                best = temp;
-                                bestLength = length;
-                            }
-                            noshares = false;
-                            break;
-                        } else {
-                            length += 1;
-                        }
+                
+                for (j = Math.max(0, i - 10); j < i; j += 1) {
+                    if (temp.equals(result[j])) {
+                        continue outer;
                     }
                 }
-                
-                // does not share a single operand with the previous exercise
-                if (noshares === true) {
-                    best = temp;
-                    break;
-                }
-                
-                retries += 1;
             }
             
             result[i] = best;

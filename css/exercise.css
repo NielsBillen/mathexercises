@@ -37,7 +37,7 @@
     animation-name: animation-start;
     animation-duration: 1s;
     animation-delay: 1s;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-fill-mode: both;
 }
 
