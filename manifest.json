@@ -6,10 +6,19 @@
     "start_url": "/index.html",
     "display": "standalone",
     "orientation": "portrait",
-    "icons": [
-    {
-        "src": "images/icon512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-    }]
+    "theme_color": "#925b34",
+    "background_color":  "#ddf8ff",
+    "icons": [{
+            "src": "images/icons/icon512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }, {
+            "src": "images/icons/icon144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }, {
+            "src": "images/icons/icon96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }]
 }
