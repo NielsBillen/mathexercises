@@ -50,6 +50,7 @@ self.addEventListener('install', function (event) {
         })
     );
 });
+
 self.addEventListener('fetch', function (event) {
     "use strict";
     event.respondWith(
@@ -63,7 +64,7 @@ function fetchAndCache (url) {
     return fetch(url).then(function (response) {
         // Check if we received a valid response
         if (!response.ok) {
-            throw Error(response.statusText);
+            throw Error(response.statusText, url);
         }
     
         return caches.open(CACHE_NAME).then(function (cache) {
@@ -71,7 +72,7 @@ function fetchAndCache (url) {
             return response;
         });
     }).catch(function(error) {
-        console.log('Request failed:', error);
+        console.log('Request failed:', error, url);
         // You could return a custom offline 404 page here
     });
 }

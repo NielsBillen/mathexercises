@@ -3,7 +3,7 @@
     "name": "Rekenoefeningen",
     "short_name": "Rekenen",
     "developer": "Niels Billen",
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#925b34",
