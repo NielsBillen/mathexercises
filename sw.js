@@ -44,7 +44,6 @@ self.addEventListener('install', function (event) {
                 './error.html',
                 './index.html',
                 './manifest.json',
-                './cache.manifest',
                 './sw.js',
             ]);
         })
