@@ -5,7 +5,7 @@
     "developer": "Niels Billen",
     "start_url": ".",
     "display": "standalone",
-    "orientation": "portrait",
+    "orientation": "landscape",
     "theme_color": "#925b34",
     "background_color":  "#ddf8ff",
     "icons": [{
