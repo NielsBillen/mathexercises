@@ -1,4 +1,5 @@
 /*global self, caches, fetch*/
+/*version 1.0.0*/
 
 const CACHE_NAME = "offline-cache";
 
