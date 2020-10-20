@@ -479,12 +479,8 @@ var model = (function () {
     
         if (operator === "multiply") {
             //if (Math.random() < 0.5) {
-            left = utility.getRandom(tableArray);
-            right = utility.getRandomInt(1, 10);
-            /*} else {
-                right = utility.getRandom(tableArray);
-                left = utility.getRandomInt(1, 10);
-            }*/
+            right = utility.getRandom(tableArray);
+            left = utility.getRandomInt(1, 10);
             
             solution = left * right;
             operatorSign = "&times;";
